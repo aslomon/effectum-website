@@ -10,10 +10,11 @@ import {
 import { useRef, useEffect } from "react";
 
 const STATS = [
-  { value: 10, label: "Workflow commands", suffix: "" },
-  { value: 8, label: "Quality gates", suffix: "" },
-  { value: 4, label: "Stack presets", suffix: "" },
-  { value: 12, label: "PRD commands", suffix: "" },
+  { value: 17, label: "Workflow commands", suffix: "" },
+  { value: 6, label: "Modular stacks", suffix: "" },
+  { value: 19, label: "Specialized agents", suffix: "" },
+  { value: 22, label: "Skills", suffix: "+" },
+  { value: 148, label: "Tests passing", suffix: "" },
 ];
 
 function Counter({ value, isInView }: { value: number; isInView: boolean }) {
@@ -44,7 +45,7 @@ export function Stats() {
       aria-hidden="true"
     >
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-5">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}

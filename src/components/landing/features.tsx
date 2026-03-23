@@ -7,36 +7,93 @@ import {
   LayoutGrid,
   RefreshCw,
   Lock,
+  Compass,
+  GitBranch,
+  Layers,
+  Bot,
+  Boxes,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/section";
 
 const FEATURES = [
   {
-    title: "PRD Workshop",
+    title: "Onboarding",
     description:
-      "Guided specification writing that transforms vague ideas into actionable PRDs. Adaptive questioning until it fully understands what you want.",
+      "New project or existing codebase — effectum adapts. /onboard runs 6 parallel agents to analyze your repo and generate a complete CLAUDE.md in minutes.",
     details: [
-      "Workshop mode: guided discovery for vague ideas",
-      "Express mode: one-shot specs from clear input",
-      "Decompose large projects into manageable PRDs",
-      "Review specs for quality before implementation",
+      "6 agents: deps, structure, patterns, env, tests, docs",
+      "Auto-generates PRD from existing code",
+      "Self-tests with /verify after setup",
+      "Works on any codebase, any language",
     ],
-    icon: FileText,
+    icon: Compass,
     size: "large",
   },
   {
-    title: "10 Workflow Commands",
+    title: "17 Workflow Commands",
     description:
-      "The entire development lifecycle in slash commands. Plan before building. Write tests first. Verify quality. Review security. Build autonomously overnight.",
+      "The entire development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, and deploy with full autonomy.",
     details: [
       "/plan — think before building",
       "/tdd — test-driven development",
-      "/verify — run all 8 quality gates",
+      "/verify — run all quality gates",
       "/ralph-loop — autonomous overnight builds",
     ],
     icon: Terminal,
     size: "large",
+  },
+  {
+    title: "PRD Lifecycle",
+    description:
+      "PRDs that evolve with your code. /prd:update applies delta handoffs, tracks what changed, and keeps specs in sync with implementation.",
+    details: [
+      "/prd:new — workshop or express mode",
+      "/prd:update — delta handoff from changes",
+      "Task registry tracks completion",
+      "Decompose large projects automatically",
+    ],
+    icon: GitBranch,
+    size: "large",
+  },
+  {
+    title: "Modular Stacks",
+    description:
+      "6 composable stacks with 8 quick presets. Pick ecosystem, framework, database, and deployment — or use a preset for instant setup.",
+    details: [
+      "6 stacks: Next.js, Python, Swift, Go, Rust, Deno",
+      "8 presets: SaaS, API, CLI, Mobile, and more",
+      "Each stack includes CLAUDE.md + guardrails",
+      "Mix and match components freely",
+    ],
+    icon: Layers,
+    size: "large",
+  },
+  {
+    title: "19 Specialized Agents",
+    description:
+      "Purpose-built agents for every phase — from code review to security audit to documentation. They work in parallel when possible.",
+    details: [
+      "Onboard agents analyze repos in parallel",
+      "Review agents catch security issues",
+      "Test agents maintain 80%+ coverage",
+      "Doc agents keep everything in sync",
+    ],
+    icon: Bot,
+    size: "medium",
+  },
+  {
+    title: "Foundation Model",
+    description:
+      "A unified configuration layer that powers every command. CLAUDE.md, guardrails, hooks, and quality gates — all composable and extensible.",
+    details: [
+      "CLAUDE.md as single source of truth",
+      "Guardrails injected at every session",
+      "Hooks for auto-format, changelog, gates",
+      "Error learning from past failures",
+    ],
+    icon: Boxes,
+    size: "medium",
   },
   {
     title: "8 Quality Gates",
@@ -49,19 +106,6 @@ const FEATURES = [
       "Max 300 lines per file enforced",
     ],
     icon: Shield,
-    size: "medium",
-  },
-  {
-    title: "4 Stack Presets",
-    description:
-      "Pre-configured setups that include CLAUDE.md templates, guardrails, and stack-specific rules.",
-    details: [
-      "Next.js + Supabase",
-      "Python + FastAPI",
-      "Swift / SwiftUI",
-      "Generic (stack-agnostic)",
-    ],
-    icon: LayoutGrid,
     size: "medium",
   },
   {
@@ -175,25 +219,31 @@ export function Features() {
       description="A complete autonomous development system that takes you from idea to production-ready code."
     >
       <div className="mx-auto max-w-5xl">
-        {/* Bento grid: 2 large on top, 2 medium + 2 small below */}
+        {/* Row 1: two large cards — Onboarding + 17 Commands */}
         <div className="grid gap-4 sm:grid-cols-2">
-          {/* Row 1: two large cards */}
           {FEATURES.slice(0, 2).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i} />
           ))}
         </div>
 
-        {/* Row 2: two medium cards */}
+        {/* Row 2: two large cards — PRD Lifecycle + Modular Stacks */}
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {FEATURES.slice(2, 4).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 2} />
           ))}
         </div>
 
-        {/* Row 3: two small cards side by side */}
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {FEATURES.slice(4, 6).map((feature, i) => (
+        {/* Row 3: three medium cards — Agents + Foundation + Quality */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          {FEATURES.slice(4, 7).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 4} />
+          ))}
+        </div>
+
+        {/* Row 4: two small cards — Ralph Loop + Guardrails */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {FEATURES.slice(7, 9).map((feature, i) => (
+            <FeatureCard key={feature.title} feature={feature} index={i + 7} />
           ))}
         </div>
       </div>

@@ -2,7 +2,15 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Download, FileText, Map, Code, ShieldCheck, Eye } from "lucide-react";
+import {
+  Download,
+  FileText,
+  Map,
+  Code,
+  ShieldCheck,
+  Eye,
+  Compass,
+} from "lucide-react";
 import { Section } from "@/components/section";
 
 const STEPS = [
@@ -10,11 +18,23 @@ const STEPS = [
     number: 1,
     title: "Setup",
     description:
-      "Install effectum into your project with one command. It configures your CLAUDE.md, selects a stack preset, and wires up all quality gates and guardrails.",
+      "Install effectum into your project with one command. Choose from 6 modular stacks or 8 quick presets — it configures CLAUDE.md, guardrails, and quality gates automatically.",
     command: "npx @aslomon/effectum",
     icon: Download,
     detail:
-      "Supports Next.js, Python/FastAPI, Swift/SwiftUI, and a generic stack-agnostic preset.",
+      "Supports Next.js, Python, Swift, Go, Rust, Deno — plus 8 quick presets for SaaS, API, CLI, and more.",
+    altFlow: null,
+  },
+  {
+    number: 1,
+    title: "Onboard",
+    description:
+      "Already have a project? /onboard runs 6 parallel agents that analyze your dependencies, structure, patterns, environment, tests, and docs — then generates a complete CLAUDE.md and PRD.",
+    command: "/onboard",
+    icon: Compass,
+    detail:
+      "Agents run in parallel: deps, structure, patterns, env, tests, docs. Self-tests with /verify when done.",
+    altFlow: "existing",
   },
   {
     number: 2,
@@ -25,6 +45,7 @@ const STEPS = [
     icon: FileText,
     detail:
       "Workshop mode for vague ideas, express mode for clear input. Decomposes large projects automatically.",
+    altFlow: null,
   },
   {
     number: 3,
@@ -35,6 +56,7 @@ const STEPS = [
     icon: Map,
     detail:
       "Waits for your approval before proceeding. No surprises, no unexpected architecture decisions.",
+    altFlow: null,
   },
   {
     number: 4,
@@ -45,6 +67,7 @@ const STEPS = [
     icon: Code,
     detail:
       "Strict TypeScript, no any types, no unsafe casts. Colocated tests, single-responsibility functions.",
+    altFlow: null,
   },
   {
     number: 5,
@@ -55,6 +78,7 @@ const STEPS = [
     icon: ShieldCheck,
     detail:
       "Done means compiles + tests pass + linter clean. Not suggested — required.",
+    altFlow: null,
   },
   {
     number: 6,
@@ -65,6 +89,7 @@ const STEPS = [
     icon: Eye,
     detail:
       "Blocks commits with security issues. Enforces architecture rules defined in your CLAUDE.md.",
+    altFlow: null,
   },
 ];
 
@@ -74,15 +99,17 @@ function PipelineStep({
   isActive,
   isInView,
   onActivate,
+  totalSteps,
 }: {
   step: (typeof STEPS)[0];
   index: number;
   isActive: boolean;
   isInView: boolean;
   onActivate: () => void;
+  totalSteps: number;
 }) {
   const Icon = step.icon;
-  const isLast = index === STEPS.length - 1;
+  const isLast = index === totalSteps - 1;
 
   return (
     <div className="relative">
@@ -156,15 +183,17 @@ function PipelineStep({
 function StepDetail({
   step,
   isInView,
+  totalSteps,
 }: {
   step: (typeof STEPS)[0];
   isInView: boolean;
+  totalSteps: number;
 }) {
   const Icon = step.icon;
 
   return (
     <motion.div
-      key={step.number}
+      key={step.title}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
@@ -179,7 +208,7 @@ function StepDetail({
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-accent/70">
-              Step {step.number} of {STEPS.length}
+              Step {step.number} of {totalSteps}
             </p>
             <h3 className="text-2xl font-bold text-text-primary">
               {step.title}
@@ -221,13 +250,15 @@ function MobileStep({
   step,
   index,
   isInView,
+  totalSteps,
 }: {
   step: (typeof STEPS)[0];
   index: number;
   isInView: boolean;
+  totalSteps: number;
 }) {
   const Icon = step.icon;
-  const isLast = index === STEPS.length - 1;
+  const isLast = index === totalSteps - 1;
 
   return (
     <div className="relative">
@@ -272,46 +303,95 @@ export function HowItWorks() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [activeStep, setActiveStep] = useState(0);
+  const [flow, setFlow] = useState<"new" | "existing">("new");
+
+  const filteredSteps = STEPS.filter((step) =>
+    flow === "new"
+      ? step.altFlow === null
+      : step.altFlow !== null
+        ? true
+        : step.altFlow === null && step.number !== 1,
+  );
 
   return (
     <Section
       id="how-it-works"
       label="Workflow"
       title="How it works"
-      description="Six steps from idea to production-ready code — a complete development pipeline."
+      description="From idea to production-ready code — a complete development pipeline."
       className="bg-surface"
     >
+      {/* Flow toggle */}
+      <div className="-mt-10 mb-10 flex justify-center">
+        <div className="inline-flex items-center gap-1 rounded-full border border-border bg-background p-1">
+          <button
+            type="button"
+            onClick={() => {
+              setFlow("new");
+              setActiveStep(0);
+            }}
+            className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 ${
+              flow === "new"
+                ? "bg-accent text-white shadow-sm"
+                : "text-text-muted hover:text-text-primary"
+            }`}
+          >
+            New project
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setFlow("existing");
+              setActiveStep(0);
+            }}
+            className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 ${
+              flow === "existing"
+                ? "bg-accent text-white shadow-sm"
+                : "text-text-muted hover:text-text-primary"
+            }`}
+          >
+            Existing project
+          </button>
+        </div>
+      </div>
+
       <div ref={ref} className="mx-auto max-w-6xl">
         {/* Desktop: two-column pipeline layout */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_1.1fr] lg:gap-8 xl:gap-12">
           {/* Left: step list */}
           <div className="flex flex-col gap-1">
-            {STEPS.map((step, i) => (
+            {filteredSteps.map((step, i) => (
               <PipelineStep
-                key={step.number}
+                key={step.title}
                 step={step}
                 index={i}
                 isActive={activeStep === i}
                 isInView={isInView}
                 onActivate={() => setActiveStep(i)}
+                totalSteps={filteredSteps.length}
               />
             ))}
           </div>
 
           {/* Right: detail panel */}
           <div className="sticky top-24 h-fit">
-            <StepDetail step={STEPS[activeStep]} isInView={isInView} />
+            <StepDetail
+              step={filteredSteps[activeStep]}
+              isInView={isInView}
+              totalSteps={filteredSteps.length}
+            />
           </div>
         </div>
 
         {/* Mobile: vertical stacked pipeline */}
         <div className="flex flex-col gap-1 lg:hidden">
-          {STEPS.map((step, i) => (
+          {filteredSteps.map((step, i) => (
             <MobileStep
-              key={step.number}
+              key={step.title}
               step={step}
               index={i}
               isInView={isInView}
+              totalSteps={filteredSteps.length}
             />
           ))}
         </div>

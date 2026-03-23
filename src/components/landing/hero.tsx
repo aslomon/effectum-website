@@ -79,9 +79,9 @@ export function Hero() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
               effectum transforms natural language into production-ready code
-              through structured specifications, test-driven development, and
-              automated quality gates. Write a spec. Let Claude Code build it
-              overnight.
+              with intelligent setup, 17 workflow commands, and 19 specialized
+              agents. New project or existing codebase — describe what you want,
+              let Claude Code build it overnight.
             </p>
           </div>
         </FadeIn>
