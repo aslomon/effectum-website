@@ -169,6 +169,66 @@ export const COMMANDS: CommandEntry[] = [
     ],
     usage: "/checkpoint",
   },
+  {
+    name: "/simplify",
+    phase: "Implementation",
+    icon: "Minimize2",
+    tagline: "Reduce complexity, keep behavior",
+    description:
+      "Reviews changed code for reuse opportunities, quality issues, and inefficiencies, then fixes them. Reduces complexity without changing behavior.",
+    details: [
+      "Identifies duplicated logic and extracts shared helpers",
+      "Simplifies overly nested or verbose code paths",
+      "Removes unnecessary abstractions and indirection",
+      "Verifies behavior is unchanged after every simplification",
+    ],
+    usage: "/simplify",
+  },
+  {
+    name: "/onboard",
+    phase: "Planning",
+    icon: "ScanSearch",
+    tagline: "Reverse-engineer any codebase",
+    description:
+      "Runs 6 parallel agents to analyze an existing codebase — dependencies, structure, patterns, environment, tests, and docs — then generates a complete CLAUDE.md and PRDs.",
+    details: [
+      "6 agents: deps, structure, patterns, env, tests, docs",
+      "Auto-generates CLAUDE.md from analysis results",
+      "Creates PRDs from existing code and architecture",
+      "Works on any codebase, any language",
+    ],
+    usage: "/onboard",
+  },
+  {
+    name: "/setup",
+    phase: "Planning",
+    icon: "Settings",
+    tagline: "Reconfigure your install",
+    description:
+      "Reconfigures an existing effectum installation. Change stack, update guardrails, or adjust settings without starting from scratch.",
+    details: [
+      "Switch or update your stack preset",
+      "Regenerate CLAUDE.md with new options",
+      "Update guardrails and quality gates",
+      "Preserves existing customizations where possible",
+    ],
+    usage: "/setup ~/my-project",
+  },
+  {
+    name: "/orchestrate",
+    phase: "Automation",
+    icon: "Network",
+    tagline: "Parallel agent teams",
+    description:
+      "Creates agent teams for parallel complex feature development. Spawns independent Claude instances that work on separate workstreams simultaneously.",
+    details: [
+      "Spawns parallel teammates for independent workstreams",
+      "Each teammate inherits all hooks and guardrails",
+      "Teammates communicate via mailbox and shared task list",
+      "Merges results when all workstreams complete",
+    ],
+    usage: "/orchestrate",
+  },
 ];
 
 export const PHASE_ORDER: CommandPhase[] = [

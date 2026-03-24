@@ -59,9 +59,9 @@ const FEATURES = [
   {
     title: "Modular Stacks",
     description:
-      "6 composable stacks with 8 quick presets. Pick ecosystem, framework, database, and deployment — or use a preset for instant setup.",
+      "7 composable stacks with 8 quick presets. Pick ecosystem, framework, database, and deployment — or use a preset for instant setup.",
     details: [
-      "6 stacks: Next.js, Python, Swift, Go, Rust, Deno",
+      "7 stacks: Next.js, Python, Swift, Go+Echo, Django, Rust+Actix, Generic",
       "8 presets: SaaS, API, CLI, Mobile, and more",
       "Each stack includes CLAUDE.md + guardrails",
       "Mix and match components freely",

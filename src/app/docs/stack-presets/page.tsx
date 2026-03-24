@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
-import { CheckCircle2, Globe, Server, Apple, Box } from "lucide-react";
+import {
+  CheckCircle2,
+  Globe,
+  Server,
+  Apple,
+  Box,
+  Zap,
+  Database,
+  Cpu,
+} from "lucide-react";
 import { CodeBlock } from "@/components/code-block";
 import {
   PRESETS_DATA,
@@ -10,7 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "Stack Presets",
   description:
-    "Pre-configured setups for Next.js, Python, Swift, and generic projects.",
+    "Pre-configured setups for Next.js, Python, Swift, Go, Django, Rust, and generic projects.",
 };
 
 // Map icon string names to Lucide components
@@ -19,6 +28,9 @@ const ICON_MAP: Record<string, React.ComponentType<Record<string, unknown>>> = {
   Server,
   Apple,
   Box,
+  Zap,
+  Database,
+  Cpu,
 };
 
 export default function StackPresetsPage() {

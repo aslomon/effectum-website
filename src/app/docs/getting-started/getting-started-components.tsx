@@ -38,7 +38,7 @@ export const INSTALL_OPTIONS = [
 // What gets installed data
 export const INSTALLED_ITEMS = [
   {
-    label: "10 workflow commands",
+    label: "14 workflow commands",
     detail:
       "Slash commands for the entire lifecycle — planning, TDD, verification, code review, autonomous building",
   },

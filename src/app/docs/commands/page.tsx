@@ -11,6 +11,10 @@ import {
   Bot,
   OctagonX,
   Bookmark,
+  Minimize2,
+  ScanSearch,
+  Settings,
+  Network,
   Terminal,
   ArrowRight,
 } from "lucide-react";
@@ -19,7 +23,7 @@ import type { CommandPhase } from "./commands-data";
 
 export const metadata: Metadata = {
   title: "Commands",
-  description: "Reference for all 10 effectum workflow commands.",
+  description: "Reference for all 14 effectum workflow commands.",
 };
 
 // Map icon string names to Lucide components
@@ -34,6 +38,10 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Bot,
   OctagonX,
   Bookmark,
+  Minimize2,
+  ScanSearch,
+  Settings,
+  Network,
 };
 
 // Typical command flow for the visual header

@@ -1,7 +1,14 @@
 // Stack Presets page data — extracted for file size limits
 // Note: icons cannot be stored here (React components), they are mapped in page.tsx
 
-export type PresetKey = "nextjs" | "python" | "swift" | "generic";
+export type PresetKey =
+  | "nextjs"
+  | "python"
+  | "swift"
+  | "go-echo"
+  | "django-postgres"
+  | "rust-actix"
+  | "generic";
 
 export interface PresetData {
   id: PresetKey;
@@ -81,6 +88,69 @@ export const PRESETS_DATA: PresetData[] = [
     command: "npx @aslomon/effectum --stack swift-ios",
   },
   {
+    id: "go-echo",
+    name: "Go + Echo",
+    tagline: "High-performance Go backend",
+    description:
+      "Production Go backend with Echo v4 routing, GORM ORM, PostgreSQL, Air hot-reload, and golangci-lint for strict code quality.",
+    iconName: "Zap",
+    iconBg: "bg-cyan-50 dark:bg-cyan-950/40",
+    iconColor: "text-cyan-600 dark:text-cyan-400",
+    borderColor: "border-cyan-100 dark:border-cyan-900/30",
+    features: [
+      "Go 1.22+ with strict linting",
+      "Echo v4 HTTP framework",
+      "GORM ORM + PostgreSQL",
+      "Air hot-reload for dev",
+      "golangci-lint code quality",
+      "Docker Compose setup",
+      "Structured logging",
+    ],
+    command: "npx @aslomon/effectum --stack go-echo",
+  },
+  {
+    id: "django-postgres",
+    name: "Django + PostgreSQL",
+    tagline: "Batteries-included Python",
+    description:
+      "Full-featured Django 5+ setup with Django REST Framework, pytest-django testing, ruff linting, uv package manager, and Docker Compose.",
+    iconName: "Database",
+    iconBg: "bg-green-50 dark:bg-green-950/40",
+    iconColor: "text-green-600 dark:text-green-400",
+    borderColor: "border-green-100 dark:border-green-900/30",
+    features: [
+      "Python 3.12+ with Django 5+",
+      "Django REST Framework APIs",
+      "pytest-django test suite",
+      "ruff linting & formatting",
+      "uv package manager",
+      "Docker Compose setup",
+      "PostgreSQL with migrations",
+    ],
+    command: "npx @aslomon/effectum --stack django-postgres",
+  },
+  {
+    id: "rust-actix",
+    name: "Rust + Actix",
+    tagline: "Systems-level web backend",
+    description:
+      "High-performance Rust backend with Actix-web 4, SQLx async database, Tokio runtime, PostgreSQL, clippy linting, and cargo-watch for dev.",
+    iconName: "Cpu",
+    iconBg: "bg-orange-50 dark:bg-orange-950/40",
+    iconColor: "text-orange-600 dark:text-orange-400",
+    borderColor: "border-orange-100 dark:border-orange-900/30",
+    features: [
+      "Rust stable with clippy",
+      "Actix-web 4 HTTP framework",
+      "SQLx async + PostgreSQL",
+      "Tokio async runtime",
+      "cargo-watch hot-reload",
+      "Docker multi-stage builds",
+      "Structured error handling",
+    ],
+    command: "npx @aslomon/effectum --stack rust-actix",
+  },
+  {
     id: "generic",
     name: "Generic",
     tagline: "Bring your own stack",
@@ -91,7 +161,7 @@ export const PRESETS_DATA: PresetData[] = [
     iconColor: "text-emerald-600 dark:text-emerald-400",
     borderColor: "border-emerald-100 dark:border-emerald-900/30",
     features: [
-      "All 10 workflow commands",
+      "All 14 workflow commands",
       "Customizable quality gates",
       "PRD Workshop included",
       "Guardrails system",
@@ -105,7 +175,7 @@ export const PRESETS_DATA: PresetData[] = [
 
 export const COMPARISON_FEATURES = [
   "PRD Workshop",
-  "10 workflow commands",
+  "14 workflow commands",
   "Quality gates",
   "Guardrails",
   "MCP servers",
@@ -124,7 +194,7 @@ export const PRESET_SUPPORT: Record<
 > = {
   nextjs: {
     "PRD Workshop": true,
-    "10 workflow commands": true,
+    "14 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -136,7 +206,7 @@ export const PRESET_SUPPORT: Record<
   },
   python: {
     "PRD Workshop": true,
-    "10 workflow commands": true,
+    "14 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -148,7 +218,7 @@ export const PRESET_SUPPORT: Record<
   },
   swift: {
     "PRD Workshop": true,
-    "10 workflow commands": true,
+    "14 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": false,
@@ -158,9 +228,45 @@ export const PRESET_SUPPORT: Record<
     "DB migrations": false,
     "Deployment config": false,
   },
+  "go-echo": {
+    "PRD Workshop": true,
+    "14 workflow commands": true,
+    "Quality gates": true,
+    Guardrails: true,
+    "MCP servers": true,
+    "Type safety": true,
+    "E2E tests": false,
+    "Auth setup": false,
+    "DB migrations": true,
+    "Deployment config": true,
+  },
+  "django-postgres": {
+    "PRD Workshop": true,
+    "14 workflow commands": true,
+    "Quality gates": true,
+    Guardrails: true,
+    "MCP servers": true,
+    "Type safety": true,
+    "E2E tests": false,
+    "Auth setup": true,
+    "DB migrations": true,
+    "Deployment config": true,
+  },
+  "rust-actix": {
+    "PRD Workshop": true,
+    "14 workflow commands": true,
+    "Quality gates": true,
+    Guardrails: true,
+    "MCP servers": true,
+    "Type safety": true,
+    "E2E tests": false,
+    "Auth setup": false,
+    "DB migrations": true,
+    "Deployment config": true,
+  },
   generic: {
     "PRD Workshop": true,
-    "10 workflow commands": true,
+    "14 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": false,
