@@ -20,9 +20,32 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
-    version: "0.12.0",
+    version: "0.13.0",
     date: "2026-03-25",
     tag: "latest",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "/design Command (system/commands/design.md) — 5-step workflow: read PRD → detect design signals → ask 3–5 questions → generate DESIGN.md → confirm. Bridges the gap between 'what to build' (PRD) and 'how it should look' (DESIGN.md).",
+          "DESIGN.md Template (system/templates/DESIGN.md.tmpl) — 7 sections: Overview, Color System, Typography, Component Patterns, Layout & Spacing, Interaction Design, Constraints. Uses {{projectName}} / {{stack}} / {{date}} interpolation.",
+          "detectDesignSignals(dir) (bin/lib/design.js) — scans for Tailwind (config files + package.json), shadcn (components.json), CSS custom properties (globals.css). Returns { hasTailwind, hasShadcn, cssVars, existingColors }.",
+          "Design docs (docs/design-md.md) — when to use DESIGN.md, how to run /design, section reference, example Next.js+Tailwind snippet, FAQ.",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "236 tests, all passing (up from 201)",
+          "Added test/design.test.js — 35 tests covering Tailwind/shadcn/CSS detection, parseCssVars, isColorValue, template loading/interpolation, command file validation",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.12.0",
+    date: "2026-03-25",
+    tag: "stable",
     sections: [
       {
         type: "Added",
