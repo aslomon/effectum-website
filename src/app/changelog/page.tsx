@@ -20,9 +20,40 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: "0.12.0",
+    date: "2026-03-25",
+    tag: "latest",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "AGENTS.md Detection — detectAgentsMd() detects AGENTS.md in project root, sets agentsMdFound: true with certain confidence; wired into detectAll()",
+          "--output-format CLI flag — accepts claude-md (default) | agents-md | both. Generates a tool-agnostic AGENTS.md alongside or instead of CLAUDE.md. Auto-triggers when existing AGENTS.md detected.",
+          "AGENTS.md template blocks (system/blocks/agents-md/) — 4 generic blocks: foundation, workflow, guardrails, commands. No Claude-specific language — compatible with Codex, Gemini CLI, and other agents.",
+          "npm Stats Script (scripts/npm-stats.mjs) — tracks daily/weekly/monthly downloads and GitHub stars, outputs Markdown report. Cron-safe.",
+          "HN Launch Post draft (docs/launch/hn-post.md) — Show HN post with thread strategy and timing notes.",
+        ],
+      },
+      {
+        type: "Changed",
+        items: [
+          "README — added Kiro to comparison table, AGENTS.md positioning note, clarified CLI-native vs IDE-based positioning",
+          "docs/cli-reference.md — documented --output-format flag with examples",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "201 tests, all passing (up from 184)",
+          "Added test/agents-md.test.js — 17 new tests covering detection, block loading, placeholder content, composeBlocks compatibility, and interpolation",
+        ],
+      },
+    ],
+  },
+  {
     version: "0.11.1",
     date: "2026-03-24",
-    tag: "latest",
+    tag: "stable",
     sections: [
       {
         type: "Fixed",
