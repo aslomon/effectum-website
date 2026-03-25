@@ -45,6 +45,14 @@ export function Footer() {
                     Getting Started
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/changelog"
+                    className="text-sm text-text-secondary transition-colors hover:text-text-primary"
+                  >
+                    Changelog
+                  </Link>
+                </li>
               </ul>
             </div>
 
