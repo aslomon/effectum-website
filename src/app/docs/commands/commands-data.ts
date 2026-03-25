@@ -215,6 +215,21 @@ export const COMMANDS: CommandEntry[] = [
     usage: "/setup ~/my-project",
   },
   {
+    name: "/design",
+    phase: "Planning",
+    icon: "Paintbrush",
+    tagline: "Visual spec before you build",
+    description:
+      "Generates a structured DESIGN.md for frontend-heavy projects. Detects existing design signals (Tailwind, shadcn, CSS vars), asks 3–5 lightweight questions, and produces a visual source of truth for UI work.",
+    details: [
+      "Reads current PRD and scans for Tailwind, shadcn, CSS variables",
+      "Asks 3–5 questions: color palette, typography feel, UI complexity",
+      "Generates DESIGN.md with 7 sections: colors, typography, components, layout, interactions, constraints",
+      "Reduces UI rework by making design decisions explicit before implementation",
+    ],
+    usage: "/design",
+  },
+  {
     name: "/orchestrate",
     phase: "Automation",
     icon: "Network",
