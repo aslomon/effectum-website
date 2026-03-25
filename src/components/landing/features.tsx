@@ -12,6 +12,7 @@ import {
   Layers,
   Bot,
   Boxes,
+  Palette,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/section";
@@ -80,6 +81,19 @@ const FEATURES = [
       "Doc agents keep everything in sync",
     ],
     icon: Bot,
+    size: "medium",
+  },
+  {
+    title: "Design System",
+    description:
+      "/design generates a structured DESIGN.md before implementation begins — color tokens, typography, component patterns, and constraints that guide every UI decision.",
+    details: [
+      "Detects Tailwind, shadcn, CSS vars automatically",
+      "7-section template: colors, type, components, layout",
+      "Constraints section prevents generic AI aesthetics",
+      "Bridges PRD ('what') and code ('how it looks')",
+    ],
+    icon: Palette,
     size: "medium",
   },
   {
