@@ -1,0 +1,319 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Tag, GitCommit, Package, ArrowUpRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Changelog",
+  description:
+    "What's new in effectum — release notes, bug fixes, and feature announcements.",
+};
+
+interface Release {
+  version: string;
+  date: string;
+  tag?: "latest" | "stable";
+  sections: {
+    type: "Added" | "Changed" | "Fixed" | "Tests" | "Breaking";
+    items: string[];
+  }[];
+}
+
+const RELEASES: Release[] = [
+  {
+    version: "0.11.1",
+    date: "2026-03-24",
+    tag: "latest",
+    sections: [
+      {
+        type: "Fixed",
+        items: [
+          "Rust/Cargo.toml detection now maps correctly to the rust-actix stack preset",
+          "npx entry point fixed — main() was not being called when loaded via the effectum.js router",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.11.0",
+    date: "2026-03-24",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "Agent Teams Orchestration — 5 YAML team profiles (web-feature, fullstack, frontend-only, review, overnight-build) with agent specializations, file ownership, phased execution, quality gates, and cost estimates",
+          "/orchestrate command — full lifecycle management: profile loading, prerequisite validation, cost estimation, team creation, PRD-based task distribution, progress monitoring, nudge, and shutdown",
+          "suggestTeams() — recommendation engine that suggests optimal team profiles based on code complexity (ACs, module count, parallel streams)",
+          "Team Hooks — enhanced TeammateIdle and TaskCompleted hooks for task completion validation and test status verification",
+        ],
+      },
+      {
+        type: "Changed",
+        items: [
+          "bin/lib/recommendation.js — integrated suggestTeams() output into the main recommendation engine",
+          "AUTONOMOUS-WORKFLOW.md — added Section 9.5 with /orchestrate reference, YAML profile table, and cost awareness guidance",
+          "docs/teams.md — complete rewrite with YAML schema, all 5 profile definitions, /orchestrate workflow, and automatic recommendation logic",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.10.0",
+    date: "2026-03-24",
+    sections: [
+      {
+        type: "Fixed",
+        items: [
+          "readConfig() now throws a descriptive error on invalid JSON instead of silently returning null",
+          "loadStackPreset() falls back to the generic preset with a warning instead of crashing",
+          "checkPackageAvailable() uses async spawn + Promise.all for parallel MCP checks — reduces max wait from ~32s to ≤10s",
+          "deepMerge() uses concat+deduplicate for permissions arrays — preserves user-defined deny rules through reconfigure",
+          "parseStackPreset() handles CRLF line endings — fixes silent parse failures on Windows",
+          "installBaseFiles() ensures .claude/ exists before file writes — prevents crash on first install",
+          "installPlaywrightBrowsers() error path references correct stderr variable",
+          "findRepoRoot() uses __dirname-based traversal — works correctly when loaded as a library",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "184 tests, all passing (up from 156)",
+          "Added test/install.test.js — 28 new integration and unit tests",
+          "Extended stack-parser, utils, and config test coverage",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.9.0",
+    date: "2026-03-23",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "Modular Stack Selection + Smart Auto-Detection — detection rules for JavaScript (27), Python (13), Go (7), Swift (5), Dart (5)",
+          "8 quick-start presets: nextjs-supabase, nextjs-firebase, nextjs-prisma, django-postgres, fastapi-postgres, go-echo-postgres, swift-swiftui, flutter-firebase",
+          "14 CLAUDE.md template blocks organized by category",
+          "Confidence-based detection: certain / partial / none — drives installer skip logic with --yes smart defaults",
+          "Interactive HTML Network Map Viewer — dark/light theme, direction toggle, SVG export",
+        ],
+      },
+      {
+        type: "Fixed",
+        items: [
+          "Next.js-only projects no longer incorrectly detected as nextjs-supabase",
+          "Mermaid syntax safety rules added for labels with slashes/special chars",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.8.0",
+    date: "2026-03-23",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "/onboard command — reverse-engineers existing codebases into effectum PRDs via 6 parallel analysis agents (Stack, Architecture, API, Database, Frontend, Tests)",
+          "/onboard:review command — consistency review with 6 checks, supports --fix and --strict flags",
+          "Updated PRD template — added implemented status and onboarded field to frontmatter schema",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.7.0",
+    date: "2026-03-23",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "Stack Preset: Go + Echo — Go 1.22+, Echo v4, GORM, PostgreSQL, Air hot-reload, golangci-lint, golang-migrate",
+          "Stack Preset: Django + PostgreSQL — Python 3.12+, Django 5+, DRF, pytest-django, ruff, mypy, uv",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.6.2",
+    date: "2026-03-22",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "124 unit tests for recommendation engine, detect module, template engine, and stack parser",
+          "GitHub Actions CI/CD pipeline (ci.yml + publish.yml)",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.6.0",
+    date: "2026-03-21",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "Rust + Actix stack preset",
+          "/prd:network-map command for visual dependency mapping",
+          "/prd:update command for safe in-place PRD updates",
+          "/code-review command for systematic code review with severity levels",
+          "Playwright browser automation support via Foundation MCP",
+        ],
+      },
+    ],
+  },
+];
+
+const TYPE_STYLES: Record<string, { bg: string; text: string; dot: string }> = {
+  Added: {
+    bg: "bg-emerald-500/10",
+    text: "text-emerald-600 dark:text-emerald-400",
+    dot: "bg-emerald-500",
+  },
+  Changed: {
+    bg: "bg-blue-500/10",
+    text: "text-blue-600 dark:text-blue-400",
+    dot: "bg-blue-500",
+  },
+  Fixed: {
+    bg: "bg-amber-500/10",
+    text: "text-amber-600 dark:text-amber-400",
+    dot: "bg-amber-500",
+  },
+  Tests: {
+    bg: "bg-violet-500/10",
+    text: "text-violet-600 dark:text-violet-400",
+    dot: "bg-violet-500",
+  },
+  Breaking: {
+    bg: "bg-red-500/10",
+    text: "text-red-600 dark:text-red-400",
+    dot: "bg-red-500",
+  },
+};
+
+function TypeBadge({ type }: { type: string }) {
+  const style = TYPE_STYLES[type] ?? TYPE_STYLES.Changed;
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${style.bg} ${style.text}`}
+    >
+      <span className={`h-1.5 w-1.5 rounded-full ${style.dot}`} />
+      {type}
+    </span>
+  );
+}
+
+function VersionBadge({ tag }: { tag?: string }) {
+  if (!tag) return null;
+  return (
+    <span className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-white">
+      {tag}
+    </span>
+  );
+}
+
+export default function ChangelogPage() {
+  return (
+    <div className="mx-auto max-w-3xl px-6 pt-20 pb-16 lg:px-12 lg:pt-28 lg:pb-24">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="mb-4 flex items-center gap-2 text-accent">
+          <GitCommit className="h-4 w-4" />
+          <span className="text-xs font-semibold uppercase tracking-wider">
+            Release History
+          </span>
+        </div>
+        <h1 className="text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
+          Changelog
+        </h1>
+        <p className="mt-4 text-lg text-text-secondary">
+          Every release, documented. effectum ships fast — check back often.
+        </p>
+
+        {/* Quick links */}
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link
+            href="https://www.npmjs.com/package/@aslomon/effectum"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            <Package className="h-3.5 w-3.5" />
+            npm
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+          <Link
+            href="https://github.com/aslomon/effectum/blob/main/CHANGELOG.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent"
+          >
+            <Tag className="h-3.5 w-3.5" />
+            Full changelog on GitHub
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Releases */}
+      <div className="relative">
+        {/* Vertical line */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
+
+        <div className="space-y-12 pl-8">
+          {RELEASES.map((release) => (
+            <div key={release.version} className="relative">
+              {/* Dot on timeline */}
+              <div className="absolute -left-[2.125rem] top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-surface" />
+
+              {/* Version header */}
+              <div className="mb-4 flex flex-wrap items-center gap-2.5">
+                <h2 className="text-xl font-bold tracking-tight text-text-primary">
+                  v{release.version}
+                </h2>
+                <VersionBadge tag={release.tag} />
+                <time className="text-sm text-text-muted">{release.date}</time>
+              </div>
+
+              {/* Sections */}
+              <div className="space-y-5">
+                {release.sections.map((section, idx) => (
+                  <div key={idx}>
+                    <div className="mb-2">
+                      <TypeBadge type={section.type} />
+                    </div>
+                    <ul className="space-y-2">
+                      {section.items.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-text-secondary"
+                        >
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-text-muted" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer note */}
+      <div className="mt-16 rounded-xl border border-border p-5 text-sm text-text-secondary">
+        <strong className="text-text-primary">All releases on npm:</strong>{" "}
+        <code className="rounded bg-surface-raised px-1.5 py-0.5 font-mono text-xs">
+          npx @aslomon/effectum@0.11.1
+        </code>{" "}
+        — or just{" "}
+        <code className="rounded bg-surface-raised px-1.5 py-0.5 font-mono text-xs">
+          npx @aslomon/effectum
+        </code>{" "}
+        for latest.
+      </div>
+    </div>
+  );
+}
