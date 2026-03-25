@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, ArrowRight, Terminal } from "lucide-react";
+import { useState, useEffect } from "react";
 import { FadeIn } from "@/components/fade-in";
 
 function GridPattern() {
@@ -25,7 +26,41 @@ function GridPattern() {
   );
 }
 
+const TERMINAL_LINES = [
+  { delay: 0,    text: "$ npx @aslomon/effectum", type: "command" },
+  { delay: 800,  text: "◆ Stack detected: Next.js + Supabase ✓", type: "info" },
+  { delay: 1400, text: "◆ Autonomy level: Standard", type: "info" },
+  { delay: 2000, text: "✓ Configured in 11s. Run /prd:new to start.", type: "success" },
+  { delay: 3000, text: "$ claude code", type: "command" },
+  { delay: 3600, text: "> /ralph-loop", type: "prompt" },
+  { delay: 4200, text: "✓ build — PASS", type: "success" },
+  { delay: 4600, text: "✓ tests — 12/12", type: "success" },
+  { delay: 5000, text: "✓ Completion promise satisfied.", type: "success" },
+];
+
 function TerminalInstall() {
+  const [visibleLines, setVisibleLines] = useState<number[]>([]);
+
+  const [cycle, setCycle] = useState(0);
+
+  useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    TERMINAL_LINES.forEach((line, i) => {
+      const t = setTimeout(() => {
+        setVisibleLines((prev) => [...prev, i]);
+      }, line.delay);
+      timers.push(t);
+    });
+    // Restart loop
+    const restart = setTimeout(() => {
+      setVisibleLines([]);
+      setCycle((c) => c + 1);
+    }, 8000);
+    timers.push(restart);
+    return () => timers.forEach(clearTimeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cycle]);
+
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-code-bg shadow-lg shadow-black/10">
       <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
@@ -37,18 +72,39 @@ function TerminalInstall() {
           <span>terminal</span>
         </div>
       </div>
-      <div className="px-5 py-4">
-        <div className="flex items-center gap-3">
-          <span className="select-none text-sm text-accent">$</span>
-          <span className="font-mono text-sm tracking-wide text-code-text">
-            npx @aslomon/effectum
-          </span>
+      <div className="px-5 py-4 space-y-1.5 min-h-[140px]">
+        {TERMINAL_LINES.map((line, i) =>
+          visibleLines.includes(i) ? (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -4 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-start gap-2 font-mono text-sm"
+            >
+              <span
+                className={
+                  line.type === "command"
+                    ? "text-accent font-medium"
+                    : line.type === "success"
+                    ? "text-green-400"
+                    : line.type === "prompt"
+                    ? "text-purple-400"
+                    : "text-code-text/70"
+                }
+              >
+                {line.text}
+              </span>
+            </motion.div>
+          ) : null
+        )}
+        {visibleLines.length < TERMINAL_LINES.length && (
           <motion.span
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 1.2, repeat: Infinity }}
             className="inline-block h-4 w-0.5 bg-accent"
           />
-        </div>
+        )}
       </div>
     </div>
   );
