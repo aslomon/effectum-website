@@ -32,14 +32,15 @@ const FEATURES = [
     size: "large",
   },
   {
-    title: "17 Workflow Commands",
+    title: "28 Workflow Commands",
     description:
-      "The entire development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, and deploy with full autonomy.",
+      "The entire development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, update, and deploy with full autonomy.",
     details: [
       "/plan — think before building",
       "/tdd — test-driven development",
       "/verify — run all quality gates",
       "/ralph-loop — autonomous overnight builds",
+      "/update — upgrade config without reconfiguring",
     ],
     icon: Terminal,
     size: "large",

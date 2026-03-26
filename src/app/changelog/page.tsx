@@ -20,9 +20,86 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: "0.15.0",
+    date: "2026-03-26",
+    tag: "latest",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "YAML frontmatter on all 28 commands — each command now has `title`, `description`, `usage`, and `examples` metadata for better discoverability and tooling.",
+          "Commands README index (system/commands/README.md) — searchable index of all commands with descriptions and usage examples.",
+          "6 specialized onboard agents — parallel analysis agents (api, architecture, database, frontend, stack, test) for faster, more accurate /onboard.",
+        ],
+      },
+      {
+        type: "Changed",
+        items: [
+          "onboard.md refactored from 578 → 202 lines — cleaner orchestration, delegates analysis to specialized agents, faster execution.",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "389 tests, all passing (up from 299)",
+          "Added test/frontmatter.test.js — 210 tests validating YAML frontmatter on all commands",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.14.2",
+    date: "2026-03-26",
+    tag: undefined,
+    sections: [
+      {
+        type: "Fixed",
+        items: [
+          "effectum update now shows a clear error when .effectum.json is missing instead of silently failing.",
+          "Clack fallback for non-TTY environments — effectum update --yes works in CI/scripts without interactive prompt.",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.14.1",
+    date: "2026-03-26",
+    tag: undefined,
+    sections: [
+      {
+        type: "Fixed",
+        items: [
+          "effectum update --yes flag now correctly skips all confirmation prompts for non-interactive mode.",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.14.0",
+    date: "2026-03-26",
+    tag: undefined,
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "effectum update command — intelligently updates your project's CLAUDE.md/AGENTS.md and commands to the latest version without requiring full reconfiguration. Preserves your existing customizations.",
+          "Package manager configuration — effectum now detects npm, pnpm, yarn, or bun from your project and sets it as the default. Overridable in the setup flow.",
+          "Next-step navigation in all commands — every command now ends with a clear suggestion for what to run next, keeping Claude oriented in the workflow.",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "299 tests, all passing (up from 236)",
+          "Added test/update.test.js (306 tests), test/package-manager.test.js (232 tests), test/next-steps.test.js (183 tests)",
+        ],
+      },
+    ],
+  },
+  {
     version: "0.13.0",
     date: "2026-03-25",
-    tag: "latest",
+    tag: undefined,
     sections: [
       {
         type: "Added",
