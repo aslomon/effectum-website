@@ -27,10 +27,14 @@ function GridPattern() {
 }
 
 const TERMINAL_LINES = [
-  { delay: 0,    text: "$ npx @aslomon/effectum", type: "command" },
-  { delay: 800,  text: "◆ Stack detected: Next.js + Supabase ✓", type: "info" },
+  { delay: 0, text: "$ npx @aslomon/effectum", type: "command" },
+  { delay: 800, text: "◆ Stack detected: Next.js + Supabase ✓", type: "info" },
   { delay: 1400, text: "◆ Autonomy level: Standard", type: "info" },
-  { delay: 2000, text: "✓ Configured in 11s. Run /prd:new to start.", type: "success" },
+  {
+    delay: 2000,
+    text: "✓ Configured in 11s. Run /prd:new to start.",
+    type: "success",
+  },
   { delay: 3000, text: "$ claude code", type: "command" },
   { delay: 3600, text: "> /ralph-loop", type: "prompt" },
   { delay: 4200, text: "✓ build — PASS", type: "success" },
@@ -58,7 +62,7 @@ function TerminalInstall() {
     }, 8000);
     timers.push(restart);
     return () => timers.forEach(clearTimeout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cycle]);
 
   return (
@@ -87,16 +91,16 @@ function TerminalInstall() {
                   line.type === "command"
                     ? "text-accent font-medium"
                     : line.type === "success"
-                    ? "text-green-400"
-                    : line.type === "prompt"
-                    ? "text-purple-400"
-                    : "text-code-text/70"
+                      ? "text-green-400"
+                      : line.type === "prompt"
+                        ? "text-purple-400"
+                        : "text-code-text/70"
                 }
               >
                 {line.text}
               </span>
             </motion.div>
-          ) : null
+          ) : null,
         )}
         {visibleLines.length < TERMINAL_LINES.length && (
           <motion.span
@@ -135,7 +139,7 @@ export function Hero() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
               effectum transforms natural language into production-ready code
-              with intelligent setup, 17 workflow commands, and 19 specialized
+              with intelligent setup, 28 workflow commands, and 19 specialized
               agents. New project or existing codebase — describe what you want,
               let Claude Code build it overnight.
             </p>

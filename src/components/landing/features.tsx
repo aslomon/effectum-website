@@ -13,6 +13,8 @@ import {
   Bot,
   Boxes,
   Palette,
+  PackageCheck,
+  Download,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/section";
@@ -121,6 +123,32 @@ const FEATURES = [
       "Max 300 lines per file enforced",
     ],
     icon: Shield,
+    size: "medium",
+  },
+  {
+    title: "Update Command",
+    description:
+      "npx @aslomon/effectum update — add new commands, refresh templates, and preserve your config without re-running the full setup.",
+    details: [
+      "Diffs commands: shows new and updated",
+      "Re-renders CLAUDE.md + settings.json",
+      "Preserves stack, autonomy, customizations",
+      "Supports --yes for CI automation",
+    ],
+    icon: Download,
+    size: "medium",
+  },
+  {
+    title: "Package Manager",
+    description:
+      "Auto-detects your package manager from lock files. Recommends the best option for your ecosystem, flows through all templates.",
+    details: [
+      "Detects: pnpm, yarn, bun, uv, cargo, go",
+      "Apple-like confirm-or-change flow",
+      "{{PACKAGE_MANAGER}} in all templates",
+      "Ecosystem-aware defaults",
+    ],
+    icon: PackageCheck,
     size: "medium",
   },
   {
@@ -234,7 +262,7 @@ export function Features() {
       description="A complete autonomous development system that takes you from idea to production-ready code."
     >
       <div className="mx-auto max-w-5xl">
-        {/* Row 1: two large cards — Onboarding + 17 Commands */}
+        {/* Row 1: two large cards — Onboarding + 28 Commands */}
         <div className="grid gap-4 sm:grid-cols-2">
           {FEATURES.slice(0, 2).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i} />
@@ -248,17 +276,24 @@ export function Features() {
           ))}
         </div>
 
-        {/* Row 3: three medium cards — Agents + Foundation + Quality */}
+        {/* Row 3: three medium cards — Agents + Design System + Foundation */}
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           {FEATURES.slice(4, 7).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 4} />
           ))}
         </div>
 
-        {/* Row 4: two small cards — Ralph Loop + Guardrails */}
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {FEATURES.slice(7, 9).map((feature, i) => (
+        {/* Row 4: three medium cards — Quality + Update + Package Manager */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          {FEATURES.slice(7, 10).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 7} />
+          ))}
+        </div>
+
+        {/* Row 5: two small cards — Ralph Loop + Guardrails */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {FEATURES.slice(10, 12).map((feature, i) => (
+            <FeatureCard key={feature.title} feature={feature} index={i + 10} />
           ))}
         </div>
       </div>

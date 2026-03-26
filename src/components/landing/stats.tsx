@@ -10,11 +10,11 @@ import {
 import { useRef, useEffect } from "react";
 
 const STATS = [
-  { value: 17, label: "Workflow commands", suffix: "" },
-  { value: 6, label: "Modular stacks", suffix: "" },
+  { value: 28, label: "Workflow commands", suffix: "" },
+  { value: 7, label: "Modular stacks", suffix: "" },
   { value: 19, label: "Specialized agents", suffix: "" },
   { value: 22, label: "Skills", suffix: "+" },
-  { value: 148, label: "Tests passing", suffix: "" },
+  { value: 389, label: "Tests passing", suffix: "" },
 ];
 
 function Counter({ value, isInView }: { value: number; isInView: boolean }) {
