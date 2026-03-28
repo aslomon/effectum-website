@@ -87,7 +87,7 @@ function CinematicTerminal() {
       </div>
 
       {/* Lines */}
-      <div className="min-h-[60vh] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[320px]">
+      <div className="min-h-[calc(100vh-140px)] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[calc(100vh-160px)]">
         {TERMINAL_LINES.slice(0, visibleCount).map((line, i) => (
           <div key={i} className="leading-relaxed">
             <span
@@ -134,19 +134,15 @@ export function Hero() {
       return;
     }
 
-    // 3-second timer
-    const timer = setTimeout(() => setRevealed(true), 3000);
-
-    // Scroll trigger
+    // Scroll trigger ONLY — no timer
     const onScroll = () => {
-      if (window.scrollY > 10) {
+      if (window.scrollY > 30) {
         setRevealed(true);
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
@@ -262,7 +258,7 @@ export function Hero() {
 
         {/* Terminal — full viewport centred */}
         <div
-          className={`terminal-wrap absolute inset-x-0 top-[5vh] mx-auto w-[92vw] max-w-2xl px-2 sm:top-[10vh] sm:w-[90vw] sm:px-0 ${
+          className={`terminal-wrap absolute inset-x-0 top-[72px] mx-auto w-[92vw] max-w-2xl px-2 sm:top-[80px] sm:w-[90vw] sm:px-0 ${
             revealed ? "revealed" : ""
           }`}
         >
