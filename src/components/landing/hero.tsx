@@ -1,173 +1,323 @@
 "use client";
 
-import { Github, ArrowRight, Terminal } from "lucide-react";
-import { useState, useEffect } from "react";
-import { FadeIn } from "@/components/fade-in";
+import { Github, ArrowRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
-function GridPattern() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-      aria-hidden="true"
-    >
-      <div
-        className="absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage: `linear-gradient(to right, #D97706 1px, transparent 1px),
-            linear-gradient(to bottom, #D97706 1px, transparent 1px)`,
-          backgroundSize: "48px 48px",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background opacity-80" />
-      <div className="absolute -left-32 -top-32 h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full bg-amber-100/40 blur-[100px] dark:bg-amber-900/20" />
-      <div className="absolute -right-32 bottom-0 h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] rounded-full bg-orange-100/30 blur-[120px] dark:bg-amber-900/15" />
-    </div>
-  );
-}
-
-const TERMINAL_LINES = [
-  { delay: 0, text: "$ npx @aslomon/effectum", type: "command" },
-  { delay: 800, text: "◆ Stack detected: Next.js + Supabase ✓", type: "info" },
-  { delay: 1400, text: "◆ Autonomy level: Standard", type: "info" },
+// ---------------------------------------------------------------------------
+// Rotating headline data
+// ---------------------------------------------------------------------------
+const HEADLINES = [
   {
-    delay: 2000,
-    text: "✓ Configured in 11s. Run /effectum to start.",
-    type: "success",
+    headline: "Stop prompting. Start shipping.",
+    sub: "Effectum gives Claude Code a spine — spec first, plan always, verify before you sleep.",
   },
-  { delay: 3000, text: "$ claude", type: "command" },
-  { delay: 3400, text: "> /effectum", type: "prompt" },
-  { delay: 3900, text: "◆ Choose your journey: A / B / C", type: "info" },
-  { delay: 4400, text: "> /run", type: "prompt" },
-  { delay: 4800, text: "✓ build — PASS", type: "success" },
-  { delay: 5200, text: "✓ tests — 12/12", type: "success" },
-  { delay: 5600, text: "✓ Completion promise satisfied.", type: "success" },
+  {
+    headline: "Claude Code generates code.\nEffectum generates results.",
+    sub: "The methodology layer that turns AI potential into production software.",
+  },
+  {
+    headline: "Effectum. The result. Not the attempt.",
+    sub: "A methodology for Claude Code that ends sessions in working software, not half-built features.",
+  },
 ];
 
-function TerminalInstall() {
-  const [visibleLines, setVisibleLines] = useState<number[]>([]);
+// ---------------------------------------------------------------------------
+// Terminal typing sequence
+// ---------------------------------------------------------------------------
+const TERMINAL_LINES = [
+  { text: "$ npx @aslomon/effectum", type: "command", pause: 800 },
+  { text: "✓ Stack detected: Next.js + Supabase", type: "success", pause: 400 },
+  { text: "✓ 42 commands installed", type: "success", pause: 600 },
+  { text: "$ claude", type: "command", pause: 700 },
+  { text: "> /effectum", type: "prompt", pause: 500 },
+  {
+    text: "◆ Pick your journey: New Project / Existing Code / Feature Build",
+    type: "info",
+    pause: 600,
+  },
+  { text: "> /prd:new", type: "prompt", pause: 500 },
+  { text: "◆ What do you want to build?", type: "info", pause: 400 },
+  { text: "> An auth system with social login", type: "prompt", pause: 700 },
+  { text: "◆ Writing spec...", type: "info", pause: 800 },
+  { text: "✓ PRD-001-auth.md created", type: "success", pause: 600 },
+  { text: "> /run --max-iterations 30", type: "prompt", pause: 500 },
+  { text: "◆ Starting autonomous build...", type: "info", pause: 700 },
+  { text: "✓ Iteration 1/30 — tests written", type: "success", pause: 500 },
+  { text: "✓ Iteration 2/30 — auth flow implemented", type: "success", pause: 500 },
+  { text: "✓ Iteration 3/30 — all 8 quality gates pass", type: "success", pause: 600 },
+  { text: "✓ Completion promise satisfied.", type: "success", pause: 99999 },
+];
 
-  const [cycle, setCycle] = useState(0);
+// ---------------------------------------------------------------------------
+// Terminal component
+// ---------------------------------------------------------------------------
+function CinematicTerminal() {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const idxRef = useRef(0);
 
   useEffect(() => {
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    TERMINAL_LINES.forEach((line, i) => {
-      const t = setTimeout(() => {
-        setVisibleLines((prev) => [...prev, i]);
-      }, line.delay);
-      timers.push(t);
-    });
-    // Restart loop
-    const restart = setTimeout(() => {
-      setVisibleLines([]);
-      setCycle((c) => c + 1);
-    }, 9000);
-    timers.push(restart);
-    return () => timers.forEach(clearTimeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cycle]);
+    let timer: ReturnType<typeof setTimeout>;
+
+    function showNext() {
+      const i = idxRef.current;
+      if (i >= TERMINAL_LINES.length) return;
+      setVisibleCount(i + 1);
+      idxRef.current = i + 1;
+      timer = setTimeout(showNext, TERMINAL_LINES[i].pause);
+    }
+
+    timer = setTimeout(showNext, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-code-bg shadow-lg shadow-black/10">
+    <div
+      className="cinematic-terminal overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0d] font-mono text-sm"
+      style={{
+        boxShadow:
+          "0 0 0 1px rgba(217,119,6,0.15), 0 8px 32px rgba(0,0,0,0.6), 0 0 60px rgba(217,119,6,0.08)",
+      }}
+    >
+      {/* Title bar */}
       <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
         <div className="h-3 w-3 rounded-full bg-red-500/70" />
         <div className="h-3 w-3 rounded-full bg-yellow-500/70" />
         <div className="h-3 w-3 rounded-full bg-green-500/70" />
-        <div className="ml-3 flex items-center gap-2 text-xs text-code-text/50">
-          <Terminal size={12} />
-          <span>terminal</span>
-        </div>
+        <span className="ml-3 text-xs text-white/30">effectum — terminal</span>
       </div>
-      <div className="px-5 py-4 space-y-1.5 min-h-[160px]">
-        {TERMINAL_LINES.map((line, i) =>
-          visibleLines.includes(i) ? (
-            <div
-              key={i}
-              className="flex items-start gap-2 font-mono text-sm"
+
+      {/* Lines */}
+      <div className="min-h-[260px] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[320px]">
+        {TERMINAL_LINES.slice(0, visibleCount).map((line, i) => (
+          <div key={i} className="leading-relaxed">
+            <span
+              className={
+                line.type === "command"
+                  ? "text-amber-400 font-semibold"
+                  : line.type === "success"
+                  ? "text-green-400"
+                  : line.type === "prompt"
+                  ? "text-purple-300"
+                  : "text-white/60"
+              }
             >
-              <span
-                className={
-                  line.type === "command"
-                    ? "text-accent font-medium"
-                    : line.type === "success"
-                      ? "text-green-400"
-                      : line.type === "prompt"
-                        ? "text-purple-400"
-                        : "text-code-text/70"
-                }
-              >
-                {line.text}
-              </span>
-            </div>
-          ) : null,
-        )}
-        {visibleLines.length < TERMINAL_LINES.length && (
-          <span
-            className="inline-block h-4 w-0.5 bg-accent"
-          />
+              {line.text}
+            </span>
+          </div>
+        ))}
+        {/* Blinking cursor */}
+        {visibleCount < TERMINAL_LINES.length && (
+          <span className="terminal-cursor inline-block h-4 w-0.5 bg-amber-400" />
         )}
       </div>
     </div>
   );
 }
 
+// ---------------------------------------------------------------------------
+// Main Hero
+// ---------------------------------------------------------------------------
 export function Hero() {
-  return (
-    <section className="relative overflow-hidden py-16 sm:py-24 lg:py-28">
-      <GridPattern />
+  const [headlineIdx] = useState(() => Math.floor(Math.random() * HEADLINES.length));
+  const [revealed, setRevealed] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <FadeIn>
-          <div className="mx-auto max-w-3xl text-center">
-            <div
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Built for Claude Code · v0.17
+  const headline = HEADLINES[headlineIdx];
+
+  useEffect(() => {
+    // Check prefers-reduced-motion
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) {
+      setRevealed(true); // skip animation
+      setReducedMotion(true);
+      return;
+    }
+
+    // 3-second timer
+    const timer = setTimeout(() => setRevealed(true), 3000);
+
+    // Scroll trigger
+    const onScroll = () => {
+      if (window.scrollY > 10) {
+        setRevealed(true);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  // -------------------------------------------------------------------------
+  // Reduced-motion layout: side by side
+  // -------------------------------------------------------------------------
+  if (reducedMotion) {
+    return (
+      <section
+        ref={sectionRef}
+        className="relative overflow-hidden py-20 sm:py-28"
+      >
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Headline */}
+            <div>
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                Built for Claude Code · v0.17
+              </div>
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl whitespace-pre-line">
+                {headline.headline}
+              </h1>
+              <p className="mt-6 text-lg leading-relaxed text-white/60">
+                {headline.sub}
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <a
+                  href="https://github.com/aslomon/effectum"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg bg-amber-500 px-6 text-sm font-medium text-white shadow-sm transition-all hover:bg-amber-400"
+                >
+                  <Github size={16} />
+                  View on GitHub
+                </a>
+                <a
+                  href="/docs/getting-started"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-6 text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+                >
+                  Get started
+                  <ArrowRight size={14} className="text-amber-400" />
+                </a>
+              </div>
             </div>
+            {/* Terminal */}
+            <div>
+              <CinematicTerminal />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-            <h1 className="text-5xl font-bold tracking-tight text-text-primary sm:text-7xl">
-              Describe what you want.
-              <br />
-              <span className="text-accent">Get production-ready code.</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
-              effectum transforms natural language into production-ready code.
-              Type <code className="font-mono text-accent">/effectum</code> to
-              pick your journey, write a spec with{" "}
-              <code className="font-mono text-accent">/prd:new</code>, then{" "}
-              <code className="font-mono text-accent">/run</code> to build
-              autonomously — overnight if you want.
+  // -------------------------------------------------------------------------
+  // Full cinematic layout
+  // -------------------------------------------------------------------------
+  return (
+    <>
+      {/* Inline styles for cinematic transitions */}
+      <style>{`
+        .terminal-wrap {
+          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          transform-origin: top center;
+        }
+        .terminal-wrap.revealed {
+          transform: scale(0.65) translateY(-15vh);
+          opacity: 0.3;
+        }
+        @media (max-width: 639px) {
+          .terminal-wrap.revealed {
+            transform: scale(0.55) translateY(-10vh);
+            opacity: 0.25;
+          }
+        }
+
+        .hero-content {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.6s ease 0.3s,
+                      transform 0.6s ease 0.3s;
+          pointer-events: none;
+        }
+        .hero-content.visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        .terminal-cursor {
+          animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}</style>
+
+      <section
+        ref={sectionRef}
+        className="relative min-h-screen overflow-hidden bg-[#080808]"
+      >
+        {/* Subtle background glow */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+        >
+          <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-600/5 blur-[120px]" />
+        </div>
+
+        {/* Terminal — full viewport centred */}
+        <div
+          className={`terminal-wrap absolute inset-x-0 top-[10vh] mx-auto w-[90vw] max-w-2xl px-4 sm:px-0 ${
+            revealed ? "revealed" : ""
+          }`}
+        >
+          <CinematicTerminal />
+          {/* Scroll hint — disappears on reveal */}
+          {!revealed && (
+            <p className="mt-6 animate-pulse text-center text-xs text-white/25">
+              scroll to skip
             </p>
-          </div>
-        </FadeIn>
+          )}
+        </div>
 
-        <FadeIn delay={0.15}>
-          <div className="mx-auto mt-12 max-w-lg">
-            <TerminalInstall />
+        {/* Hero content — fades in after reveal */}
+        <div
+          className={`hero-content relative mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-end px-6 pb-24 pt-[72vh] text-center sm:pt-[68vh] lg:pt-[64vh] ${
+            revealed ? "visible" : ""
+          }`}
+        >
+          {/* Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+            Built for Claude Code · v0.17
           </div>
-        </FadeIn>
 
-        <FadeIn delay={0.25}>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          {/* Headline */}
+          <h1 className="whitespace-pre-line text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            {headline.headline}
+          </h1>
+
+          {/* Sub */}
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/55">
+            {headline.sub}
+          </p>
+
+          {/* Buttons */}
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
               href="https://github.com/aslomon/effectum"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-accent px-6 text-sm font-medium text-white shadow-sm shadow-amber-900/20 transition-all hover:bg-accent-hover hover:shadow-md"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-7 text-sm font-medium text-white shadow shadow-amber-900/30 transition-all hover:bg-amber-400 sm:w-auto"
             >
               <Github size={16} />
               View on GitHub
             </a>
             <a
               href="/docs/getting-started"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-border bg-surface px-6 text-sm font-medium text-text-primary transition-all hover:border-border-hover hover:shadow-sm"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-7 text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10 sm:w-auto"
             >
               Get started
-              <ArrowRight size={14} className="text-accent" />
+              <ArrowRight size={14} className="text-amber-400" />
             </a>
           </div>
-        </FadeIn>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
