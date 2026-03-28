@@ -183,7 +183,9 @@ cd ~/my-project && claude
               </span>
             </div>
             <CodeBlock
-              code={`/effectum → /prd:new → /prd:review → /prd:handoff → [target repo] → /run`}
+              code={`/effectum → /prd:new →
+/prd:review → /prd:handoff →
+[target repo] → /run`}
               language="terminal"
             />
             <p className="mt-3 text-xs text-text-muted">
@@ -206,7 +208,8 @@ cd ~/my-project && claude
               </span>
             </div>
             <CodeBlock
-              code={`/effectum → /onboard → /prd:new → /prd:handoff → /run`}
+              code={`/effectum → /onboard →
+/prd:new → /prd:handoff → /run`}
               language="terminal"
             />
             <p className="mt-3 text-xs text-text-muted">

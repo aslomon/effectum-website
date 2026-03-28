@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Zap } from "lucide-react";
 import { Section } from "@/components/section";
@@ -45,8 +44,7 @@ const COMPARISONS = [
 
 export function Comparison() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
+  
   return (
     <Section
       id="comparison"
@@ -58,12 +56,8 @@ export function Comparison() {
         {/* Comparison cards */}
         <div className="space-y-3">
           {COMPARISONS.map((comp, i) => (
-            <motion.div
-              key={comp.name}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ duration: 0.2, delay: i * 0.09 }}
-              className="group grid items-center gap-4 rounded-2xl border border-border bg-surface p-5 transition-all duration-200 hover:border-accent/25 hover:shadow-sm sm:grid-cols-[140px_1fr_32px_1fr]"
+            <div
+              key={comp.name}className="group grid items-center gap-4 rounded-2xl border border-border bg-surface p-5 transition-all duration-200 hover:border-accent/25 hover:shadow-sm sm:grid-cols-[140px_1fr_32px_1fr]"
             >
               {/* Tool name */}
               <div>
@@ -91,16 +85,12 @@ export function Comparison() {
                 <Zap size={13} strokeWidth={2} className="shrink-0" />
                 {comp.adds}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Summary banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          transition={{ duration: 0.2, delay: 0.05 }}
-          className="mt-6 rounded-2xl border border-accent/20 bg-gradient-to-r from-accent-light to-accent-light/30 p-5 text-center"
+        <div className="mt-6 rounded-2xl border border-accent/20 bg-gradient-to-r from-accent-light to-accent-light/30 p-5 text-center"
         >
           <p className="text-sm font-medium text-text-primary">
             effectum takes the strongest idea from each tool and unifies them
@@ -110,7 +100,7 @@ export function Comparison() {
             No methodology switching. No integration work. One install, full
             pipeline.
           </p>
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

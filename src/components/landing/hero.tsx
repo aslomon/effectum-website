@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Github, ArrowRight, Terminal } from "lucide-react";
 import { useState, useEffect } from "react";
 import { FadeIn } from "@/components/fade-in";
@@ -81,11 +80,8 @@ function TerminalInstall() {
       <div className="px-5 py-4 space-y-1.5 min-h-[160px]">
         {TERMINAL_LINES.map((line, i) =>
           visibleLines.includes(i) ? (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, x: -4 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.2 }}
               className="flex items-start gap-2 font-mono text-sm"
             >
               <span
@@ -101,13 +97,11 @@ function TerminalInstall() {
               >
                 {line.text}
               </span>
-            </motion.div>
+            </div>
           ) : null,
         )}
         {visibleLines.length < TERMINAL_LINES.length && (
-          <motion.span
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 0.3, repeat: Infinity }}
+          <span
             className="inline-block h-4 w-0.5 bg-accent"
           />
         )}
@@ -124,15 +118,12 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
+            <div
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               Built for Claude Code · v0.17
-            </motion.div>
+            </div>
 
             <h1 className="text-5xl font-bold tracking-tight text-text-primary sm:text-7xl">
               Describe what you want.

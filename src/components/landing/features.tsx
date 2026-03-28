@@ -21,7 +21,6 @@ import {
   Brain,
   SplitSquareHorizontal,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { Section } from "@/components/section";
 
 const FEATURES = [
@@ -255,11 +254,7 @@ function FeatureCard({
   const size = feature.size as FeatureSize;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.2, delay: index * 0.07 }}
+    <div
       className={`group relative overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-lg hover:shadow-amber-900/5 ${
         size === "large" ? "p-7" : size === "medium" ? "p-6" : "p-5"
       }`}
@@ -314,7 +309,7 @@ function FeatureCard({
           </li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }
 

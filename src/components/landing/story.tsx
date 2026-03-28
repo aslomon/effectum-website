@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Sparkles, Check } from "lucide-react";
 
@@ -48,15 +47,11 @@ const COMBINED = [
 
 export function Story() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
+  
   return (
     <section id="story" className="relative overflow-hidden py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
+        <div
           className="mx-auto max-w-3xl text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">
@@ -71,7 +66,7 @@ export function Story() {
             combines the pieces that actually work — the perfect mix of
             generative intelligence and the structure of a program.
           </p>
-        </motion.div>
+        </div>
 
         <div
           ref={ref}
@@ -83,14 +78,8 @@ export function Story() {
               What we tested
             </h3>
             {TESTED.map((item, i) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, x: -12 }}
-                animate={
-                  isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }
-                }
-                transition={{ duration: 0.2, delay: i * 0.08 }}
-                className="rounded-xl border border-border bg-surface p-4"
+              <div
+                key={item.name}className="rounded-xl border border-border bg-surface p-4"
               >
                 <div className="flex items-center justify-between">
                   <a
@@ -115,7 +104,7 @@ export function Story() {
                 <p className="mt-1 text-xs text-red-400/80 dark:text-red-500/70">
                   {item.dropped}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -127,14 +116,8 @@ export function Story() {
             <div className="rounded-2xl border border-accent/20 bg-gradient-to-br from-accent-light/50 via-background to-accent-light/10 p-5">
               <div className="space-y-2">
                 {COMBINED.map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: 8 }}
-                    animate={
-                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 8 }
-                    }
-                    transition={{ duration: 0.2, delay: i * 0.06 + 0.2 }}
-                    className="flex items-center justify-between rounded-lg border border-accent/10 bg-surface/70 px-4 py-3"
+                  <div
+                    key={item.label}className="flex items-center justify-between rounded-lg border border-accent/10 bg-surface/70 px-4 py-3"
                   >
                     <div className="flex items-center gap-2.5">
                       <Check
@@ -155,21 +138,17 @@ export function Story() {
                     >
                       {item.from === "New" ? "effectum" : `from ${item.from}`}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ delay: 0.05 }}
-                className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-accent/25 bg-accent/5 px-4 py-3"
+              <div className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-accent/25 bg-accent/5 px-4 py-3"
               >
                 <Sparkles size={14} className="text-accent" />
                 <span className="text-xs font-semibold text-text-primary">
                   One install. Full pipeline. No methodology switching.
                 </span>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

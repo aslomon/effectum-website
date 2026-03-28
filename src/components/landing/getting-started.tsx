@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ExternalLink, Download, Compass, FileText, Rocket } from "lucide-react";
 import { Section } from "@/components/section";
 import { CodeBlock } from "@/components/code-block";
@@ -39,11 +38,7 @@ export function GettingStarted() {
     >
       <div className="mx-auto max-w-3xl">
         {/* Step indicators */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.2 }}
+        <div
           className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4"
         >
           {STEPS.map((step, i) => {
@@ -71,14 +66,10 @@ export function GettingStarted() {
               </div>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* Code block */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.2, delay: 0.1 }}
+        <div
         >
           <CodeBlock
             code={`# Install effectum
@@ -103,14 +94,10 @@ cd ~/my-project && claude
 /run`}
             language="terminal"
           />
-        </motion.div>
+        </div>
 
         {/* Requirements note */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.2, delay: 0.05 }}
+        <div
           className="mt-6 flex flex-col items-center gap-2 sm:flex-row sm:justify-center"
         >
           <p className="flex items-center gap-1.5 text-sm text-text-muted">
@@ -128,7 +115,7 @@ cd ~/my-project && claude
           </p>
           <span className="hidden text-text-muted sm:block">&middot;</span>
           <p className="text-sm text-text-muted">MIT License, free to use</p>
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

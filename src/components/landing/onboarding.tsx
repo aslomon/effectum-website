@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
   Layers,
@@ -53,8 +52,7 @@ const OUTPUTS = [
 
 export function Onboarding() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
+  
   return (
     <section id="onboarding" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -78,15 +76,8 @@ export function Onboarding() {
               {AGENTS.map((agent, i) => {
                 const Icon = agent.icon;
                 return (
-                  <motion.div
+                  <div
                     key={agent.title}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={
-                      isInView
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 16 }
-                    }
-                    transition={{ duration: 0.2, delay: i * 0.08 }}
                     className="group relative flex items-start gap-3.5 rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
                   >
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
@@ -105,16 +96,12 @@ export function Onboarding() {
                         parallel
                       </span>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.2, delay: 0.05 }}
-              className="mt-8 rounded-2xl border border-accent/20 bg-gradient-to-r from-accent/5 via-background to-accent/5 p-6"
+            <div className="mt-8 rounded-2xl border border-accent/20 bg-gradient-to-r from-accent/5 via-background to-accent/5 p-6"
             >
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-3 rounded-xl border border-code-border bg-code-bg px-4 py-2.5">
@@ -135,7 +122,7 @@ export function Onboarding() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

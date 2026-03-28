@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const STACKS = [
@@ -26,8 +25,7 @@ const PRESETS = [
 
 export function ModularStacks() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
+  
   return (
     <section id="stacks" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -49,14 +47,8 @@ export function ModularStacks() {
           {/* Stacks grid */}
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {STACKS.map((stack, i) => (
-              <motion.div
-                key={stack.name}
-                initial={{ opacity: 0, y: 16 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
-                }
-                transition={{ duration: 0.2, delay: i * 0.06 }}
-                className="group rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
+              <div
+                key={stack.name}className="group rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
               >
                 <p className="text-sm font-semibold text-text-primary">
                   {stack.name}
@@ -72,16 +64,12 @@ export function ModularStacks() {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Presets */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.2, delay: 0.05 }}
-            className="mt-8 rounded-2xl border border-border bg-surface p-6"
+          <div className="mt-8 rounded-2xl border border-border bg-surface p-6"
           >
             <p className="mb-4 text-xs font-bold uppercase tracking-wider text-text-muted">
               Quick presets
@@ -105,7 +93,7 @@ export function ModularStacks() {
               </code>{" "}
               for instant zero-config setup.
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

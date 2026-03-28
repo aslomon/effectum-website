@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Download,
@@ -70,8 +69,7 @@ const STEPS = [
 
 export function HowItWorks() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [active, setActive] = useState(0);
+    const [active, setActive] = useState(0);
 
   const ActiveIcon = STEPS[active].icon;
 
@@ -99,14 +97,8 @@ export function HowItWorks() {
                 const Icon = step.icon;
                 const isActive = active === i;
                 return (
-                  <motion.div
-                    key={step.label}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={
-                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }
-                    }
-                    transition={{ duration: 0.2, delay: i * 0.02 }}
-                  >
+                  <div
+                    key={step.label}>
                     <button
                       type="button"
                       onClick={() => setActive(i)}
@@ -156,18 +148,15 @@ export function HowItWorks() {
                         <div className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-accent" />
                       )}
                     </button>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
 
             {/* Detail panel */}
             <div className="sticky top-24 h-fit">
-              <motion.div
+              <div
                 key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
                 className="flex h-full flex-col rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 via-background to-amber-50/30 p-8 dark:to-transparent"
               >
                 <div className="mb-6 flex items-center gap-4">
@@ -204,7 +193,7 @@ export function HowItWorks() {
                     </code>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
 
@@ -213,14 +202,8 @@ export function HowItWorks() {
             {STEPS.map((step, i) => {
               const Icon = step.icon;
               return (
-                <motion.div
-                  key={step.label}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={
-                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }
-                  }
-                  transition={{ duration: 0.2, delay: i * 0.02 }}
-                  className="relative"
+                <div
+                  key={step.label}className="relative"
                 >
                   {i < STEPS.length - 1 && (
                     <div className="absolute left-5 top-10 h-[calc(100%+1rem)] w-px bg-gradient-to-b from-accent/30 to-border/20" />
@@ -243,7 +226,7 @@ export function HowItWorks() {
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>

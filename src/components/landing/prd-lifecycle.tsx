@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FileText, RefreshCw, ListChecks, GitBranch } from "lucide-react";
 
@@ -42,8 +41,7 @@ const DELTA_LINES = [
 
 export function PrdLifecycle() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
+  
   return (
     <section id="prd-lifecycle" className="py-24 sm:py-32 bg-surface">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -66,15 +64,8 @@ export function PrdLifecycle() {
               {PHASES.map((phase, i) => {
                 const Icon = phase.icon;
                 return (
-                  <motion.div
+                  <div
                     key={phase.command}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      isInView
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 20 }
-                    }
-                    transition={{ duration: 0.2, delay: i * 0.08 }}
                     className="group relative"
                   >
                     {i < PHASES.length - 1 && (
@@ -96,16 +87,12 @@ export function PrdLifecycle() {
                         {phase.desc}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.2, delay: 0.05 }}
-              className="mt-8 overflow-hidden rounded-2xl border border-code-border bg-code-bg"
+            <div className="mt-8 overflow-hidden rounded-2xl border border-code-border bg-code-bg"
             >
               <div className="border-b border-white/10 px-5 py-3">
                 <span className="text-xs font-semibold text-code-text/50">
@@ -132,7 +119,7 @@ export function PrdLifecycle() {
                   ))}
                 </pre>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
