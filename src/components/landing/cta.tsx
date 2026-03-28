@@ -17,7 +17,7 @@ export function CTA() {
       />
 
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-64 w-[600px] -translate-x-1/2 rounded-full bg-amber-100/20 blur-3xl dark:bg-amber-900/15"
+        className="pointer-events-none absolute left-1/2 top-0 h-64 w-[300px] sm:w-[600px] -translate-x-1/2 rounded-full bg-amber-100/20 blur-3xl dark:bg-amber-900/15"
         aria-hidden="true"
       />
 

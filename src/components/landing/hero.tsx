@@ -20,8 +20,8 @@ function GridPattern() {
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background opacity-80" />
-      <div className="absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-amber-100/40 blur-[100px] dark:bg-amber-900/20" />
-      <div className="absolute -right-32 bottom-0 h-[400px] w-[400px] rounded-full bg-orange-100/30 blur-[120px] dark:bg-amber-900/15" />
+      <div className="absolute -left-32 -top-32 h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full bg-amber-100/40 blur-[100px] dark:bg-amber-900/20" />
+      <div className="absolute -right-32 bottom-0 h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] rounded-full bg-orange-100/30 blur-[120px] dark:bg-amber-900/15" />
     </div>
   );
 }

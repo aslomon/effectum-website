@@ -19,7 +19,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section id={id} className={`py-24 sm:py-32 ${className}`}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+      <div className="mx-auto max-w-7xl overflow-hidden px-4 sm:px-6 lg:px-12">
         <div className="mx-auto max-w-2xl text-center">
           {label && (
             <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">

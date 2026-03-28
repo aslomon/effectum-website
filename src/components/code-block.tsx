@@ -18,7 +18,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-code-border bg-code-bg shadow-sm">
+    <div className="group relative max-w-full overflow-hidden rounded-xl border border-code-border bg-code-bg shadow-sm">
       {language && (
         <div className="flex items-center justify-between border-b border-white/5 px-4 py-2.5">
           <div className="flex items-center gap-2 text-xs text-code-text/40">
@@ -47,7 +47,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
       )}
       <div className="relative">
         <pre className="overflow-x-auto p-4">
-          <code className="font-mono text-sm leading-relaxed text-code-text">
+          <code className="font-mono text-xs sm:text-sm leading-relaxed text-code-text break-all sm:break-normal">
             {code}
           </code>
         </pre>

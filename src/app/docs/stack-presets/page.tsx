@@ -117,7 +117,7 @@ export default function StackPresetsPage() {
           Feature comparison
         </h2>
         <div className="overflow-x-auto rounded-xl border border-border">
-          <table className="w-full text-left text-sm">
+          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0"><table className="w-full text-left text-sm min-w-[480px]">
             <thead>
               <tr className="border-b border-border bg-background">
                 <th className="px-4 py-3 text-xs font-semibold text-text-primary">
@@ -165,7 +165,7 @@ export default function StackPresetsPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
         </div>
       </div>
     </div>
