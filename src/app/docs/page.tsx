@@ -10,9 +10,23 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Documentation",
+  title: "Documentation — effectum Claude Code Framework",
   description:
-    "Learn how to use effectum to build production-ready code with Claude Code.",
+    "Complete documentation for the effectum Claude Code framework. Installation, PRD Workshop, 42 workflow commands, stack presets, and autonomous build guides.",
+  keywords: [
+    "effectum documentation",
+    "Claude Code framework docs",
+    "autonomous development framework",
+    "Claude Code workflow",
+    "spec-driven development",
+    "PRD workshop",
+    "Claude Code commands",
+  ],
+  openGraph: {
+    title: "Documentation — effectum Claude Code Framework",
+    description:
+      "Complete documentation for the effectum Claude Code framework. PRD Workshop, 42 workflow commands, stack presets, and autonomous build guides.",
+  },
 };
 
 const SECTIONS = [

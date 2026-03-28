@@ -21,23 +21,27 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aslomon.github.io/effectum"),
   title: {
-    default: "effectum — Describe what you want. Get production-ready code.",
+    default: "effectum — Claude Code Framework for Autonomous Development",
     template: "%s | effectum",
   },
   description:
-    "An autonomous development system for Claude Code. Transform natural language into production-ready code through structured workflows, quality gates, and test-driven development.",
+    "effectum is an open-source Claude Code framework for autonomous development. 42 workflow commands, spec-driven development, quality gates, and overnight autonomous builds.",
   keywords: [
     "effectum",
-    "Claude Code",
-    "autonomous development",
-    "AI coding",
-    "TDD",
-    "test-driven development",
-    "code generation",
-    "PRD workshop",
-    "quality gates",
+    "Claude Code framework",
+    "autonomous development framework",
+    "Claude Code workflow",
     "spec-driven development",
-    "Anthropic",
+    "AI coding framework",
+    "Claude Code autonomous build",
+    "Claude Code commands",
+    "PRD workshop",
+    "test-driven AI development",
+    "quality gates AI coding",
+    "AI development workflow",
+    "Claude Code setup",
+    "autonomous coding system",
+    "Anthropic Claude Code",
     "open source",
   ],
   authors: [
@@ -45,9 +49,9 @@ export const metadata: Metadata = {
   ],
   creator: "Jason Salomon-Rinnert",
   openGraph: {
-    title: "effectum — Describe what you want. Get production-ready code.",
+    title: "effectum — Claude Code Framework for Autonomous Development",
     description:
-      "An autonomous development system for Claude Code. Write a spec, let Claude build it overnight with quality gates and TDD.",
+      "Open-source Claude Code framework with 42 workflow commands. Write a spec, let Claude build it overnight with quality gates, TDD, and autonomous execution.",
     type: "website",
     locale: "en_US",
     siteName: "effectum",
@@ -55,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "effectum — Describe what you want. Get production-ready code.",
+    title: "effectum — Claude Code Framework for Autonomous Development",
     description:
-      "An autonomous development system for Claude Code. Write a spec, let Claude build it overnight.",
+      "Open-source Claude Code framework: spec-driven development, 42 workflow commands, quality gates, overnight autonomous builds.",
   },
   alternates: {
     canonical: "https://aslomon.github.io/effectum",
@@ -79,6 +83,38 @@ const themeScript = `
 })();
 `;
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "effectum",
+  url: "https://aslomon.github.io/effectum",
+  logo: "https://aslomon.github.io/effectum/logo.png",
+  sameAs: ["https://github.com/aslomon/effectum"],
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "effectum",
+  description:
+    "An open-source autonomous development framework for Claude Code. Structures AI-assisted coding with 42 workflow commands, quality gates, and spec-driven development.",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "macOS, Linux, Windows",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  url: "https://aslomon.github.io/effectum",
+  downloadUrl: "https://www.npmjs.com/package/@aslomon/effectum",
+  softwareVersion: "0.17",
+  author: {
+    "@type": "Person",
+    name: "Jason Salomon-Rinnert",
+    url: "https://github.com/aslomon",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -90,6 +126,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">
         <Script id="theme-init" strategy="beforeInteractive">
           {themeScript}

@@ -27,7 +27,7 @@ const FEATURES = [
   {
     title: "Onboarding",
     description:
-      "New project or existing codebase — effectum adapts. /onboard runs 6 parallel agents to analyze your repo and generate a complete CLAUDE.md in minutes.",
+      "New project or existing codebase — the Effectum framework adapts. /onboard runs 6 parallel agents to analyze your repo and generate a complete CLAUDE.md in minutes.",
     details: [
       "6 agents: Stack, Architecture, API, Database, Frontend, Test",
       "Auto-generates PRD from existing code",
@@ -40,7 +40,7 @@ const FEATURES = [
   {
     title: "42 Workflow Commands",
     description:
-      "The entire development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, update, and deploy with full autonomy.",
+      "The entire Claude Code development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, update, and deploy with full autonomy.",
     details: [
       "/effectum — entry point: pick your journey in 60 seconds",
       "/next — smart router: always know what to do next",
@@ -106,7 +106,7 @@ const FEATURES = [
   {
     title: "Foundation Model",
     description:
-      "A unified configuration layer that powers every command. CLAUDE.md, guardrails, hooks, and quality gates — all composable and extensible.",
+      "A unified configuration layer that powers every command in the framework. CLAUDE.md, guardrails, hooks, and quality gates — all composable and extensible.",
     details: [
       "CLAUDE.md as single source of truth",
       "Guardrails injected at every session",
@@ -119,7 +119,7 @@ const FEATURES = [
   {
     title: "8 Quality Gates",
     description:
-      "Automated checks that enforce production standards — not suggestions, requirements.",
+      "Automated checks that enforce AI development quality standards — not suggestions, requirements. The Effectum framework enforces all 8 before any code ships.",
     details: [
       "Zero tolerance: 0 errors, 0 warnings",
       "OWASP vulnerability scanning",
@@ -318,8 +318,8 @@ export function Features() {
     <Section
       id="features"
       label="Features"
-      title="Everything you need to ship"
-      description="A complete autonomous development system that takes you from idea to production-ready code."
+      title="A complete Claude Code development framework"
+      description="Effectum gives Claude Code the structure it needs: spec-driven workflow, 42 commands, 8 automated quality gates, and modular stack presets — everything to take you from idea to production-ready code."
     >
       <div className="mx-auto max-w-5xl">
         {/* Row 1: two large cards — Onboarding + 28 Commands */}

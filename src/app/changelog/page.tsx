@@ -3,9 +3,20 @@ import Link from "next/link";
 import { Tag, GitCommit, Package, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Changelog",
+  title: "Changelog — effectum Claude Code Framework Release Notes",
   description:
-    "What's new in effectum — release notes, bug fixes, and feature announcements.",
+    "Release notes for the effectum Claude Code framework. New features, bug fixes, and improvements to autonomous development workflows and quality gates.",
+  keywords: [
+    "effectum changelog",
+    "Claude Code framework updates",
+    "effectum releases",
+    "autonomous development framework",
+  ],
+  openGraph: {
+    title: "Changelog — effectum Claude Code Framework Release Notes",
+    description:
+      "Release notes for the effectum Claude Code framework. New features, bug fixes, and improvements to autonomous development workflows.",
+  },
 };
 
 interface Release {

@@ -43,8 +43,24 @@ import { COMMANDS, PHASE_ORDER, PHASE_META } from "./commands-data";
 import type { CommandPhase, CommandEntry } from "./commands-data";
 
 export const metadata: Metadata = {
-  title: "Commands",
-  description: "Reference for all 42 effectum workflow commands.",
+  title: "Commands Reference — 42 Claude Code Workflow Commands | effectum",
+  description:
+    "Complete reference for all 42 effectum Claude Code workflow commands. From PRD planning to autonomous overnight builds, quality gates, and spec-driven development.",
+  keywords: [
+    "Claude Code commands",
+    "effectum commands",
+    "Claude Code workflow",
+    "autonomous development framework",
+    "Claude Code autonomous build",
+    "PRD workshop commands",
+    "quality gates AI coding",
+    "Claude Code autonomous loop",
+  ],
+  openGraph: {
+    title: "Commands Reference — 42 Claude Code Workflow Commands | effectum",
+    description:
+      "Complete reference for all 42 effectum Claude Code workflow commands. From PRD planning to autonomous overnight builds and quality gates.",
+  },
 };
 
 // Map icon string names to Lucide components

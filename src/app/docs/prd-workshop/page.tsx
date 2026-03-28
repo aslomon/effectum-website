@@ -29,9 +29,24 @@ import {
 import { Section, ModeCard, CommandRow, ChecklistRow } from "./prd-components";
 
 export const metadata: Metadata = {
-  title: "PRD Workshop",
+  title: "PRD Workshop — Spec-Driven Development with Claude Code | effectum",
   description:
-    "The heart of effectum — bridging 'I have an idea' and 'Claude builds it autonomously.'",
+    "The PRD Workshop is the heart of effectum's Claude Code framework. Transform ideas into structured specs for autonomous AI development. Spec-driven development made simple.",
+  keywords: [
+    "PRD workshop",
+    "spec-driven development",
+    "Claude Code framework",
+    "autonomous development framework",
+    "how to use Claude Code effectively",
+    "spec to ship framework",
+    "structured AI development",
+    "Claude Code best practices",
+  ],
+  openGraph: {
+    title: "PRD Workshop — Spec-Driven Development with Claude Code | effectum",
+    description:
+      "Transform ideas into structured specs for autonomous AI development. The heart of the effectum Claude Code framework.",
+  },
 };
 
 // Map icon string names from prd-data.ts to actual Lucide components

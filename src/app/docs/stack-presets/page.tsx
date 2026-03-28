@@ -17,9 +17,22 @@ import {
 } from "./stack-data";
 
 export const metadata: Metadata = {
-  title: "Stack Presets",
+  title: "Stack Presets — Claude Code Framework Setup for Any Stack | effectum",
   description:
-    "Pre-configured setups for Next.js, Python, Swift, Go, Django, Rust, and generic projects.",
+    "Pre-configured Claude Code framework setups for Next.js, Python, Swift, Go, Django, Rust, and more. One command to configure effectum for your stack.",
+  keywords: [
+    "Claude Code setup",
+    "effectum stack presets",
+    "Claude Code framework",
+    "Next.js Claude Code",
+    "Python AI coding framework",
+    "autonomous development framework",
+  ],
+  openGraph: {
+    title: "Stack Presets — Claude Code Framework Setup for Any Stack | effectum",
+    description:
+      "Pre-configured Claude Code framework setups for Next.js, Python, Swift, Go, Django, Rust, and more.",
+  },
 };
 
 // Map icon string names to Lucide components

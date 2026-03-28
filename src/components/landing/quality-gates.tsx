@@ -108,9 +108,9 @@ export function QualityGates() {
   return (
     <Section
       id="quality-gates"
-      label="Quality enforcement"
+      label="AI development quality"
       title="8 gates. Zero exceptions."
-      description="Every feature must pass all 8 automated quality checks before shipping. These are requirements, not suggestions."
+      description="Effectum enforces AI development quality with 8 automated checks on every build. Production standards enforced by the framework — not suggestions, hard requirements."
       className="bg-surface"
     >
       <FadeIn>

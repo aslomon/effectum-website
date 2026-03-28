@@ -23,9 +23,23 @@ import {
 } from "./getting-started-components";
 
 export const metadata: Metadata = {
-  title: "Getting Started",
+  title: "Getting Started — Install the effectum Claude Code Framework",
   description:
-    "Install effectum and build your first feature with Claude Code.",
+    "Install the effectum Claude Code framework in 2 minutes. Set up autonomous development with quality gates, spec-driven workflows, and 42 workflow commands.",
+  keywords: [
+    "Claude Code setup",
+    "install effectum",
+    "Claude Code framework setup",
+    "how to use Claude Code effectively",
+    "autonomous development framework",
+    "Claude Code workflow",
+    "structured AI development",
+  ],
+  openGraph: {
+    title: "Getting Started — Install the effectum Claude Code Framework",
+    description:
+      "Install the effectum Claude Code framework in 2 minutes. Autonomous development with quality gates, spec-driven workflows, and 42 workflow commands.",
+  },
 };
 
 export default function GettingStartedPage() {

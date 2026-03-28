@@ -46,8 +46,8 @@ export function Problem() {
     <Section
       id="why"
       label="The problem"
-      title="AI coding tools produce mediocre results"
-      description="The gap between 'describe what you want' and 'get production-ready code' is filled with vague handoffs, back-and-forth, and code that nobody would ship."
+      title="Unstructured AI coding produces mediocre results"
+      description="The gap between 'describe what you want' and 'get production-ready code' is filled with vague handoffs, back-and-forth, and code that nobody would ship. A development framework closes that gap."
     >
       <div className="mx-auto max-w-5xl">
         <div

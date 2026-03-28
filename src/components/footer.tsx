@@ -10,8 +10,8 @@ export function Footer() {
           <div className="space-y-3">
             <Logo className="h-5 w-auto text-text-primary" />
             <p className="max-w-xs text-sm text-text-muted">
-              Autonomous development system for Claude Code. Describe what you
-              want. Get production-ready code.
+              Open-source autonomous development framework for Claude Code.
+              Describe what you want. Get production-ready code.
             </p>
           </div>
 
@@ -43,6 +43,14 @@ export function Footer() {
                     className="text-sm text-text-secondary transition-colors hover:text-text-primary"
                   >
                     Getting Started
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-sm text-text-secondary transition-colors hover:text-text-primary"
+                  >
+                    About
                   </Link>
                 </li>
                 <li>
