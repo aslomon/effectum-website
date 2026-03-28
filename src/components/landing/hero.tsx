@@ -156,7 +156,21 @@ export function Hero() {
     // After 10 seconds, auto-scroll down smoothly to trigger reveal
     const autoScrollTimer = setTimeout(() => {
       if (window.scrollY <= 30) {
-        window.scrollTo({ top: 220, behavior: "smooth" });
+        // Slower auto-scroll: scroll over ~2 seconds
+        const start = window.scrollY;
+        const target = 220;
+        const duration = 2000;
+        const startTime = performance.now();
+        function easeScroll(now: number) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+          window.scrollTo(0, start + (target - start) * eased);
+          if (progress < 1) requestAnimationFrame(easeScroll);
+        }
+        requestAnimationFrame(easeScroll);
       }
     }, 10000);
 
@@ -235,7 +249,7 @@ export function Hero() {
 
       <section
         ref={sectionRef}
-        className="relative min-h-[150vh] overflow-hidden bg-[#080808]"
+        className="relative min-h-[130vh] overflow-hidden bg-[#080808]"
       >
         {/* Subtle background glow */}
         <div
@@ -266,9 +280,9 @@ export function Hero() {
 
         {/* Hero content — overlaps terminal from bottom, fades in progressively */}
         <div
-          className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-6 pb-24 text-center"
+          className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-6 pb-10 text-center"
           style={{
-            marginTop: "-20vh",
+            marginTop: "-28vh",
             opacity: scrollProgress,
             transform: `translateY(${(1 - scrollProgress) * 60}px)`,
             pointerEvents: scrollProgress > 0.3 ? "auto" : "none",
