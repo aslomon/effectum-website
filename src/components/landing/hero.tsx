@@ -87,7 +87,7 @@ function CinematicTerminal() {
       </div>
 
       {/* Lines */}
-      <div className="min-h-[260px] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[320px]">
+      <div className="min-h-[60vh] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[320px]">
         {TERMINAL_LINES.slice(0, visibleCount).map((line, i) => (
           <div key={i} className="leading-relaxed">
             <span
@@ -262,7 +262,7 @@ export function Hero() {
 
         {/* Terminal — full viewport centred */}
         <div
-          className={`terminal-wrap absolute inset-x-0 top-[10vh] mx-auto w-[90vw] max-w-2xl px-4 sm:px-0 ${
+          className={`terminal-wrap absolute inset-x-0 top-[5vh] mx-auto w-[92vw] max-w-2xl px-2 sm:top-[10vh] sm:w-[90vw] sm:px-0 ${
             revealed ? "revealed" : ""
           }`}
         >
