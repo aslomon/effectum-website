@@ -443,6 +443,134 @@ cd ~/my-project && claude
           ))}
         </ul>
       </div>
+
+      {/* FAQ */}
+      <DocSection icon={Info} title="Frequently Asked Questions">
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary">
+              What is Effectum?
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary">
+              Effectum is an open-source autonomous development framework for Claude Code.
+              It installs 42 workflow commands, 8 automated quality gates, and modular stack
+              presets that give Claude Code a structured spec-driven workflow. You write a
+              specification using the PRD Workshop, then run{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /run
+              </code>{" "}
+              to let Claude build autonomously until every quality gate passes.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary">
+              How does Effectum work with Claude Code?
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary">
+              Effectum works entirely inside Claude Code — no new IDE, no subscription.
+              After running{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                npx @aslomon/effectum
+              </code>
+              , the framework installs slash commands into your project that Claude Code
+              reads as workflow instructions. Type{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /effectum
+              </code>{" "}
+              to start,{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /prd:new
+              </code>{" "}
+              to write a spec, and{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /run
+              </code>{" "}
+              to build. The framework handles quality enforcement, stuck detection, and
+              context budget monitoring automatically.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary">
+              Is Effectum free?
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary">
+              Yes. Effectum is MIT-licensed and completely free and open source. No paywalls,
+              no gated features, no enterprise tiers. Install it with{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                npx @aslomon/effectum
+              </code>{" "}
+              — no account required. The source code is on{" "}
+              <a
+                href="https://github.com/aslomon/effectum"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover underline underline-offset-2"
+              >
+                GitHub
+              </a>{" "}
+              and the package is on{" "}
+              <a
+                href="https://www.npmjs.com/package/@aslomon/effectum"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:text-accent-hover underline underline-offset-2"
+              >
+                npm
+              </a>
+              .
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary">
+              What&apos;s the difference between Effectum and GSD, BMAD, or Kiro?
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary">
+              GSD (context-engineering-intro) focuses on writing better context files — it is
+              a lightweight prompt framework without an autonomous build loop or quality gates.
+              BMAD is a comprehensive multi-agent agile framework with many specialized personas
+              but significant setup complexity. Kiro is a spec-driven IDE tool from Amazon that
+              requires its own CLI and ecosystem. Effectum works entirely within Claude Code,
+              installs in 2 minutes, and focuses on the complete development lifecycle: spec →
+              build → verify — with enforced quality gates on every iteration. See the full
+              comparison on the{" "}
+              <a
+                href="/about"
+                className="text-accent hover:text-accent-hover underline underline-offset-2"
+              >
+                About page
+              </a>
+              .
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary">
+              Can I use Effectum with existing projects?
+            </h3>
+            <p className="mt-2 text-sm text-text-secondary">
+              Yes. Run{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /onboard
+              </code>{" "}
+              after installation — it spawns 6 parallel analysis agents that map your existing
+              codebase (stack, architecture, APIs, database, frontend, tests) and generate a
+              complete CLAUDE.md tailored to your project. From there, the full Effectum
+              framework applies: write specs with{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /prd:new
+              </code>
+              , build with{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+                /run
+              </code>
+              , verify quality, and iterate.
+            </p>
+          </div>
+        </div>
+      </DocSection>
     </div>
   );
 }

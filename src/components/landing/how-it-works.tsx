@@ -81,11 +81,11 @@ export function HowItWorks() {
             Workflow
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl">
-            How it works
+            How the Effectum framework works
           </h2>
           <p className="mt-4 text-lg text-text-secondary">
-            From idea to production-ready code — a complete development
-            pipeline.
+            From idea to production-ready code — a complete Claude Code development
+            workflow in six steps.
           </p>
         </div>
 
