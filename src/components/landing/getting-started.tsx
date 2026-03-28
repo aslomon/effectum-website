@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Download, FileText, Map, Rocket } from "lucide-react";
+import { ExternalLink, Download, Compass, FileText, Rocket } from "lucide-react";
 import { Section } from "@/components/section";
 import { CodeBlock } from "@/components/code-block";
 
@@ -12,19 +12,19 @@ const STEPS = [
     command: "npx @aslomon/effectum",
   },
   {
+    icon: Compass,
+    label: "Orient",
+    command: "/effectum",
+  },
+  {
     icon: FileText,
     label: "Spec",
     command: "/prd:new",
   },
   {
-    icon: Map,
-    label: "Plan",
-    command: "/plan docs/prds/001-feature.md",
-  },
-  {
     icon: Rocket,
     label: "Build",
-    command: "/ralph-loop",
+    command: "/run",
   },
 ];
 
@@ -87,11 +87,20 @@ npx @aslomon/effectum
 # Open your project in Claude Code
 cd ~/my-project && claude
 
-# Write your first spec
+# See your options — always start here
+/effectum
+
+# Write your spec
 /prd:new
 
-# Build it
-/plan docs/prds/001-my-feature.md`}
+# Generate a build prompt
+/prd:handoff
+
+# Create a restore point
+/save
+
+# Build it autonomously
+/run`}
             language="terminal"
           />
         </motion.div>

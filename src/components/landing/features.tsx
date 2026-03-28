@@ -43,11 +43,11 @@ const FEATURES = [
     description:
       "The entire development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, update, and deploy with full autonomy.",
     details: [
+      "/effectum — entry point: pick your journey in 60 seconds",
       "/next — smart router: always know what to do next",
-      "/plan — think before building",
-      "/ralph-loop (/run) — autonomous overnight builds",
-      "/forensics (/diagnose), /map-codebase (/explore) — analysis",
-      "/project:init, /context:init — clean namespaces in v0.17.0",
+      "/run — autonomous overnight builds (internally: /ralph-loop)",
+      "/diagnose — post-mortem analysis (alias: /forensics)",
+      "/explore — 4-agent codebase map (alias: /map-codebase)",
     ],
     icon: Terminal,
     size: "large",
@@ -84,7 +84,7 @@ const FEATURES = [
       "Purpose-built agents for every phase — from code review to security audit to documentation. They work in parallel when possible.",
     details: [
       "Onboard agents analyze repos in parallel",
-      "4 parallel /map-codebase analysis agents",
+      "4 parallel /explore analysis agents",
       "Review agents catch security issues",
       "Doc agents keep everything in sync",
     ],
@@ -181,9 +181,9 @@ const FEATURES = [
     size: "small",
   },
   {
-    title: "/forensics Command",
+    title: "/diagnose Command",
     description:
-      "Post-mortem diagnosis that reads HANDOFF.md, STUCK.md, loop-state.json, and git log. Classifies failure mode and outputs FORENSICS-YYYY-MM-DD.md.",
+      "Post-mortem diagnosis that reads HANDOFF.md, STUCK.md, loop-state.json, and git log. Classifies failure mode and outputs FORENSICS-YYYY-MM-DD.md. (internally: /forensics)",
     details: [
       "Reads all loop artifacts automatically",
       "Classifies failure mode and root cause",
@@ -193,9 +193,9 @@ const FEATURES = [
     size: "small",
   },
   {
-    title: "/map-codebase Command",
+    title: "/explore Command",
     description:
-      "Spawns 4 parallel analysis agents that produce 7 knowledge documents in knowledge/codebase/ — architecture, stack, conventions, testing, concerns, integrations.",
+      "Spawns 4 parallel analysis agents that produce 7 knowledge documents in knowledge/codebase/ — architecture, stack, conventions, testing, concerns, integrations. (internally: /map-codebase)",
     details: [
       "4 agents: Architecture, Stack, Quality, Integration",
       "7 output docs: ARCHITECTURE.md, STACK.md, …",
@@ -211,18 +211,18 @@ const FEATURES = [
     details: [
       "<!-- effectum:project-context:start/end --> markers",
       "Preserved across effectum update runs",
-      "/effectum:init populates it via 7-question interview",
+      "/context:init populates it via 7-question interview",
     ],
     icon: SplitSquareHorizontal,
     size: "small",
   },
   {
-    title: "Ralph Loop",
+    title: "/run — Autonomous Build",
     description:
-      "Claude works autonomously — writing code, running tests, fixing errors, iterating — until every quality gate passes.",
+      "Claude works autonomously — writing code, running tests, fixing errors, iterating — until every quality gate passes. Use /save before /run as your safety net.",
     details: [
-      "Built-in error recovery",
-      "Context budget + stuck detection built in",
+      "Built-in error recovery and stuck detection",
+      "Context budget monitor built in",
       "Only outputs promise when 100% true",
     ],
     icon: RefreshCw,
@@ -355,14 +355,14 @@ export function Features() {
           ))}
         </div>
 
-        {/* Row 5: v0.16.0 — Context Budget + Stuck Detection + /forensics */}
+        {/* Row 5: v0.16.0 — Context Budget + Stuck Detection + /diagnose */}
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           {FEATURES.slice(10, 13).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 10} />
           ))}
         </div>
 
-        {/* Row 6: v0.16.0 — /map-codebase + Sentinel CLAUDE.md */}
+        {/* Row 6: v0.16.0 — /explore + Sentinel CLAUDE.md */}
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {FEATURES.slice(13, 15).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 13} />

@@ -60,7 +60,7 @@ const PIPELINE_STEPS = [
   { label: "Write PRD", icon: Sparkles },
   { label: "Review", icon: ClipboardCheck },
   { label: "Handoff", icon: Send },
-  { label: "Build", icon: Zap },
+  { label: "/run", icon: Zap },
 ];
 
 export default function PrdWorkshopPage() {
@@ -101,7 +101,7 @@ export default function PrdWorkshopPage() {
           the single source of truth when building your feature. Each section
           has a specific job — the problem statement guides decisions, the
           acceptance criteria map to tests, the completion promise exits the
-          Ralph Loop.
+          autonomous /run loop.
         </p>
         <div className="mt-4 flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800/30 dark:bg-amber-950/30">
           <Lightbulb
@@ -262,30 +262,34 @@ export default function PrdWorkshopPage() {
           A complete flow from vague idea to autonomous build — step by step.
         </p>
         <CodeBlock
-          code={`# 1. Start with a vague idea — Claude asks questions
+          code={`# 1. Start with /effectum to orient yourself, then pick your journey
+/effectum
+# → Choose Journey A (new project), B (existing codebase), or C (feature)
+
+# 2. Start with a vague idea — Claude asks questions
 /prd:new
 # → "What problem does this solve?"
 # → "Who are the users?"
 # → "What does success look like?"
 
-# 2. Discuss a specific area in depth if needed
+# 3. Discuss a specific area in depth if needed
 /prd:discuss "the data model for password resets"
 
-# 3. If scope is too large, split into sub-PRDs
+# 4. If scope is too large, split into sub-PRDs
 /prd:decompose
 # → Creates PRD-001-auth.md, PRD-002-email.md, etc.
 
-# 4. Review the spec for completeness
+# 5. Review the spec for completeness before handing off
 /prd:review
 # → "AC-3 is missing the error case"
 # → "Completion promise is not verifiable"
 
-# 5. Hand off to the target project
-/prd:handoff
+# 6. Generate the build prompt for the target project
+/prd:handoff docs/prds/001-password-reset.md ~/my-project
 
-# 6. In your project: plan, build, verify
-/plan docs/prds/001-password-reset.md
-/ralph-loop "Build password reset per PRD" --max-iterations 30`}
+# 7. In your project: save a restore point, then build autonomously
+/save
+/run "Build password reset per PRD" --max-iterations 30`}
           language="terminal"
         />
       </Section>

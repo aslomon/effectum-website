@@ -32,14 +32,16 @@ const TERMINAL_LINES = [
   { delay: 1400, text: "◆ Autonomy level: Standard", type: "info" },
   {
     delay: 2000,
-    text: "✓ Configured in 11s. Run /prd:new to start.",
+    text: "✓ Configured in 11s. Run /effectum to start.",
     type: "success",
   },
-  { delay: 3000, text: "$ claude code", type: "command" },
-  { delay: 3600, text: "> /ralph-loop", type: "prompt" },
-  { delay: 4200, text: "✓ build — PASS", type: "success" },
-  { delay: 4600, text: "✓ tests — 12/12", type: "success" },
-  { delay: 5000, text: "✓ Completion promise satisfied.", type: "success" },
+  { delay: 3000, text: "$ claude", type: "command" },
+  { delay: 3400, text: "> /effectum", type: "prompt" },
+  { delay: 3900, text: "◆ Choose your journey: A / B / C", type: "info" },
+  { delay: 4400, text: "> /run", type: "prompt" },
+  { delay: 4800, text: "✓ build — PASS", type: "success" },
+  { delay: 5200, text: "✓ tests — 12/12", type: "success" },
+  { delay: 5600, text: "✓ Completion promise satisfied.", type: "success" },
 ];
 
 function TerminalInstall() {
@@ -59,7 +61,7 @@ function TerminalInstall() {
     const restart = setTimeout(() => {
       setVisibleLines([]);
       setCycle((c) => c + 1);
-    }, 8000);
+    }, 9000);
     timers.push(restart);
     return () => timers.forEach(clearTimeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,7 +78,7 @@ function TerminalInstall() {
           <span>terminal</span>
         </div>
       </div>
-      <div className="px-5 py-4 space-y-1.5 min-h-[140px]">
+      <div className="px-5 py-4 space-y-1.5 min-h-[160px]">
         {TERMINAL_LINES.map((line, i) =>
           visibleLines.includes(i) ? (
             <motion.div
@@ -129,7 +131,7 @@ export function Hero() {
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Built for Claude Code
+              Built for Claude Code · v0.17
             </motion.div>
 
             <h1 className="text-5xl font-bold tracking-tight text-text-primary sm:text-7xl">
@@ -138,10 +140,12 @@ export function Hero() {
               <span className="text-accent">Get production-ready code.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
-              effectum transforms natural language into production-ready code
-              with intelligent setup, 42 workflow commands, and 25 specialized
-              agents. New project or existing codebase — describe what you want,
-              let Claude Code build it overnight.
+              effectum transforms natural language into production-ready code.
+              Type <code className="font-mono text-accent">/effectum</code> to
+              pick your journey, write a spec with{" "}
+              <code className="font-mono text-accent">/prd:new</code>, then{" "}
+              <code className="font-mono text-accent">/run</code> to build
+              autonomously — overnight if you want.
             </p>
           </div>
         </FadeIn>

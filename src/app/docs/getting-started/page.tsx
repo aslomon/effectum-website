@@ -9,6 +9,8 @@ import {
   ArrowRight,
   Info,
   Lightbulb,
+  Compass,
+  GitBranch,
 } from "lucide-react";
 import { CodeBlock } from "@/components/code-block";
 import {
@@ -38,8 +40,12 @@ export default function GettingStartedPage() {
           Install &amp; configure effectum
         </h1>
         <p className="mt-3 text-lg text-text-secondary">
-          effectum takes about 2 minutes to install. Once set up, write a spec
-          and Claude builds it — with tests, quality gates, and guardrails.
+          effectum takes about 2 minutes to install. Once set up, type{" "}
+          <code className="rounded bg-code-bg px-1.5 py-0.5 font-mono text-sm text-code-text">
+            /effectum
+          </code>{" "}
+          to pick your journey — then write a spec and let Claude build it with
+          tests, quality gates, and guardrails.
         </p>
       </div>
 
@@ -127,37 +133,152 @@ export default function GettingStartedPage() {
         </div>
       </DocSection>
 
-      {/* First feature */}
-      <DocSection icon={Zap} title="Your first feature">
+      {/* Entry Point */}
+      <DocSection icon={Compass} title="Your entry point: /effectum">
         <p className="mb-4 text-sm text-text-secondary">
-          Once installed, the typical workflow is four steps. You write a spec,
-          Claude builds it.
+          Always start with{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /effectum
+          </code>
+          . It shows you the three user journeys and recommends where to begin.
+          When you&apos;re lost at any point, type{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /next
+          </code>{" "}
+          — the smart router reads your project state and tells you exactly one
+          action to take.
         </p>
         <CodeBlock
           code={`# Open your project in Claude Code
 cd ~/my-project && claude
 
-# Write a specification (guided mode)
+# See your options — always start here
+/effectum
+
+# Lost? Not sure what to do next?
+/next`}
+          language="terminal"
+        />
+      </DocSection>
+
+      {/* The 3 User Journeys */}
+      <DocSection icon={GitBranch} title="The 3 user journeys">
+        <p className="mb-6 text-sm text-text-secondary">
+          effectum is built around three journeys. Pick the one that matches
+          where you are.
+        </p>
+
+        <div className="space-y-4">
+          {/* Journey A */}
+          <div className="rounded-xl border border-border bg-surface p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-xs font-bold text-accent">
+                A
+              </span>
+              <h3 className="text-sm font-semibold text-text-primary">
+                New Project
+              </h3>
+              <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
+                Start from scratch
+              </span>
+            </div>
+            <CodeBlock
+              code={`/effectum → /prd:new → /prd:review → /prd:handoff → [target repo] → /run`}
+              language="terminal"
+            />
+            <p className="mt-3 text-xs text-text-muted">
+              You have an idea. Claude helps you write a spec, review it, then
+              build it autonomously in the target repo.
+            </p>
+          </div>
+
+          {/* Journey B */}
+          <div className="rounded-xl border border-border bg-surface p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-xs font-bold text-accent">
+                B
+              </span>
+              <h3 className="text-sm font-semibold text-text-primary">
+                Existing Codebase
+              </h3>
+              <span className="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700 dark:bg-blue-950/40 dark:text-blue-400">
+                Onboard first
+              </span>
+            </div>
+            <CodeBlock
+              code={`/effectum → /onboard → /prd:new → /prd:handoff → /run`}
+              language="terminal"
+            />
+            <p className="mt-3 text-xs text-text-muted">
+              You have an existing repo. Run{" "}
+              <code className="font-mono">/onboard</code> to analyze it, then
+              write specs against what&apos;s already there.
+            </p>
+          </div>
+
+          {/* Journey C */}
+          <div className="rounded-xl border border-border bg-surface p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 text-xs font-bold text-accent">
+                C
+              </span>
+              <h3 className="text-sm font-semibold text-text-primary">
+                Feature Build
+              </h3>
+              <span className="rounded-full bg-violet-50 px-2 py-0.5 text-xs text-violet-700 dark:bg-violet-950/40 dark:text-violet-400">
+                Quick iteration
+              </span>
+            </div>
+            <CodeBlock
+              code={`/prd:new → /prd:review → /prd:handoff → /save → /run`}
+              language="terminal"
+            />
+            <p className="mt-3 text-xs text-text-muted">
+              You know what you&apos;re building. Write the spec, save a restore
+              point, then let Claude build it.
+            </p>
+          </div>
+        </div>
+      </DocSection>
+
+      {/* First feature — full workflow */}
+      <DocSection icon={Zap} title="Your first feature">
+        <p className="mb-4 text-sm text-text-secondary">
+          The PRD Workshop is the core of effectum.{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /prd:new
+          </code>{" "}
+          →{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /prd:review
+          </code>{" "}
+          →{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /prd:handoff
+          </code>{" "}
+          gives you a spec that Claude can actually build from.
+        </p>
+        <CodeBlock
+          code={`# 1. Write a spec (guided mode — Claude asks questions)
 /prd:new
 
-# Review the plan before building
-/plan docs/prds/001-my-feature.md
-# → Claude creates implementation plan
-# → You approve or adjust
+# 2. Review for completeness before building
+/prd:review
 
-# Build with test-driven development
-/tdd
+# 3. Generate the build prompt for your target repo
+/prd:handoff docs/prds/001-my-feature.md ~/my-project
 
-# Verify all quality gates pass
-/verify`}
+# 4. In your project — create a restore point, then build
+/save
+/run`}
           language="terminal"
         />
         <Callout icon={Lightbulb} variant="tip">
-          For well-defined features, use{" "}
+          Use{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
             /prd:express
           </code>{" "}
-          for a one-shot spec. Use{" "}
+          for a one-shot spec when requirements are already clear. Use{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
             /prd:new
           </code>{" "}
@@ -165,23 +286,43 @@ cd ~/my-project && claude
         </Callout>
       </DocSection>
 
-      {/* Ralph Loop */}
+      {/* Autonomous builds */}
       <DocSection icon={Bot} title="Autonomous overnight builds">
         <p className="mb-4 text-sm text-text-secondary">
-          For complex features with a thorough spec, use the Ralph Loop. Claude
-          iterates autonomously — writing code, running tests, fixing errors —
-          until every quality gate passes.
+          For complex features with a thorough spec, use{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /run
+          </code>
+          . Claude iterates autonomously — writing code, running tests, fixing
+          errors — until every quality gate passes. Always{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            /save
+          </code>{" "}
+          first as your safety net.
         </p>
         <CodeBlock
-          code={`/ralph-loop "Build the auth system per PRD"
-  --max-iterations 30
-  --completion-promise "All tests pass, build succeeds, 0 lint errors"`}
+          code={`# Create a restore point before the autonomous run
+/save
+
+# Start the autonomous build loop
+/run "Build the auth system per PRD" --max-iterations 30 --completion-promise "All tests pass, build succeeds, 0 lint errors"
+
+# Something went wrong? Run post-mortem diagnosis
+/diagnose
+
+# Need to take back control?
+/stop`}
           language="terminal"
         />
         <Callout icon={Info} variant="info">
           The completion promise is only output when it is 100% true. Claude
           cannot lie to exit the loop. At 80% of max iterations, it writes a
-          status report of what is done and what remains.
+          status report of what is done and what remains. For overnight builds,
+          use{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
+            --max-iterations 50
+          </code>
+          .
         </Callout>
       </DocSection>
 
@@ -190,7 +331,7 @@ cd ~/my-project && claude
         <p className="mb-4 text-sm text-text-secondary">
           Configure how much Claude decides independently during{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /setup
+            npx @aslomon/effectum
           </code>
           . Change anytime in{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
@@ -206,7 +347,10 @@ cd ~/my-project && claude
                   Level
                 </th>
                 <th className="px-4 py-2.5 text-xs font-semibold text-text-primary">
-                  Asks before
+                  Behavior
+                </th>
+                <th className="px-4 py-2.5 text-xs font-semibold text-text-primary">
+                  Active time
                 </th>
                 <th className="px-4 py-2.5 text-xs font-semibold text-text-primary">
                   Best for
@@ -228,6 +372,9 @@ cd ~/my-project && claude
                   </td>
                   <td className="px-4 py-3 text-sm text-text-secondary">
                     {row.asks}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-text-secondary">
+                    {row.activeTime}
                   </td>
                   <td className="px-4 py-3 text-sm text-text-secondary">
                     {row.bestFor}

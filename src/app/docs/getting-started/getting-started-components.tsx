@@ -38,14 +38,14 @@ export const INSTALL_OPTIONS = [
 // What gets installed data
 export const INSTALLED_ITEMS = [
   {
-    label: "14 workflow commands",
+    label: "42 workflow commands",
     detail:
-      "Slash commands for the entire lifecycle — planning, TDD, verification, code review, autonomous building",
+      "Slash commands for the entire lifecycle — /effectum entry point, /run autonomous builds, /save restore points, /diagnose post-mortem, and more",
   },
   {
     label: "PRD Workshop",
     detail:
-      "8 knowledge files + 12 commands for guided specification writing with adaptive questioning",
+      "12 commands for guided specification writing — /prd:new, /prd:review, /prd:handoff, and the full lifecycle",
   },
   {
     label: "Quality gates",
@@ -71,12 +71,23 @@ export const INSTALLED_ITEMS = [
 
 // Autonomy levels
 export const AUTONOMY_LEVELS = [
-  { level: "Conservative", asks: "Most changes", bestFor: "Teams, learning" },
-  { level: "Standard", asks: "Ambiguous specs", bestFor: "Daily development" },
+  {
+    level: "Conservative",
+    asks: "Claude asks at every step",
+    activeTime: "15–30 min active",
+    bestFor: "Teams, learning, sensitive codebases",
+  },
+  {
+    level: "Standard",
+    asks: "Autonomous within guardrails, stops on ambiguity",
+    activeTime: "5–10 min setup",
+    bestFor: "Daily development",
+  },
   {
     level: "Full Autonomy",
-    asks: "Almost nothing",
-    bestFor: "Overnight builds",
+    asks: "Runs until done or stuck",
+    activeTime: "2–5 min setup",
+    bestFor: "Overnight builds, well-defined specs",
   },
 ] as const;
 

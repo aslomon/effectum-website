@@ -12,22 +12,22 @@ const PHASES = [
     icon: FileText,
   },
   {
-    command: "/prd:update",
-    title: "Update",
-    desc: "Delta handoff — only what changed gets applied. Your PRD stays in sync with implementation reality.",
-    icon: RefreshCw,
-  },
-  {
-    command: "/prd:status",
-    title: "Track",
-    desc: "Task registry shows completion per section. See exactly what's done and what's left at a glance.",
+    command: "/prd:review",
+    title: "Review",
+    desc: "Quality check before handing off. Flags missing acceptance criteria, vague goals, and unverifiable completion promises.",
     icon: ListChecks,
   },
   {
-    command: "/prd:decompose",
-    title: "Decompose",
-    desc: "Large projects split into manageable child PRDs automatically. Each one is independently buildable.",
+    command: "/prd:handoff",
+    title: "Hand off",
+    desc: "Export the finished spec to your target project — ready for /run. The bridge between spec and autonomous build.",
     icon: GitBranch,
+  },
+  {
+    command: "/run",
+    title: "Build",
+    desc: "Claude builds autonomously — writing code, running tests, fixing errors — until every quality gate passes.",
+    icon: RefreshCw,
   },
 ];
 

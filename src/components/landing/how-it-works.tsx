@@ -4,11 +4,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Download,
+  Compass,
   FileText,
-  Map,
-  Code,
-  ShieldCheck,
-  Eye,
+  Send,
+  Save,
+  Play,
 } from "lucide-react";
 
 const STEPS = [
@@ -22,49 +22,49 @@ const STEPS = [
     icon: Download,
   },
   {
+    label: "Orient",
+    command: "/effectum",
+    description:
+      "Always start here. See your 3 user journeys — New Project, Existing Codebase, or Feature Build — and get pointed to the right next step. Type /next any time you're lost.",
+    detail:
+      "Journey A: new project. Journey B: existing codebase with /onboard. Journey C: quick feature iteration.",
+    icon: Compass,
+  },
+  {
     label: "Spec",
     command: "/prd:new",
     description:
       "Write a structured PRD using the guided workshop. Adaptive questioning turns vague ideas into precise, actionable specifications with clear acceptance criteria.",
     detail:
-      "Workshop mode asks 12–15 questions. Express mode generates from a one-liner. Both produce the same structured output.",
+      "Workshop mode asks 12–15 questions. Express mode generates from a one-liner. Run /prd:review before handoff.",
     icon: FileText,
   },
   {
-    label: "Plan",
-    command: "/plan",
+    label: "Handoff",
+    command: "/prd:handoff",
     description:
-      "Claude analyzes the spec and creates a detailed implementation strategy — file structure, data models, API contracts — before touching any code.",
+      "Export the finished spec to the target project. This generates the build prompt that /run will use — the bridge between your spec and the autonomous build loop.",
     detail:
-      "PLAN.md captures the full strategy so every subsequent command has shared context.",
-    icon: Map,
+      "Validates PRD completeness, sets status to 'ready', copies to target project, and tells you exactly what to run next.",
+    icon: Send,
   },
   {
-    label: "Implement",
-    command: "/tdd",
+    label: "Save",
+    command: "/save",
     description:
-      "Test-driven development at scale. Claude writes failing tests, then implements code to make them pass, following your established patterns.",
+      "Create a git restore point before the autonomous build. Your safety net — if /run takes an unexpected direction, roll back instantly with one command.",
     detail:
-      "Red → green → refactor, repeated per acceptance criterion. 80%+ coverage enforced.",
-    icon: Code,
+      "Creates a tagged git commit. Zero cost, pure upside. Always /save before /run.",
+    icon: Save,
   },
   {
-    label: "Verify",
-    command: "/verify",
+    label: "Build",
+    command: "/run",
     description:
-      "Eight quality gates enforced in sequence: build, types, lint, tests, security, debug logs, type safety, and file size. Zero tolerance.",
+      "Claude builds autonomously — writing code, running tests, fixing errors, iterating — until every quality gate passes and your completion promise is 100% true.",
     detail:
-      "Gates run in order. First failure stops the chain. Claude fixes and retries.",
-    icon: ShieldCheck,
-  },
-  {
-    label: "Review",
-    command: "/code-review",
-    description:
-      "Automated security audit and architecture validation. OWASP vulnerability scanning, dependency review, and code quality checks before shipping.",
-    detail:
-      "Three severity levels: critical (must fix), warning (should fix), info (consider). Output is a structured Markdown report.",
-    icon: Eye,
+      "Built-in stuck detection, context budget monitor, and error recovery. Use --max-iterations 50 for overnight builds.",
+    icon: Play,
   },
 ];
 
