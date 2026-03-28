@@ -124,7 +124,7 @@ function CinematicTerminal() {
 // ---------------------------------------------------------------------------
 export function Hero() {
   const [headlineIdx] = useState(() => Math.floor(Math.random() * HEADLINES.length));
-  const [revealed, setRevealed] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -134,17 +134,21 @@ export function Hero() {
     // Check prefers-reduced-motion
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mq.matches) {
-      setRevealed(true); // skip animation
+      setScrollProgress(1);
       setReducedMotion(true);
       return;
     }
 
-    // Bidirectional scroll — reveal on scroll down, un-reveal on scroll up
+    // Smooth progressive scroll — 0.0 to 1.0 over 200px of scroll
+    let ticking = false;
     const onScroll = () => {
-      if (window.scrollY > 30) {
-        setRevealed(true);
-      } else {
-        setRevealed(false);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const progress = Math.min(window.scrollY / 200, 1);
+          setScrollProgress(progress);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -152,7 +156,7 @@ export function Hero() {
     // After 10 seconds, auto-scroll down smoothly to trigger reveal
     const autoScrollTimer = setTimeout(() => {
       if (window.scrollY <= 30) {
-        window.scrollTo({ top: 120, behavior: "smooth" });
+        window.scrollTo({ top: 220, behavior: "smooth" });
       }
     }, 10000);
 
@@ -219,37 +223,7 @@ export function Hero() {
   // -------------------------------------------------------------------------
   return (
     <>
-      {/* Inline styles for cinematic transitions */}
       <style>{`
-        .terminal-wrap {
-          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-          transform-origin: top center;
-        }
-        .terminal-wrap.revealed {
-          transform: scale(0.65) translateY(-15vh);
-          opacity: 0.3;
-        }
-        @media (max-width: 639px) {
-          .terminal-wrap.revealed {
-            transform: scale(0.55) translateY(-10vh);
-            opacity: 0.25;
-          }
-        }
-
-        .hero-content {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: opacity 0.6s ease 0.3s,
-                      transform 0.6s ease 0.3s;
-          pointer-events: none;
-        }
-        .hero-content.visible {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
-        }
-
         .terminal-cursor {
           animation: blink 1s step-end infinite;
         }
@@ -261,7 +235,7 @@ export function Hero() {
 
       <section
         ref={sectionRef}
-        className="relative min-h-screen overflow-hidden bg-[#080808]"
+        className="relative min-h-[150vh] overflow-hidden bg-[#080808]"
       >
         {/* Subtle background glow */}
         <div
@@ -271,26 +245,34 @@ export function Hero() {
           <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-600/5 blur-[120px]" />
         </div>
 
-        {/* Terminal — full viewport centred */}
+        {/* Terminal — starts fullscreen, shrinks progressively */}
         <div
-          className={`terminal-wrap absolute inset-x-0 top-[72px] mx-auto w-[92vw] max-w-2xl px-2 sm:top-[80px] sm:w-[90vw] sm:px-0 ${
-            revealed ? "revealed" : ""
-          }`}
+          className="sticky top-[72px] z-10 mx-auto w-[92vw] max-w-2xl px-2 sm:top-[80px] sm:w-[90vw] sm:px-0"
+          style={{
+            transform: `scale(${1 - scrollProgress * 0.3})`,
+            opacity: Math.max(1 - scrollProgress * 0.6, 0.35),
+            transformOrigin: "top center",
+          }}
         >
           <CinematicTerminal />
-          {/* Scroll hint — disappears on reveal */}
-          {!revealed && (
-            <p className="mt-6 animate-pulse text-center text-xs text-white/25">
-              scroll to skip
-            </p>
-          )}
+          {/* Scroll hint */}
+          <p
+            className="mt-4 text-center text-xs text-white/25"
+            style={{ opacity: Math.max(1 - scrollProgress * 4, 0) }}
+          >
+            ↓ scroll
+          </p>
         </div>
 
-        {/* Hero content — fades in after reveal */}
+        {/* Hero content — overlaps terminal from bottom, fades in progressively */}
         <div
-          className={`hero-content relative mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-end px-6 pb-24 pt-[72vh] text-center sm:pt-[68vh] lg:pt-[64vh] ${
-            revealed ? "visible" : ""
-          }`}
+          className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-6 pb-24 text-center"
+          style={{
+            marginTop: "-20vh",
+            opacity: scrollProgress,
+            transform: `translateY(${(1 - scrollProgress) * 60}px)`,
+            pointerEvents: scrollProgress > 0.3 ? "auto" : "none",
+          }}
         >
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-400">
