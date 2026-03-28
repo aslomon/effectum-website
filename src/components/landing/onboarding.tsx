@@ -3,44 +3,44 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
-  Package,
-  FolderTree,
-  Fingerprint,
-  Settings,
+  Layers,
+  GitBranch,
+  Globe,
+  Database,
+  Monitor,
   TestTube,
-  BookOpen,
 } from "lucide-react";
 
 const AGENTS = [
   {
-    icon: Package,
-    title: "Dependencies",
-    desc: "Scans package manifests and lock files",
+    icon: Layers,
+    title: "Stack",
+    desc: "Detects tech stack, dependencies, and package manifests",
   },
   {
-    icon: FolderTree,
-    title: "Structure",
-    desc: "Maps directory layout and architecture",
+    icon: GitBranch,
+    title: "Architecture",
+    desc: "Identifies patterns, structure, and conventions",
   },
   {
-    icon: Fingerprint,
-    title: "Patterns",
-    desc: "Detects coding conventions and style",
+    icon: Globe,
+    title: "API",
+    desc: "Discovers endpoints, routes, and API contracts",
   },
   {
-    icon: Settings,
-    title: "Environment",
-    desc: "Identifies config, env vars, and secrets",
+    icon: Database,
+    title: "Database",
+    desc: "Analyzes schema, migrations, and data models",
+  },
+  {
+    icon: Monitor,
+    title: "Frontend",
+    desc: "Maps UI framework, components, and design system",
   },
   {
     icon: TestTube,
-    title: "Tests",
-    desc: "Discovers test framework and coverage",
-  },
-  {
-    icon: BookOpen,
-    title: "Documentation",
-    desc: "Reads existing docs and READMEs",
+    title: "Test",
+    desc: "Discovers test framework and coverage baseline",
   },
 ];
 
@@ -66,9 +66,9 @@ export function Onboarding() {
             /onboard: Already have a project?
           </h2>
           <p className="mt-4 text-lg text-text-secondary">
-            Six parallel agents analyze your existing codebase, generate a
-            complete CLAUDE.md, and create a PRD — so effectum understands your
-            project from day one.
+            Six parallel agents — Stack, Architecture, API, Database, Frontend,
+            and Test — analyze your existing codebase, generate a complete
+            CLAUDE.md, and create a PRD so effectum understands your project from day one.
           </p>
         </div>
 

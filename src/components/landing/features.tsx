@@ -30,7 +30,7 @@ const FEATURES = [
     description:
       "New project or existing codebase — effectum adapts. /onboard runs 6 parallel agents to analyze your repo and generate a complete CLAUDE.md in minutes.",
     details: [
-      "6 agents: deps, structure, patterns, env, tests, docs",
+      "6 agents: Stack, Architecture, API, Database, Frontend, Test",
       "Auto-generates PRD from existing code",
       "Self-tests with /verify after setup",
       "Works on any codebase, any language",

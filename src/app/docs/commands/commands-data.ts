@@ -5,7 +5,10 @@ export type CommandPhase =
   | "Implementation"
   | "QA"
   | "Automation"
-  | "Safety";
+  | "Safety"
+  | "PRD Workshop"
+  | "Onboarding"
+  | "Workspace";
 
 export interface CommandEntry {
   name: string;
@@ -132,7 +135,7 @@ export const COMMANDS: CommandEntry[] = [
       "The most powerful feature. Claude works autonomously — writing code, running tests, fixing errors — until every quality gate passes and your completion promise is 100% true.",
     details: [
       "Iterates: read spec → check state → implement → verify → repeat",
-      "Built-in error recovery: pivots strategy after 3x same error",
+      "Stuck detection: stops on 2 consecutive identical errors",
       "Status report at 80% of max iterations",
       "Only outputs completion promise when genuinely true",
     ],
@@ -170,21 +173,6 @@ export const COMMANDS: CommandEntry[] = [
     usage: "/checkpoint",
   },
   {
-    name: "/simplify",
-    phase: "Implementation",
-    icon: "Minimize2",
-    tagline: "Reduce complexity, keep behavior",
-    description:
-      "Reviews changed code for reuse opportunities, quality issues, and inefficiencies, then fixes them. Reduces complexity without changing behavior.",
-    details: [
-      "Identifies duplicated logic and extracts shared helpers",
-      "Simplifies overly nested or verbose code paths",
-      "Removes unnecessary abstractions and indirection",
-      "Verifies behavior is unchanged after every simplification",
-    ],
-    usage: "/simplify",
-  },
-  {
     name: "/onboard",
     phase: "Planning",
     icon: "ScanSearch",
@@ -192,7 +180,7 @@ export const COMMANDS: CommandEntry[] = [
     description:
       "Runs 6 parallel agents to analyze an existing codebase — dependencies, structure, patterns, environment, tests, and docs — then generates a complete CLAUDE.md and PRDs.",
     details: [
-      "6 agents: deps, structure, patterns, env, tests, docs",
+      "6 parallel agents: Stack, Architecture, API, Database, Frontend, Test",
       "Auto-generates CLAUDE.md from analysis results",
       "Creates PRDs from existing code and architecture",
       "Works on any codebase, any language",
@@ -244,6 +232,267 @@ export const COMMANDS: CommandEntry[] = [
     ],
     usage: "/orchestrate",
   },
+
+  // PRD Workshop commands
+  {
+    name: "/prd:new",
+    phase: "PRD Workshop",
+    icon: "Sparkles",
+    tagline: "Spec from scratch",
+    description:
+      "Start a new guided specification from scratch. Claude asks adaptive questions until it fully understands what you want to build.",
+    details: [
+      "Adaptive questioning based on your domain and complexity",
+      "Guided discovery for vague or unclear requirements",
+      "Produces a structured PRD with acceptance criteria and data model",
+      "Supports both workshop mode (12–15 questions) and quick entry",
+    ],
+    usage: "/prd:new",
+  },
+  {
+    name: "/prd:express",
+    phase: "PRD Workshop",
+    icon: "Zap",
+    tagline: "One-shot spec",
+    description:
+      "Fast one-shot spec from clear requirements. Best when you already know exactly what you want to build.",
+    details: [
+      "Generates a complete PRD from a one-liner or short description",
+      "Skips discovery questions — goes straight to spec output",
+      "Same structured format as /prd:new",
+      "Best for well-understood features with clear scope",
+    ],
+    usage: "/prd:express",
+  },
+  {
+    name: "/prd:update",
+    phase: "PRD Workshop",
+    icon: "RefreshCw",
+    tagline: "Evolve an existing spec",
+    description:
+      "Safely update an existing PRD in-place. Tracks changes semantically and triggers a delta handoff so implementation stays in sync.",
+    details: [
+      "Detects and records what changed vs the previous version",
+      "Updates PRD hash and version in frontmatter",
+      "Triggers delta handoff to flag affected acceptance criteria",
+      "Safe for specs already in progress — preserves completion state",
+    ],
+    usage: "/prd:update docs/prds/001-my-feature.md",
+  },
+  {
+    name: "/prd:discuss",
+    phase: "PRD Workshop",
+    icon: "MessageSquare",
+    tagline: "Deep-dive discussion",
+    description:
+      "Deep-dive into a specific area of your spec. Explore edge cases, data models, or API design in detail before writing code.",
+    details: [
+      "Focuses on one section of an existing PRD",
+      "Surfaces edge cases and implicit assumptions",
+      "Updates the PRD with insights from the discussion",
+      "Useful before /plan on complex features",
+    ],
+    usage: "/prd:discuss docs/prds/001-my-feature.md",
+  },
+  {
+    name: "/prd:review",
+    phase: "PRD Workshop",
+    icon: "ClipboardCheck",
+    tagline: "Quality check before building",
+    description:
+      "Quality check before handing off to implementation. Flags missing acceptance criteria, vague goals, and incomplete data models.",
+    details: [
+      "Checks every AC has a matching test",
+      "Flags vague goals that can't be verified",
+      "Validates data model completeness and RLS policies",
+      "Confirms completion promise is 100% verifiable",
+    ],
+    usage: "/prd:review docs/prds/001-my-feature.md",
+  },
+  {
+    name: "/prd:decompose",
+    phase: "PRD Workshop",
+    icon: "Layers",
+    tagline: "Split large scope",
+    description:
+      "Split large projects into smaller, independently buildable PRDs. Each sub-PRD is self-contained with its own acceptance criteria.",
+    details: [
+      "Analyzes scope and identifies natural split points",
+      "Creates sub-PRDs with no cross-dependencies where possible",
+      "Generates a dependency graph for sequencing",
+      "Each sub-PRD is independently runnable with /ralph-loop",
+    ],
+    usage: "/prd:decompose docs/prds/001-large-feature.md",
+  },
+  {
+    name: "/prd:handoff",
+    phase: "PRD Workshop",
+    icon: "Send",
+    tagline: "Export spec to project",
+    description:
+      "Export a finished spec to the target project. Copies the PRD file and prepares it for /plan in the implementation project.",
+    details: [
+      "Copies PRD from workshop to target project",
+      "Validates PRD is complete before export",
+      "Sets status to 'ready' in frontmatter",
+      "Outputs the /plan command to run next",
+    ],
+    usage: "/prd:handoff docs/prds/001-my-feature.md ~/my-project",
+  },
+  {
+    name: "/prd:prompt",
+    phase: "PRD Workshop",
+    icon: "Code2",
+    tagline: "Generate handoff prompt",
+    description:
+      "Generate a handoff prompt for a completed PRD. Use to start a new Claude session focused on one specific feature.",
+    details: [
+      "Extracts the essential context from a PRD",
+      "Formats as a ready-to-paste Claude session opener",
+      "Includes acceptance criteria and completion promise",
+      "Optimized for minimal context burn",
+    ],
+    usage: "/prd:prompt docs/prds/001-my-feature.md",
+  },
+  {
+    name: "/prd:status",
+    phase: "PRD Workshop",
+    icon: "BarChart3",
+    tagline: "Dashboard of all projects",
+    description:
+      "View all projects and their current progress. Shows which specs are draft, ready, in progress, or complete.",
+    details: [
+      "Lists all projects under workshop/projects/",
+      "Shows PRD count and status per project",
+      "Highlights stalled or incomplete specs",
+      "Quick overview before starting a new build session",
+    ],
+    usage: "/prd:status",
+  },
+  {
+    name: "/prd:resume",
+    phase: "PRD Workshop",
+    icon: "RotateCcw",
+    tagline: "Continue previous work",
+    description:
+      "Continue working on a previous specification. Loads context and picks up where you left off.",
+    details: [
+      "Reads the current PRD state and git log",
+      "Summarizes what's done and what remains",
+      "Identifies the next logical step",
+      "Works with any PRD in any status",
+    ],
+    usage: "/prd:resume docs/prds/001-my-feature.md",
+  },
+  {
+    name: "/prd:network-map",
+    phase: "PRD Workshop",
+    icon: "Network",
+    tagline: "Visualize dependencies",
+    description:
+      "Render PRD dependencies as an interactive HTML map. Dark/light theme, direction toggle, and SVG export built in.",
+    details: [
+      "Generates an interactive HTML file from PRD frontmatter",
+      "Supports dark/light theme and direction toggle",
+      "SVG export for documentation",
+      "Detects cycles and orphaned PRDs",
+    ],
+    usage: "/prd:network-map",
+  },
+
+  // Onboarding commands
+  {
+    name: "/effectum:init",
+    phase: "Onboarding",
+    icon: "ClipboardList",
+    tagline: "Project context interview",
+    description:
+      "Interactive 7-question interview to populate the sentinel block in CLAUDE.md with project-specific context that cannot be inferred from code.",
+    details: [
+      "Asks about domain, key entities, auth, architecture, conventions, tech debt",
+      "Writes ONLY inside the sentinel block markers",
+      "Survives effectum update — custom content preserved",
+      "Run once on new projects, re-run after major pivots",
+    ],
+    usage: "/effectum:init",
+  },
+  {
+    name: "/onboard:review",
+    phase: "Onboarding",
+    icon: "ClipboardCheck",
+    tagline: "Cross-PRD consistency check",
+    description:
+      "Review onboarded PRDs for cross-PRD consistency, duplicates, and best practices. Runs automatically as part of /onboard but can be run standalone.",
+    details: [
+      "6 checks: completeness, duplicates, naming, data model, API, status",
+      "Supports --fix flag to automatically apply suggested fixes",
+      "Supports --strict flag to treat warnings as failures",
+      "Safe to run on any project with onboarded PRDs",
+    ],
+    usage: "/onboard:review my-project --fix",
+  },
+  {
+    name: "/map-codebase",
+    phase: "Onboarding",
+    icon: "Map",
+    tagline: "4-agent codebase analysis",
+    description:
+      "Spawns 4 parallel agents (ArchitectureMapper, StackMapper, QualityMapper, IntegrationMapper) to produce 7 structured knowledge documents.",
+    details: [
+      "4 agents run in parallel: ArchitectureMapper, StackMapper, QualityMapper, IntegrationMapper",
+      "Produces 7 docs: ARCHITECTURE.md, STACK.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md, INTEGRATIONS.md",
+      "All output written to knowledge/codebase/",
+      "Use before /onboard on complex legacy codebases",
+    ],
+    usage: "/map-codebase",
+  },
+  {
+    name: "/forensics",
+    phase: "Safety",
+    icon: "Search",
+    tagline: "Post-mortem diagnosis",
+    description:
+      "Reads all loop artifacts — HANDOFF.md, STUCK.md, loop-state.json, effectum-metrics.json, git log — and outputs a structured failure diagnosis.",
+    details: [
+      "Classifies failure mode: stuck, context budget, build error, or unknown",
+      "Reads loop-state.json for last known iteration state",
+      "Cross-references effectum-metrics.json for historical patterns",
+      "Outputs FORENSICS-YYYY-MM-DD.md with recommended next steps",
+    ],
+    usage: "/forensics",
+  },
+
+  // Workspace commands
+  {
+    name: "/workshop:init",
+    phase: "Workspace",
+    icon: "FolderPlus",
+    tagline: "New project workspace",
+    description:
+      "Create the complete directory structure and template files for a new project in the PRD Workshop.",
+    details: [
+      "Creates workshop/projects/{slug}/ with standard layout",
+      "Generates project README and initial PRD directory",
+      "Validates slug format before creating",
+      "Run before /prd:new on new workshop projects",
+    ],
+    usage: "/workshop:init my-new-project",
+  },
+  {
+    name: "/workshop:archive",
+    phase: "Workspace",
+    icon: "Archive",
+    tagline: "Archive completed project",
+    description:
+      "Archive a completed or abandoned project by moving it to workshop/archive/. Keeps your workspace clean without losing history.",
+    details: [
+      "Moves project from workshop/projects/ to workshop/archive/",
+      "Checks readiness before archiving (no in-progress PRDs)",
+      "Preserves full history — nothing is deleted",
+      "Can be listed and referenced after archiving",
+    ],
+    usage: "/workshop:archive my-project",
+  },
 ];
 
 export const PHASE_ORDER: CommandPhase[] = [
@@ -252,6 +501,9 @@ export const PHASE_ORDER: CommandPhase[] = [
   "QA",
   "Automation",
   "Safety",
+  "PRD Workshop",
+  "Onboarding",
+  "Workspace",
 ];
 
 export const PHASE_META: Record<
@@ -282,5 +534,20 @@ export const PHASE_META: Record<
     color:
       "bg-gray-50 text-gray-600 border-gray-200 dark:bg-gray-800/40 dark:text-gray-400 dark:border-gray-700/30",
     description: "Protect your work before risky changes",
+  },
+  "PRD Workshop": {
+    color:
+      "bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-950/40 dark:text-violet-400 dark:border-violet-800/30",
+    description: "Write and manage structured specifications",
+  },
+  Onboarding: {
+    color:
+      "bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-950/40 dark:text-cyan-400 dark:border-cyan-800/30",
+    description: "Analyze codebases and initialize project context",
+  },
+  Workspace: {
+    color:
+      "bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950/40 dark:text-teal-400 dark:border-teal-800/30",
+    description: "Manage your PRD Workshop workspace",
   },
 };

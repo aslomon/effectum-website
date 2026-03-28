@@ -11,19 +11,31 @@ import {
   Bot,
   OctagonX,
   Bookmark,
-  Minimize2,
   ScanSearch,
   Settings,
   Network,
   Terminal,
   ArrowRight,
+  Zap,
+  RefreshCw,
+  MessageSquare,
+  ClipboardCheck,
+  Layers,
+  Send,
+  Code2,
+  BarChart3,
+  RotateCcw,
+  ClipboardList,
+  FolderPlus,
+  Archive,
+  Paintbrush,
 } from "lucide-react";
 import { COMMANDS, PHASE_ORDER, PHASE_META } from "./commands-data";
 import type { CommandPhase } from "./commands-data";
 
 export const metadata: Metadata = {
   title: "Commands",
-  description: "Reference for all 14 effectum workflow commands.",
+  description: "Reference for all 31 effectum workflow commands.",
 };
 
 // Map icon string names to Lucide components
@@ -38,10 +50,22 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Bot,
   OctagonX,
   Bookmark,
-  Minimize2,
   ScanSearch,
   Settings,
   Network,
+  Zap,
+  RefreshCw,
+  MessageSquare,
+  ClipboardCheck,
+  Layers,
+  Send,
+  Code2,
+  BarChart3,
+  RotateCcw,
+  ClipboardList,
+  FolderPlus,
+  Archive,
+  Paintbrush,
 };
 
 // Typical command flow for the visual header
@@ -59,6 +83,9 @@ const PHASE_DOT_COLORS: Record<CommandPhase, string> = {
   QA: "bg-emerald-400 dark:bg-emerald-500",
   Automation: "bg-purple-400 dark:bg-purple-500",
   Safety: "bg-gray-400 dark:bg-gray-500",
+  "PRD Workshop": "bg-violet-400 dark:bg-violet-500",
+  Onboarding: "bg-cyan-400 dark:bg-cyan-500",
+  Workspace: "bg-teal-400 dark:bg-teal-500",
 };
 
 export default function CommandsPage() {
@@ -79,8 +106,8 @@ export default function CommandsPage() {
           Workflow commands
         </h1>
         <p className="mt-3 text-lg text-text-secondary">
-          All 10 commands covering the complete development lifecycle — from
-          planning to autonomous overnight builds.
+          All 31 commands covering the complete development lifecycle — from
+          planning and spec writing to autonomous overnight builds.
         </p>
       </div>
 

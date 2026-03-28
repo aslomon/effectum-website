@@ -71,20 +71,6 @@ export const PRD_COMMANDS = [
     description:
       "Continue working on a previous specification. Loads context and picks up where you left off.",
   },
-  {
-    name: "/prd:archive",
-    icon: "Archive",
-    phase: "Management",
-    description:
-      "Archive completed or abandoned specs. Keeps your workspace clean without losing history.",
-  },
-  {
-    name: "/prd:template",
-    icon: "FileTemplate",
-    phase: "Management",
-    description:
-      "Create a reusable spec template. Useful for repeating patterns like API endpoints, auth flows, or CRUD features.",
-  },
 ] as const;
 
 export const SPEC_SECTIONS = [

@@ -34,6 +34,13 @@ const COMPARISONS = [
     adds: "TDD workflow + code review + E2E testing",
     color: "rose",
   },
+  {
+    name: "Kiro",
+    tagline: "IDE-native spec-driven dev",
+    strength: "Spec-driven development inside VS Code (IDE fork)",
+    adds: "CLI-native — no IDE required, works in any editor",
+    color: "orange",
+  },
 ];
 
 export function Comparison() {

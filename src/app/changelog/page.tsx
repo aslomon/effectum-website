@@ -62,7 +62,7 @@ const RELEASES: Release[] = [
       {
         type: "Added",
         items: [
-          "YAML frontmatter on all 28 commands — each command now has `title`, `description`, `usage`, and `examples` metadata for better discoverability and tooling.",
+          "YAML frontmatter on all 28 commands — each command now has `name`, `description`, and `allowed-tools` metadata for better discoverability and tooling.",
           "Commands README index (system/commands/README.md) — searchable index of all commands with descriptions and usage examples.",
           "6 specialized onboard agents — parallel analysis agents (api, architecture, database, frontend, stack, test) for faster, more accurate /onboard.",
         ],

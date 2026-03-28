@@ -16,7 +16,7 @@ const STEPS = [
     label: "Setup",
     command: "npx @aslomon/effectum",
     description:
-      "Install effectum into your project with one command. Choose from 6 modular stacks or 8 quick presets — it configures CLAUDE.md, guardrails, and quality gates automatically.",
+      "Install effectum into your project with one command. Choose from 7 modular stacks or 8 quick presets — it configures CLAUDE.md, guardrails, and quality gates automatically.",
     detail:
       "Supports Next.js, Python, Swift, Go, Rust, Deno — plus 8 quick presets for SaaS, API, CLI, and more.",
     icon: Download,
