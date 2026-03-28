@@ -87,7 +87,7 @@ function CinematicTerminal() {
       </div>
 
       {/* Lines */}
-      <div className="min-h-[calc(100vh-140px)] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[calc(100vh-160px)]">
+      <div className="min-h-[65vh] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[55vh]">
         {TERMINAL_LINES.slice(0, visibleCount).map((line, i) => (
           <div key={i} className="leading-relaxed">
             <span
@@ -134,16 +134,26 @@ export function Hero() {
       return;
     }
 
-    // Scroll trigger ONLY — no timer
+    // Bidirectional scroll — reveal on scroll down, un-reveal on scroll up
     const onScroll = () => {
       if (window.scrollY > 30) {
         setRevealed(true);
+      } else {
+        setRevealed(false);
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // After 10 seconds, auto-scroll down smoothly to trigger reveal
+    const autoScrollTimer = setTimeout(() => {
+      if (window.scrollY <= 30) {
+        window.scrollTo({ top: 120, behavior: "smooth" });
+      }
+    }, 10000);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(autoScrollTimer);
     };
   }, []);
 
