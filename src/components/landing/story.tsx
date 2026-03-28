@@ -7,7 +7,7 @@ const TESTED = [
   {
     name: "BMAD",
     url: "https://github.com/bmad-code-org/BMAD-METHOD",
-    what: "Full enterprise methodology with agent roles",
+    what: "Full enterprise framework with agent roles",
     kept: "Structured PRD approach",
     dropped: "Too much ceremony for small teams",
   },
@@ -146,7 +146,7 @@ export function Story() {
               >
                 <Sparkles size={14} className="text-accent" />
                 <span className="text-xs font-semibold text-text-primary">
-                  One install. Full pipeline. No methodology switching.
+                  One install. Full pipeline. No framework switching.
                 </span>
               </div>
             </div>

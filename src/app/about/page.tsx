@@ -24,7 +24,7 @@ export default function AboutPage() {
           Most AI coding tools fall into one of two traps. They are either so
           simple that they produce throwaway code — no tests, no types, no
           structure — or so complex that you spend more time configuring the
-          methodology than actually building.
+          framework than actually building.
         </p>
 
         <p>

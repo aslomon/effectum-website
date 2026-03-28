@@ -13,11 +13,11 @@ const HEADLINES = [
   },
   {
     headline: "Claude Code generates code.\nEffectum generates results.",
-    sub: "The methodology layer that turns AI potential into production software.",
+    sub: "The autonomous development framework that turns AI potential into production software.",
   },
   {
     headline: "Effectum. The result. Not the attempt.",
-    sub: "A methodology for Claude Code that ends sessions in working software, not half-built features.",
+    sub: "An autonomous development framework for Claude Code that ends sessions in working software, not half-built features.",
   },
 ];
 
@@ -54,6 +54,7 @@ const TERMINAL_LINES = [
 function CinematicTerminal() {
   const [visibleCount, setVisibleCount] = useState(0);
   const idxRef = useRef(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -63,6 +64,10 @@ function CinematicTerminal() {
       if (i >= TERMINAL_LINES.length) return;
       setVisibleCount(i + 1);
       idxRef.current = i + 1;
+      // Auto-scroll terminal to bottom
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
       timer = setTimeout(showNext, TERMINAL_LINES[i].pause);
     }
 
@@ -87,7 +92,7 @@ function CinematicTerminal() {
       </div>
 
       {/* Lines */}
-      <div className="min-h-[65vh] space-y-1.5 overflow-auto px-5 py-4 sm:min-h-[55vh]">
+      <div ref={scrollRef} className="h-[65vh] max-h-[65vh] space-y-1.5 overflow-y-auto px-5 py-4 sm:h-[55vh] sm:max-h-[55vh]">
         {TERMINAL_LINES.slice(0, visibleCount).map((line, i) => (
           <div key={i} className="leading-relaxed">
             <span

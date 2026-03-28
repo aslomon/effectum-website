@@ -15,7 +15,7 @@ const COMPARISONS = [
   {
     name: "BMAD",
     tagline: "Be More Agile Daily",
-    strength: "Full enterprise methodology with agent roles",
+    strength: "Full enterprise framework with agent roles",
     adds: "Same core ideas, 90% less ceremony",
     color: "purple",
   },
@@ -97,7 +97,7 @@ export function Comparison() {
             into one cohesive, runnable system.
           </p>
           <p className="mt-1 text-xs text-text-secondary">
-            No methodology switching. No integration work. One install, full
+            No framework switching. No integration work. One install, full
             pipeline.
           </p>
         </div>
