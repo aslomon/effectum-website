@@ -107,7 +107,7 @@ function TerminalInstall() {
         {visibleLines.length < TERMINAL_LINES.length && (
           <motion.span
             animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 1.2, repeat: Infinity }}
+            transition={{ duration: 0.3, repeat: Infinity }}
             className="inline-block h-4 w-0.5 bg-accent"
           />
         )}
@@ -127,7 +127,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.2 }}
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />

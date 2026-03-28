@@ -86,7 +86,7 @@ export function Onboarding() {
                         ? { opacity: 1, y: 0 }
                         : { opacity: 0, y: 16 }
                     }
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                    transition={{ duration: 0.2, delay: i * 0.08 }}
                     className="group relative flex items-start gap-3.5 rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
                   >
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
@@ -113,7 +113,7 @@ export function Onboarding() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
+              transition={{ duration: 0.2, delay: 0.05 }}
               className="mt-8 rounded-2xl border border-accent/20 bg-gradient-to-r from-accent/5 via-background to-accent/5 p-6"
             >
               <div className="flex items-center gap-3">

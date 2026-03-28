@@ -56,7 +56,7 @@ export function Story() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="mx-auto max-w-3xl text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">
@@ -89,7 +89,7 @@ export function Story() {
                 animate={
                   isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }
                 }
-                transition={{ duration: 0.35, delay: i * 0.08 }}
+                transition={{ duration: 0.2, delay: i * 0.08 }}
                 className="rounded-xl border border-border bg-surface p-4"
               >
                 <div className="flex items-center justify-between">
@@ -133,7 +133,7 @@ export function Story() {
                     animate={
                       isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 8 }
                     }
-                    transition={{ duration: 0.3, delay: i * 0.06 + 0.2 }}
+                    transition={{ duration: 0.2, delay: i * 0.06 + 0.2 }}
                     className="flex items-center justify-between rounded-lg border border-accent/10 bg-surface/70 px-4 py-3"
                   >
                     <div className="flex items-center gap-2.5">
@@ -162,7 +162,7 @@ export function Story() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: 0.05 }}
                 className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-accent/25 bg-accent/5 px-4 py-3"
               >
                 <Sparkles size={14} className="text-accent" />

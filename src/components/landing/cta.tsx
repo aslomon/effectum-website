@@ -25,8 +25,8 @@ export function CTA() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2 }}
           className="text-center"
         >
           <h2 className="text-3xl font-bold tracking-tight text-text-primary sm:text-5xl">
@@ -42,8 +42,8 @@ export function CTA() {
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2, delay: 0.1 }}
           className="mx-auto mt-10 max-w-sm overflow-hidden rounded-xl border border-code-border bg-code-bg shadow-xl shadow-black/15"
         >
           <div className="flex items-center gap-1.5 border-b border-white/5 px-4 py-2.5">
@@ -71,8 +71,8 @@ export function CTA() {
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.15 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2, delay: 0.15 }}
           className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <a
@@ -96,8 +96,8 @@ export function CTA() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.25 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2, delay: 0.05 }}
           className="mt-12 text-center text-xs text-text-muted"
         >
           MIT License. Built by{" "}

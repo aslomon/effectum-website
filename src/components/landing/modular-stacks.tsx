@@ -55,7 +55,7 @@ export function ModularStacks() {
                 animate={
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
                 }
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                transition={{ duration: 0.2, delay: i * 0.06 }}
                 className="group rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
               >
                 <p className="text-sm font-semibold text-text-primary">
@@ -80,7 +80,7 @@ export function ModularStacks() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.4, delay: 0.5 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
             className="mt-8 rounded-2xl border border-border bg-surface p-6"
           >
             <p className="mb-4 text-xs font-bold uppercase tracking-wider text-text-muted">

@@ -42,8 +42,8 @@ export function GettingStarted() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2 }}
           className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4"
         >
           {STEPS.map((step, i) => {
@@ -77,8 +77,8 @@ export function GettingStarted() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2, delay: 0.1 }}
         >
           <CodeBlock
             code={`# Install effectum
@@ -109,8 +109,8 @@ cd ~/my-project && claude
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2, delay: 0.05 }}
           className="mt-6 flex flex-col items-center gap-2 sm:flex-row sm:justify-center"
         >
           <p className="flex items-center gap-1.5 text-sm text-text-muted">

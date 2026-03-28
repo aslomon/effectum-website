@@ -55,7 +55,7 @@ export function Problem() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="grid gap-0 overflow-hidden rounded-2xl border border-border md:grid-cols-2"
         >
           {/* Left: without effectum — dim, faded */}
@@ -86,8 +86,8 @@ export function Problem() {
                     key={item.heading}
                     initial={{ opacity: 0, x: -8 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.35, delay: i * 0.08 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.2, delay: i * 0.08 }}
                     className="flex gap-3"
                   >
                     <X
@@ -133,8 +133,8 @@ export function Problem() {
                     key={item.heading}
                     initial={{ opacity: 0, x: 8 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.35, delay: i * 0.08 + 0.15 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.2, delay: i * 0.08 + 0.15 }}
                     className="flex gap-3"
                   >
                     <Check

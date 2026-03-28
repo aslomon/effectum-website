@@ -24,7 +24,7 @@ function Counter({ value, isInView }: { value: number; isInView: boolean }) {
   useEffect(() => {
     if (isInView) {
       const controls = animate(count, value, {
-        duration: 1.2,
+        duration: 0.3,
         ease: "easeOut",
       });
       return controls.stop;
@@ -51,7 +51,7 @@ export function Stats() {
               key={stat.label}
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              transition={{ duration: 0.2, delay: i * 0.02 }}
               className="text-center"
             >
               <div className="text-4xl font-bold tabular-nums text-accent sm:text-5xl">

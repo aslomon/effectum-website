@@ -105,7 +105,7 @@ export function HowItWorks() {
                     animate={
                       isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }
                     }
-                    transition={{ duration: 0.4, delay: i * 0.07 }}
+                    transition={{ duration: 0.2, delay: i * 0.02 }}
                   >
                     <button
                       type="button"
@@ -167,7 +167,7 @@ export function HowItWorks() {
                 key={active}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
                 className="flex h-full flex-col rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 via-background to-amber-50/30 p-8 dark:to-transparent"
               >
                 <div className="mb-6 flex items-center gap-4">
@@ -219,7 +219,7 @@ export function HowItWorks() {
                   animate={
                     isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }
                   }
-                  transition={{ duration: 0.4, delay: i * 0.07 }}
+                  transition={{ duration: 0.2, delay: i * 0.02 }}
                   className="relative"
                 >
                   {i < STEPS.length - 1 && (

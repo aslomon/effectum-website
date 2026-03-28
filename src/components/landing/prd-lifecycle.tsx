@@ -74,7 +74,7 @@ export function PrdLifecycle() {
                         ? { opacity: 1, y: 0 }
                         : { opacity: 0, y: 20 }
                     }
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                    transition={{ duration: 0.2, delay: i * 0.08 }}
                     className="group relative"
                   >
                     {i < PHASES.length - 1 && (
@@ -104,7 +104,7 @@ export function PrdLifecycle() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
+              transition={{ duration: 0.2, delay: 0.05 }}
               className="mt-8 overflow-hidden rounded-2xl border border-code-border bg-code-bg"
             >
               <div className="border-b border-white/10 px-5 py-3">

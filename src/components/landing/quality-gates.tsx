@@ -82,7 +82,7 @@ function GateRow({
     <motion.div
       initial={{ opacity: 0, x: -12 }}
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
-      transition={{ duration: 0.35, delay: index * 0.07 }}
+      transition={{ duration: 0.2, delay: index * 0.07 }}
       className="group flex items-center gap-4 rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:border-accent/30 hover:bg-accent-light/30 hover:shadow-sm"
     >
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-light text-accent transition-colors group-hover:bg-accent/10">
@@ -104,7 +104,7 @@ function GateRow({
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-        transition={{ duration: 0.3, delay: index * 0.07 + 0.25 }}
+        transition={{ duration: 0.2, delay: index * 0.07 + 0.25 }}
         className="shrink-0"
       >
         <CheckCircle2 size={18} className="text-accent" strokeWidth={2} />
@@ -139,7 +139,7 @@ export function QualityGates() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-            transition={{ duration: 0.4, delay: 0.8 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
             className="mt-6 flex items-center justify-center gap-3 rounded-xl border border-accent/25 bg-gradient-to-r from-accent-light to-accent-light/50 px-6 py-4"
           >
             <CheckCircle2 size={20} className="text-accent" strokeWidth={2} />

@@ -61,7 +61,7 @@ export function Autonomy() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                transition={{ duration: 0.2, delay: i * 0.02 }}
                 className={`relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 ${
                   isHighlighted
                     ? "border-accent/40 bg-gradient-to-b from-accent-light via-amber-50/40 to-background shadow-md shadow-amber-900/8 dark:from-accent/15 dark:via-accent/5 dark:to-transparent"
@@ -143,8 +143,8 @@ export function Autonomy() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.2, delay: 0.05 }}
           className="mt-6 text-center text-xs text-text-muted"
         >
           Configured during{" "}

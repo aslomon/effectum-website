@@ -62,7 +62,7 @@ export function Comparison() {
               key={comp.name}
               initial={{ opacity: 0, y: 12 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ duration: 0.35, delay: i * 0.09 }}
+              transition={{ duration: 0.2, delay: i * 0.09 }}
               className="group grid items-center gap-4 rounded-2xl border border-border bg-surface p-5 transition-all duration-200 hover:border-accent/25 hover:shadow-sm sm:grid-cols-[140px_1fr_32px_1fr]"
             >
               {/* Tool name */}
@@ -99,7 +99,7 @@ export function Comparison() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          transition={{ duration: 0.4, delay: 0.45 }}
+          transition={{ duration: 0.2, delay: 0.05 }}
           className="mt-6 rounded-2xl border border-accent/20 bg-gradient-to-r from-accent-light to-accent-light/30 p-5 text-center"
         >
           <p className="text-sm font-medium text-text-primary">
