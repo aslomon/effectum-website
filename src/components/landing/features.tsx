@@ -15,6 +15,11 @@ import {
   Palette,
   PackageCheck,
   Download,
+  SearchCode,
+  Fingerprint,
+  Map,
+  Brain,
+  SplitSquareHorizontal,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/section";
@@ -34,7 +39,7 @@ const FEATURES = [
     size: "large",
   },
   {
-    title: "28 Workflow Commands",
+    title: "31 Workflow Commands",
     description:
       "The entire development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, update, and deploy with full autonomy.",
     details: [
@@ -42,7 +47,7 @@ const FEATURES = [
       "/tdd — test-driven development",
       "/verify — run all quality gates",
       "/ralph-loop — autonomous overnight builds",
-      "/update — upgrade config without reconfiguring",
+      "/forensics, /effectum:init, /map-codebase — new in v0.16.0",
     ],
     icon: Terminal,
     size: "large",
@@ -74,13 +79,13 @@ const FEATURES = [
     size: "large",
   },
   {
-    title: "19 Specialized Agents",
+    title: "25 Specialized Agents",
     description:
       "Purpose-built agents for every phase — from code review to security audit to documentation. They work in parallel when possible.",
     details: [
       "Onboard agents analyze repos in parallel",
+      "4 parallel /map-codebase analysis agents",
       "Review agents catch security issues",
-      "Test agents maintain 80%+ coverage",
       "Doc agents keep everything in sync",
     ],
     icon: Bot,
@@ -152,12 +157,72 @@ const FEATURES = [
     size: "medium",
   },
   {
+    title: "Context Budget Monitor",
+    description:
+      "Ralph Loop and Orchestrate estimate context usage before each iteration. At >80%, they commit state, write HANDOFF.md, and stop cleanly.",
+    details: [
+      "Estimates context before each iteration",
+      "Commits current state at 80% budget",
+      "HANDOFF.md with structured handoff notes",
+    ],
+    icon: Brain,
+    size: "small",
+  },
+  {
+    title: "Stuck Detection",
+    description:
+      "Automatically detects when the same error repeats across iterations. Stops immediately and writes STUCK.md with diagnosis and next steps.",
+    details: [
+      "Tracks error messages across iterations",
+      "Stops on 2 consecutive identical errors",
+      "STUCK.md with root cause and fix plan",
+    ],
+    icon: SearchCode,
+    size: "small",
+  },
+  {
+    title: "/forensics Command",
+    description:
+      "Post-mortem diagnosis that reads HANDOFF.md, STUCK.md, loop-state.json, and git log. Classifies failure mode and outputs FORENSICS-YYYY-MM-DD.md.",
+    details: [
+      "Reads all loop artifacts automatically",
+      "Classifies failure mode and root cause",
+      "Outputs actionable next steps doc",
+    ],
+    icon: Fingerprint,
+    size: "small",
+  },
+  {
+    title: "/map-codebase Command",
+    description:
+      "Spawns 4 parallel analysis agents that produce 7 knowledge documents in knowledge/codebase/ — architecture, stack, conventions, testing, concerns, integrations.",
+    details: [
+      "4 agents: Architecture, Stack, Quality, Integration",
+      "7 output docs: ARCHITECTURE.md, STACK.md, …",
+      "Parallel execution for fast turnaround",
+    ],
+    icon: Map,
+    size: "small",
+  },
+  {
+    title: "Sentinel CLAUDE.md",
+    description:
+      "Project context survives template updates. Sentinel markers preserve your custom context block across effectum update re-renders.",
+    details: [
+      "<!-- effectum:project-context:start/end --> markers",
+      "Preserved across effectum update runs",
+      "/effectum:init populates it via 7-question interview",
+    ],
+    icon: SplitSquareHorizontal,
+    size: "small",
+  },
+  {
     title: "Ralph Loop",
     description:
       "Claude works autonomously — writing code, running tests, fixing errors, iterating — until every quality gate passes.",
     details: [
       "Built-in error recovery",
-      "Status reports at 80% iterations",
+      "Context budget + stuck detection built in",
       "Only outputs promise when 100% true",
     ],
     icon: RefreshCw,
@@ -290,10 +355,24 @@ export function Features() {
           ))}
         </div>
 
-        {/* Row 5: two small cards — Ralph Loop + Guardrails */}
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {FEATURES.slice(10, 12).map((feature, i) => (
+        {/* Row 5: v0.16.0 — Context Budget + Stuck Detection + /forensics */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          {FEATURES.slice(10, 13).map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i + 10} />
+          ))}
+        </div>
+
+        {/* Row 6: v0.16.0 — /map-codebase + Sentinel CLAUDE.md */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {FEATURES.slice(13, 15).map((feature, i) => (
+            <FeatureCard key={feature.title} feature={feature} index={i + 13} />
+          ))}
+        </div>
+
+        {/* Row 7: Ralph Loop + Guardrails */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {FEATURES.slice(15, 17).map((feature, i) => (
+            <FeatureCard key={feature.title} feature={feature} index={i + 15} />
           ))}
         </div>
       </div>

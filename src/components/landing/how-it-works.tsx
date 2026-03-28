@@ -9,393 +9,246 @@ import {
   Code,
   ShieldCheck,
   Eye,
-  Compass,
 } from "lucide-react";
-import { Section } from "@/components/section";
 
 const STEPS = [
   {
-    number: 1,
-    title: "Setup",
+    label: "Setup",
+    command: "npx @aslomon/effectum",
     description:
       "Install effectum into your project with one command. Choose from 6 modular stacks or 8 quick presets — it configures CLAUDE.md, guardrails, and quality gates automatically.",
-    command: "npx @aslomon/effectum",
-    icon: Download,
     detail:
       "Supports Next.js, Python, Swift, Go, Rust, Deno — plus 8 quick presets for SaaS, API, CLI, and more.",
-    altFlow: null,
+    icon: Download,
   },
   {
-    number: 1,
-    title: "Onboard",
-    description:
-      "Already have a project? /onboard runs 6 parallel agents that analyze your dependencies, structure, patterns, environment, tests, and docs — then generates a complete CLAUDE.md and PRD.",
-    command: "/onboard",
-    icon: Compass,
-    detail:
-      "Agents run in parallel: deps, structure, patterns, env, tests, docs. Self-tests with /verify when done.",
-    altFlow: "existing",
-  },
-  {
-    number: 2,
-    title: "Spec",
+    label: "Spec",
+    command: "/prd:new",
     description:
       "Write a structured PRD using the guided workshop. Adaptive questioning turns vague ideas into precise, actionable specifications with clear acceptance criteria.",
-    command: "/prd:new",
-    icon: FileText,
     detail:
-      "Workshop mode for vague ideas, express mode for clear input. Decomposes large projects automatically.",
-    altFlow: null,
+      "Workshop mode asks 12–15 questions. Express mode generates from a one-liner. Both produce the same structured output.",
+    icon: FileText,
   },
   {
-    number: 3,
-    title: "Plan",
+    label: "Plan",
+    command: "/plan",
     description:
       "Claude analyzes the spec and creates a detailed implementation strategy — file structure, data models, API contracts — before touching any code.",
-    command: "/plan",
-    icon: Map,
     detail:
-      "Waits for your approval before proceeding. No surprises, no unexpected architecture decisions.",
-    altFlow: null,
+      "PLAN.md captures the full strategy so every subsequent command has shared context.",
+    icon: Map,
   },
   {
-    number: 4,
-    title: "Implement",
+    label: "Implement",
+    command: "/tdd",
     description:
       "Test-driven development at scale. Claude writes failing tests, then implements code to make them pass, following your established patterns.",
-    command: "/tdd",
-    icon: Code,
     detail:
-      "Strict TypeScript, no any types, no unsafe casts. Colocated tests, single-responsibility functions.",
-    altFlow: null,
+      "Red → green → refactor, repeated per acceptance criterion. 80%+ coverage enforced.",
+    icon: Code,
   },
   {
-    number: 5,
-    title: "Verify",
+    label: "Verify",
+    command: "/verify",
     description:
       "Eight quality gates enforced in sequence: build, types, lint, tests, security, debug logs, type safety, and file size. Zero tolerance.",
-    command: "/verify",
-    icon: ShieldCheck,
     detail:
-      "Done means compiles + tests pass + linter clean. Not suggested — required.",
-    altFlow: null,
+      "Gates run in order. First failure stops the chain. Claude fixes and retries.",
+    icon: ShieldCheck,
   },
   {
-    number: 6,
-    title: "Review",
+    label: "Review",
+    command: "/code-review",
     description:
       "Automated security audit and architecture validation. OWASP vulnerability scanning, dependency review, and code quality checks before shipping.",
-    command: "/code-review",
-    icon: Eye,
     detail:
-      "Blocks commits with security issues. Enforces architecture rules defined in your CLAUDE.md.",
-    altFlow: null,
+      "Three severity levels: critical (must fix), warning (should fix), info (consider). Output is a structured Markdown report.",
+    icon: Eye,
   },
 ];
-
-function PipelineStep({
-  step,
-  index,
-  isActive,
-  isInView,
-  onActivate,
-  totalSteps,
-}: {
-  step: (typeof STEPS)[0];
-  index: number;
-  isActive: boolean;
-  isInView: boolean;
-  onActivate: () => void;
-  totalSteps: number;
-}) {
-  const Icon = step.icon;
-  const isLast = index === totalSteps - 1;
-
-  return (
-    <div className="relative">
-      {/* Vertical connector line */}
-      {!isLast && (
-        <motion.div
-          initial={{ scaleY: 0 }}
-          animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-          transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
-          className="absolute left-5 top-10 h-full w-px origin-top bg-gradient-to-b from-border to-border/20"
-        />
-      )}
-
-      <motion.button
-        type="button"
-        initial={{ opacity: 0, x: -16 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-        transition={{ duration: 0.4, delay: index * 0.08 }}
-        onClick={onActivate}
-        className={`relative flex w-full items-start gap-4 rounded-xl px-4 py-3.5 text-left transition-all duration-200 ${
-          isActive
-            ? "bg-accent/8 ring-1 ring-accent/20"
-            : "hover:bg-background/60"
-        }`}
-      >
-        {/* Step number bubble */}
-        <div
-          className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-all duration-200 ${
-            isActive
-              ? "bg-accent text-white shadow-md shadow-amber-600/30"
-              : "bg-background ring-1 ring-border text-text-muted"
-          }`}
-        >
-          {isActive ? <Icon size={16} strokeWidth={2} /> : step.number}
-        </div>
-
-        {/* Step text */}
-        <div className="flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center gap-2">
-            <span
-              className={`text-sm font-semibold transition-colors duration-200 ${
-                isActive ? "text-accent" : "text-text-primary"
-              }`}
-            >
-              {step.title}
-            </span>
-            <code
-              className={`rounded px-1.5 py-0.5 font-mono text-xs transition-all duration-200 ${
-                isActive
-                  ? "bg-accent/10 text-accent"
-                  : "bg-background text-text-muted"
-              }`}
-            >
-              {step.command}
-            </code>
-          </div>
-          <p className="mt-0.5 line-clamp-1 text-xs text-text-muted">
-            {step.description}
-          </p>
-        </div>
-
-        {/* Active indicator — static left border */}
-        {isActive && (
-          <div className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-accent" />
-        )}
-      </motion.button>
-    </div>
-  );
-}
-
-function StepDetail({
-  step,
-  isInView,
-  totalSteps,
-}: {
-  step: (typeof STEPS)[0];
-  isInView: boolean;
-  totalSteps: number;
-}) {
-  const Icon = step.icon;
-
-  return (
-    <motion.div
-      key={step.title}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.3 }}
-      className="h-full"
-    >
-      <div className="flex h-full flex-col rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 via-background to-amber-50/30 p-8 dark:to-transparent">
-        {/* Step header */}
-        <div className="mb-6 flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent shadow-sm shadow-amber-600/10">
-            <Icon size={26} strokeWidth={1.5} />
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent/70">
-              Step {step.number} of {totalSteps}
-            </p>
-            <h3 className="text-2xl font-bold text-text-primary">
-              {step.title}
-            </h3>
-          </div>
-        </div>
-
-        {/* Description */}
-        <p className="text-base leading-relaxed text-text-secondary">
-          {step.description}
-        </p>
-
-        {/* Detail callout */}
-        <div className="mt-6 rounded-xl border border-border bg-surface/80 p-4">
-          <p className="text-sm leading-relaxed text-text-secondary">
-            {step.detail}
-          </p>
-        </div>
-
-        {/* Command block */}
-        <div className="mt-auto pt-8">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Command
-          </p>
-          <div className="flex items-center gap-3 rounded-xl border border-code-border bg-code-bg px-5 py-4">
-            <span className="select-none font-mono text-sm text-accent">$</span>
-            <code className="font-mono text-sm text-code-text">
-              {step.command}
-            </code>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-// Mobile single-step card for smaller screens
-function MobileStep({
-  step,
-  index,
-  isInView,
-  totalSteps,
-}: {
-  step: (typeof STEPS)[0];
-  index: number;
-  isInView: boolean;
-  totalSteps: number;
-}) {
-  const Icon = step.icon;
-  const isLast = index === totalSteps - 1;
-
-  return (
-    <div className="relative">
-      {!isLast && (
-        <motion.div
-          initial={{ scaleY: 0 }}
-          animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.1 + 0.25 }}
-          className="absolute left-5 top-10 h-[calc(100%+1rem)] w-px origin-top bg-gradient-to-b from-accent/30 to-border/20"
-        />
-      )}
-
-      <motion.div
-        initial={{ opacity: 0, x: -12 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
-        transition={{ duration: 0.4, delay: index * 0.09 }}
-        className="relative flex gap-4 pb-4"
-      >
-        <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white shadow-sm shadow-amber-600/20">
-          <Icon size={16} strokeWidth={2} />
-        </div>
-
-        <div className="flex flex-1 flex-col rounded-xl border border-border bg-surface p-4">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-text-primary">
-              {step.title}
-            </span>
-            <code className="rounded bg-code-bg px-1.5 py-0.5 font-mono text-xs text-accent">
-              {step.command}
-            </code>
-          </div>
-          <p className="mt-1.5 text-xs leading-relaxed text-text-secondary">
-            {step.description}
-          </p>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
 
 export function HowItWorks() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [activeStep, setActiveStep] = useState(0);
-  const [flow, setFlow] = useState<"new" | "existing">("new");
+  const [active, setActive] = useState(0);
 
-  const filteredSteps = STEPS.filter((step) =>
-    flow === "new"
-      ? step.altFlow === null
-      : step.altFlow !== null
-        ? true
-        : step.altFlow === null && step.number !== 1,
-  );
+  const ActiveIcon = STEPS[active].icon;
 
   return (
-    <Section
-      id="how-it-works"
-      label="Workflow"
-      title="How it works"
-      description="From idea to production-ready code — a complete development pipeline."
-      className="bg-surface"
-    >
-      {/* Flow toggle */}
-      <div className="-mt-10 mb-10 flex justify-center">
-        <div className="inline-flex items-center gap-1 rounded-full border border-border bg-background p-1">
-          <button
-            type="button"
-            onClick={() => {
-              setFlow("new");
-              setActiveStep(0);
-            }}
-            className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 ${
-              flow === "new"
-                ? "bg-accent text-white shadow-sm"
-                : "text-text-muted hover:text-text-primary"
-            }`}
-          >
-            New project
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setFlow("existing");
-              setActiveStep(0);
-            }}
-            className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-200 ${
-              flow === "existing"
-                ? "bg-accent text-white shadow-sm"
-                : "text-text-muted hover:text-text-primary"
-            }`}
-          >
-            Existing project
-          </button>
+    <section id="how-it-works" className="py-24 sm:py-32 bg-surface">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">
+            Workflow
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl">
+            How it works
+          </h2>
+          <p className="mt-4 text-lg text-text-secondary">
+            From idea to production-ready code — a complete development
+            pipeline.
+          </p>
         </div>
-      </div>
 
-      <div ref={ref} className="mx-auto max-w-6xl">
-        {/* Desktop: two-column pipeline layout */}
-        <div className="hidden lg:grid lg:grid-cols-[1fr_1.1fr] lg:gap-8 xl:gap-12">
-          {/* Left: step list */}
-          <div className="flex flex-col gap-1">
-            {filteredSteps.map((step, i) => (
-              <PipelineStep
-                key={step.title}
-                step={step}
-                index={i}
-                isActive={activeStep === i}
-                isInView={isInView}
-                onActivate={() => setActiveStep(i)}
-                totalSteps={filteredSteps.length}
-              />
-            ))}
+        <div ref={ref} className="mt-16 mx-auto max-w-5xl">
+          <div className="hidden lg:grid lg:grid-cols-[1fr_1.1fr] lg:gap-8 xl:gap-12">
+            {/* Steps list */}
+            <div className="flex flex-col gap-1">
+              {STEPS.map((step, i) => {
+                const Icon = step.icon;
+                const isActive = active === i;
+                return (
+                  <motion.div
+                    key={step.label}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={
+                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }
+                    }
+                    transition={{ duration: 0.4, delay: i * 0.07 }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActive(i)}
+                      className={`relative flex w-full items-start gap-4 rounded-xl px-4 py-3.5 text-left transition-all duration-200 ${
+                        isActive
+                          ? "bg-accent/8 ring-1 ring-accent/20"
+                          : "hover:bg-background/60"
+                      }`}
+                    >
+                      <div
+                        className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-all duration-200 ${
+                          isActive
+                            ? "bg-accent text-white shadow-md shadow-amber-600/30"
+                            : "bg-background ring-1 ring-border text-text-muted"
+                        }`}
+                      >
+                        {isActive ? (
+                          <Icon size={16} />
+                        ) : (
+                          <span>{i + 1}</span>
+                        )}
+                      </div>
+                      <div className="flex min-w-0 flex-1 flex-col">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-sm font-semibold transition-colors duration-200 ${
+                              isActive ? "text-accent" : "text-text-primary"
+                            }`}
+                          >
+                            {step.label}
+                          </span>
+                          <code
+                            className={`rounded px-1.5 py-0.5 font-mono text-xs transition-all duration-200 ${
+                              isActive
+                                ? "bg-accent/10 text-accent"
+                                : "bg-background text-text-muted"
+                            }`}
+                          >
+                            {step.command}
+                          </code>
+                        </div>
+                        <p className="mt-0.5 line-clamp-1 text-xs text-text-muted">
+                          {step.description}
+                        </p>
+                      </div>
+                      {isActive && (
+                        <div className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-accent" />
+                      )}
+                    </button>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Detail panel */}
+            <div className="sticky top-24 h-fit">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex h-full flex-col rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 via-background to-amber-50/30 p-8 dark:to-transparent"
+              >
+                <div className="mb-6 flex items-center gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent shadow-sm shadow-amber-600/10">
+                    <ActiveIcon size={26} strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-accent/70">
+                      Step {active + 1} of {STEPS.length}
+                    </p>
+                    <h3 className="text-2xl font-bold text-text-primary">
+                      {STEPS[active].label}
+                    </h3>
+                  </div>
+                </div>
+                <p className="text-base leading-relaxed text-text-secondary">
+                  {STEPS[active].description}
+                </p>
+                <div className="mt-6 rounded-xl border border-border bg-surface/80 p-4">
+                  <p className="text-sm leading-relaxed text-text-secondary">
+                    {STEPS[active].detail}
+                  </p>
+                </div>
+                <div className="mt-auto pt-8">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
+                    Command
+                  </p>
+                  <div className="flex items-center gap-3 rounded-xl border border-code-border bg-code-bg px-5 py-4">
+                    <span className="select-none font-mono text-sm text-accent">
+                      $
+                    </span>
+                    <code className="font-mono text-sm text-code-text">
+                      {STEPS[active].command}
+                    </code>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
 
-          {/* Right: detail panel */}
-          <div className="sticky top-24 h-fit">
-            <StepDetail
-              step={filteredSteps[activeStep]}
-              isInView={isInView}
-              totalSteps={filteredSteps.length}
-            />
+          {/* Mobile */}
+          <div className="flex flex-col gap-1 lg:hidden">
+            {STEPS.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <motion.div
+                  key={step.label}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={
+                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }
+                  }
+                  transition={{ duration: 0.4, delay: i * 0.07 }}
+                  className="relative"
+                >
+                  {i < STEPS.length - 1 && (
+                    <div className="absolute left-5 top-10 h-[calc(100%+1rem)] w-px bg-gradient-to-b from-accent/30 to-border/20" />
+                  )}
+                  <div className="relative flex gap-4 pb-4">
+                    <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white shadow-sm shadow-amber-600/20">
+                      <Icon size={16} />
+                    </div>
+                    <div className="flex flex-1 flex-col rounded-xl border border-border bg-surface p-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold text-text-primary">
+                          {step.label}
+                        </span>
+                        <code className="rounded bg-code-bg px-1.5 py-0.5 font-mono text-xs text-accent">
+                          {step.command}
+                        </code>
+                      </div>
+                      <p className="mt-1.5 text-xs leading-relaxed text-text-secondary">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
-
-        {/* Mobile: vertical stacked pipeline */}
-        <div className="flex flex-col gap-1 lg:hidden">
-          {filteredSteps.map((step, i) => (
-            <MobileStep
-              key={step.title}
-              step={step}
-              index={i}
-              isInView={isInView}
-              totalSteps={filteredSteps.length}
-            />
-          ))}
-        </div>
       </div>
-    </Section>
+    </section>
   );
 }

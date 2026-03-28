@@ -20,9 +20,44 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: "0.16.0",
+    date: "2026-03-28",
+    tag: "latest",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "Sentinel-based CLAUDE.md Split — `<!-- effectum:project-context:start/end -->` markers preserve project context across `effectum update` re-renders. Custom content survives template changes.",
+          "Context Budget Monitor — `/ralph-loop` and `/orchestrate` estimate context usage before each iteration. At >80%: commit state, write HANDOFF.md with structured handoff, and stop cleanly.",
+          "Stuck Detection — `/ralph-loop` tracks error messages across iterations. Same error in 2 consecutive iterations: stop immediately, write STUCK.md with diagnosis and next steps.",
+          "Per-Iteration Loop State — `/ralph-loop` persists `.effectum/loop-state.json` after every iteration. Detects incomplete runs on startup and offers to resume or start fresh.",
+          "Loop Ledger — On completion (success, stuck, or budget stop), appends a session entry to `effectum-metrics.json` with iterations, outcome, quality gates, and duration.",
+          "/forensics Command — Post-mortem diagnosis reads HANDOFF.md, STUCK.md, loop-state.json, effectum-metrics.json, and git log. Classifies failure mode, outputs `FORENSICS-YYYY-MM-DD.md`.",
+          "/effectum:init Command — Interactive 7-question interview to populate the sentinel block in CLAUDE.md with project-specific context (app description, users, architecture decisions, conventions, tech debt).",
+          "/map-codebase Command — Spawns 4 parallel agents (ArchitectureMapper, StackMapper, QualityMapper, IntegrationMapper) producing 7 knowledge docs in `knowledge/codebase/`.",
+          "Hook Modernization — Added `if` conditional fields to git-specific hooks: commit message check fires on `git commit*`, secret scanning fires on `git commit*` or `git push*`.",
+        ],
+      },
+      {
+        type: "Changed",
+        items: [
+          "Version bumped — v0.15.0 → v0.16.0",
+          "README — Updated version badge and feature descriptions for v0.16.0",
+          "Command Index — Added /forensics, /effectum:init, /map-codebase to command reference",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "413 tests, all passing (up from 389)",
+        ],
+      },
+    ],
+  },
+  {
     version: "0.15.0",
     date: "2026-03-26",
-    tag: "latest",
+    tag: undefined,
     sections: [
       {
         type: "Added",
@@ -437,7 +472,7 @@ export default function ChangelogPage() {
       <div className="mt-16 rounded-xl border border-border p-5 text-sm text-text-secondary">
         <strong className="text-text-primary">All releases on npm:</strong>{" "}
         <code className="rounded bg-surface-raised px-1.5 py-0.5 font-mono text-xs">
-          npx @aslomon/effectum@0.11.1
+          npx @aslomon/effectum@0.16.0
         </code>{" "}
         — or just{" "}
         <code className="rounded bg-surface-raised px-1.5 py-0.5 font-mono text-xs">

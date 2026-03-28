@@ -2,145 +2,112 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Layers, Zap } from "lucide-react";
-import { Section } from "@/components/section";
 
 const STACKS = [
-  { name: "Next.js", ecosystem: "Node", color: "bg-stone-800 text-white" },
-  { name: "Python", ecosystem: "Python", color: "bg-blue-600 text-white" },
-  { name: "Swift", ecosystem: "Apple", color: "bg-orange-500 text-white" },
-  { name: "Go", ecosystem: "Go", color: "bg-cyan-600 text-white" },
-  { name: "Rust", ecosystem: "Rust", color: "bg-amber-700 text-white" },
-  { name: "Deno", ecosystem: "Deno", color: "bg-stone-700 text-white" },
+  { name: "Next.js", tag: "TypeScript", presets: ["SaaS", "API"] },
+  { name: "Python", tag: "FastAPI / Django", presets: ["API", "CLI"] },
+  { name: "Swift", tag: "SwiftUI", presets: ["Mobile"] },
+  { name: "Go + Echo", tag: "PostgreSQL", presets: ["API"] },
+  { name: "Django", tag: "PostgreSQL", presets: ["SaaS"] },
+  { name: "Rust + Actix", tag: "Performance", presets: ["API"] },
+  { name: "Generic", tag: "Any language", presets: ["CLI"] },
 ];
 
 const PRESETS = [
-  { name: "SaaS Starter", stack: "Next.js + Supabase + Stripe" },
-  { name: "REST API", stack: "Python + FastAPI + PostgreSQL" },
-  { name: "CLI Tool", stack: "Go or Rust + cross-platform" },
-  { name: "Mobile App", stack: "Swift + SwiftUI + CloudKit" },
-  { name: "Full-Stack", stack: "Next.js + tRPC + Prisma" },
-  { name: "Edge Worker", stack: "Deno + Supabase Edge Functions" },
-  { name: "Data Pipeline", stack: "Python + Pandas + Airflow" },
-  { name: "Monorepo", stack: "Turborepo + shared packages" },
-];
-
-const FLOW_STEPS = [
-  { label: "Ecosystem", example: "Node, Python, Apple, Go..." },
-  { label: "Framework", example: "Next.js, FastAPI, SwiftUI..." },
-  { label: "Database", example: "Supabase, PostgreSQL, SQLite..." },
-  { label: "Deploy", example: "Vercel, Docker, CloudKit..." },
+  { name: "nextjs-supabase", label: "SaaS", stack: "Next.js" },
+  { name: "nextjs-firebase", label: "SaaS", stack: "Next.js" },
+  { name: "nextjs-prisma", label: "API", stack: "Next.js" },
+  { name: "django-postgres", label: "SaaS", stack: "Django" },
+  { name: "fastapi-postgres", label: "API", stack: "Python" },
+  { name: "go-echo-postgres", label: "API", stack: "Go" },
+  { name: "swift-swiftui", label: "Mobile", stack: "Swift" },
+  { name: "flutter-firebase", label: "Mobile", stack: "Flutter" },
 ];
 
 export function ModularStacks() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <Section
-      id="modular-stacks"
-      label="Stacks"
-      title="Any stack. Your way."
-      description="Choose from 6 composable stacks or 8 quick presets. Each includes a complete CLAUDE.md, guardrails, and stack-specific quality rules."
-    >
-      <div ref={ref} className="mx-auto max-w-5xl">
-        {/* Composition flow */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.4 }}
-          className="mb-10 flex flex-wrap items-center justify-center gap-2"
-        >
-          {FLOW_STEPS.map((step, i) => (
-            <div key={step.label} className="flex items-center gap-2">
-              <div className="rounded-lg border border-border bg-surface px-4 py-2.5 text-center">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-                  {step.label}
-                </p>
-                <p className="mt-0.5 text-xs text-text-muted">{step.example}</p>
-              </div>
-              {i < FLOW_STEPS.length - 1 && (
-                <span className="text-text-muted/40">→</span>
-              )}
-            </div>
-          ))}
-        </motion.div>
+    <section id="stacks" className="py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">
+            Stacks
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl">
+            7 modular stacks, 8 quick presets
+          </h2>
+          <p className="mt-4 text-lg text-text-secondary">
+            Pick your ecosystem, framework, and database — or use a preset for
+            instant setup. Each stack ships with CLAUDE.md, guardrails, and
+            quality gates tuned for that environment.
+          </p>
+        </div>
 
-        {/* Two-column: Stacks + Presets */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Stacks */}
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
-            <div className="mb-4 flex items-center gap-2">
-              <Layers size={16} className="text-accent" />
-              <h3 className="text-sm font-semibold text-text-primary">
-                6 Modular Stacks
-              </h3>
-            </div>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-              {STACKS.map((stack, i) => (
-                <motion.div
-                  key={stack.name}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={
-                    isInView
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.95 }
-                  }
-                  transition={{ duration: 0.3, delay: 0.15 + i * 0.04 }}
-                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
-                >
-                  <span
-                    className={`inline-flex rounded-md px-2.5 py-1 text-xs font-bold ${stack.color}`}
-                  >
-                    {stack.name}
-                  </span>
-                  <span className="text-[10px] text-text-muted">
-                    {stack.ecosystem}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+        <div ref={ref} className="mt-16 mx-auto max-w-5xl">
+          {/* Stacks grid */}
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {STACKS.map((stack, i) => (
+              <motion.div
+                key={stack.name}
+                initial={{ opacity: 0, y: 16 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }
+                }
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="group rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/25 hover:shadow-md hover:shadow-amber-900/5"
+              >
+                <p className="text-sm font-semibold text-text-primary">
+                  {stack.name}
+                </p>
+                <p className="mt-0.5 text-xs text-text-muted">{stack.tag}</p>
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {stack.presets.map((preset) => (
+                    <span
+                      key={preset}
+                      className="inline-flex h-4 items-center rounded-full bg-accent/8 px-1.5 text-[10px] font-semibold text-accent"
+                    >
+                      {preset}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
           {/* Presets */}
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 16 }}
-            transition={{ duration: 0.4, delay: 0.15 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="mt-8 rounded-2xl border border-border bg-surface p-6"
           >
-            <div className="mb-4 flex items-center gap-2">
-              <Zap size={16} className="text-accent" />
-              <h3 className="text-sm font-semibold text-text-primary">
-                8 Quick Presets
-              </h3>
-            </div>
-            <div className="grid gap-2">
-              {PRESETS.map((preset, i) => (
-                <motion.div
+            <p className="mb-4 text-xs font-bold uppercase tracking-wider text-text-muted">
+              Quick presets
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              {PRESETS.map((preset) => (
+                <div
                   key={preset.name}
-                  initial={{ opacity: 0, x: 8 }}
-                  animate={
-                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 8 }
-                  }
-                  transition={{ duration: 0.3, delay: 0.2 + i * 0.03 }}
-                  className="flex items-center justify-between rounded-lg border border-border bg-surface px-4 py-2.5 transition-all duration-200 hover:border-accent/20"
+                  className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2"
                 >
-                  <span className="text-sm font-medium text-text-primary">
+                  <code className="font-mono text-xs text-accent">
                     {preset.name}
-                  </span>
-                  <span className="text-xs text-text-muted">
-                    {preset.stack}
-                  </span>
-                </motion.div>
+                  </code>
+                </div>
               ))}
             </div>
+            <p className="mt-4 text-xs text-text-muted">
+              Run{" "}
+              <code className="rounded bg-code-bg px-1.5 py-0.5 font-mono text-xs text-accent">
+                npx @aslomon/effectum --preset nextjs-supabase
+              </code>{" "}
+              for instant zero-config setup.
+            </p>
           </motion.div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
