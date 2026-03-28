@@ -20,9 +20,59 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
-    version: "0.16.0",
+    version: "0.17.0",
     date: "2026-03-28",
     tag: "latest",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "/effectum Command — Entry point and getting-started guide. Run at any time to orient yourself and get pointed to the right next step. Read-only, no side effects.",
+          "/help Command — Human-language alias for /effectum. Use /help or /effectum interchangeably.",
+          "/next Command — Smart router. Reads project state (CLAUDE.md, git log, loop-state.json, PRD status) and recommends exactly one action. Never overwhelming — one recommendation, always actionable.",
+          "/run Command — Human-language alias for /ralph-loop. Start autonomous build sessions naturally: 'just /run it'.",
+          "/stop Command — Human-language alias for /cancel-ralph. Stop an active loop naturally: 'just /stop'.",
+          "/save Command — Human-language alias for /checkpoint. Create a git restore point naturally: '/save before we refactor'.",
+          "/diagnose Command — Human-language alias for /forensics. Understand failures naturally: '/diagnose what went wrong'.",
+          "/explore Command — Human-language alias for /map-codebase. Kick off codebase analysis naturally: '/explore this codebase'.",
+          "/project:init Command — Replaces /workshop:init with a cleaner namespace. Creates PRD Workshop project structure.",
+          "/project:archive Command — Replaces /workshop:archive with a cleaner namespace. Archives completed/abandoned projects.",
+          "/context:init Command — Replaces /effectum:init with a cleaner namespace. Interactive 7-question interview to populate the sentinel block in CLAUDE.md.",
+        ],
+      },
+      {
+        type: "Changed",
+        items: [
+          "Command count: 31 → 42 commands",
+          "Command categories reorganized into 8 groups: Navigation, Core Workflow, Autonomous, Spec, Onboarding, Project, Design, Setup",
+          "/ralph-loop — tagline updated to note /run alias",
+          "/cancel-ralph — tagline updated to note /stop alias",
+          "/checkpoint — tagline updated to note /save alias",
+          "/forensics — tagline updated to note /diagnose alias",
+          "/map-codebase — tagline updated to note /explore alias",
+          "Version bumped — v0.16.0 → v0.17.0",
+          "README — Updated version badge, command count, and feature descriptions for v0.17.0",
+        ],
+      },
+      {
+        type: "Fixed",
+        items: [
+          "12 journey bug fixes across the autonomous workflow loop — improved reliability and error recovery",
+          "Namespace cleanup: /workshop:* → /project:*, /effectum:init → /context:init (old commands still work, deprecated, removed in v0.19)",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "446 tests, all passing (up from 413)",
+        ],
+      },
+    ],
+  },
+  {
+    version: "0.16.0",
+    date: "2026-03-28",
+    tag: undefined,
     sections: [
       {
         type: "Added",
@@ -472,7 +522,7 @@ export default function ChangelogPage() {
       <div className="mt-16 rounded-xl border border-border p-5 text-sm text-text-secondary">
         <strong className="text-text-primary">All releases on npm:</strong>{" "}
         <code className="rounded bg-surface-raised px-1.5 py-0.5 font-mono text-xs">
-          npx @aslomon/effectum@0.16.0
+          npx @aslomon/effectum@0.17.0
         </code>{" "}
         — or just{" "}
         <code className="rounded bg-surface-raised px-1.5 py-0.5 font-mono text-xs">

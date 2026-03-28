@@ -252,7 +252,7 @@ cd ~/my-project && claude
             {
               href: "/docs/commands",
               label: "Commands reference",
-              desc: "learn all 31 workflow commands",
+              desc: "learn all 42 workflow commands",
             },
             {
               href: "/docs/stack-presets",

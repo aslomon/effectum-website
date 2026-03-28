@@ -161,7 +161,7 @@ export const PRESETS_DATA: PresetData[] = [
     iconColor: "text-emerald-600 dark:text-emerald-400",
     borderColor: "border-emerald-100 dark:border-emerald-900/30",
     features: [
-      "All 31 workflow commands",
+      "All 42 workflow commands",
       "Customizable quality gates",
       "PRD Workshop included",
       "Guardrails system",
@@ -175,7 +175,7 @@ export const PRESETS_DATA: PresetData[] = [
 
 export const COMPARISON_FEATURES = [
   "PRD Workshop",
-  "31 workflow commands",
+  "42 workflow commands",
   "Quality gates",
   "Guardrails",
   "MCP servers",
@@ -194,7 +194,7 @@ export const PRESET_SUPPORT: Record<
 > = {
   nextjs: {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -206,7 +206,7 @@ export const PRESET_SUPPORT: Record<
   },
   python: {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -218,7 +218,7 @@ export const PRESET_SUPPORT: Record<
   },
   swift: {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": false,
@@ -230,7 +230,7 @@ export const PRESET_SUPPORT: Record<
   },
   "go-echo": {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -242,7 +242,7 @@ export const PRESET_SUPPORT: Record<
   },
   "django-postgres": {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -254,7 +254,7 @@ export const PRESET_SUPPORT: Record<
   },
   "rust-actix": {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": true,
@@ -266,7 +266,7 @@ export const PRESET_SUPPORT: Record<
   },
   generic: {
     "PRD Workshop": true,
-    "31 workflow commands": true,
+    "42 workflow commands": true,
     "Quality gates": true,
     Guardrails: true,
     "MCP servers": false,

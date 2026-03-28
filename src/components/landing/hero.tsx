@@ -139,7 +139,7 @@ export function Hero() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
               effectum transforms natural language into production-ready code
-              with intelligent setup, 31 workflow commands, and 25 specialized
+              with intelligent setup, 42 workflow commands, and 25 specialized
               agents. New project or existing codebase — describe what you want,
               let Claude Code build it overnight.
             </p>

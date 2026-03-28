@@ -29,13 +29,22 @@ import {
   FolderPlus,
   Archive,
   Paintbrush,
+  Compass,
+  HelpCircle,
+  ArrowRightCircle,
+  Play,
+  StopCircle,
+  Save,
+  Fingerprint,
+  Stethoscope,
+  AlertTriangle,
 } from "lucide-react";
 import { COMMANDS, PHASE_ORDER, PHASE_META } from "./commands-data";
-import type { CommandPhase } from "./commands-data";
+import type { CommandPhase, CommandEntry } from "./commands-data";
 
 export const metadata: Metadata = {
   title: "Commands",
-  description: "Reference for all 31 effectum workflow commands.",
+  description: "Reference for all 42 effectum workflow commands.",
 };
 
 // Map icon string names to Lucide components
@@ -66,26 +75,35 @@ const ICON_MAP: Record<string, LucideIcon> = {
   FolderPlus,
   Archive,
   Paintbrush,
+  Compass,
+  HelpCircle,
+  ArrowRightCircle,
+  Play,
+  StopCircle,
+  Save,
+  Fingerprint,
+  Stethoscope,
+  AlertTriangle,
 };
 
 // Typical command flow for the visual header
 const FLOW_STEPS: { name: string; phase: CommandPhase }[] = [
-  { name: "/plan", phase: "Planning" },
-  { name: "/tdd", phase: "Implementation" },
-  { name: "/verify", phase: "QA" },
-  { name: "/code-review", phase: "QA" },
-  { name: "/ralph-loop", phase: "Automation" },
+  { name: "/next", phase: "Navigation" },
+  { name: "/plan", phase: "Core Workflow" },
+  { name: "/tdd", phase: "Core Workflow" },
+  { name: "/verify", phase: "Core Workflow" },
+  { name: "/ralph-loop", phase: "Autonomous" },
 ];
 
 const PHASE_DOT_COLORS: Record<CommandPhase, string> = {
-  Planning: "bg-blue-400 dark:bg-blue-500",
-  Implementation: "bg-amber-400 dark:bg-amber-500",
-  QA: "bg-emerald-400 dark:bg-emerald-500",
-  Automation: "bg-purple-400 dark:bg-purple-500",
-  Safety: "bg-gray-400 dark:bg-gray-500",
-  "PRD Workshop": "bg-violet-400 dark:bg-violet-500",
+  Navigation: "bg-sky-400 dark:bg-sky-500",
+  "Core Workflow": "bg-blue-400 dark:bg-blue-500",
+  Autonomous: "bg-purple-400 dark:bg-purple-500",
+  Spec: "bg-violet-400 dark:bg-violet-500",
   Onboarding: "bg-cyan-400 dark:bg-cyan-500",
-  Workspace: "bg-teal-400 dark:bg-teal-500",
+  Project: "bg-teal-400 dark:bg-teal-500",
+  Design: "bg-pink-400 dark:bg-pink-500",
+  Setup: "bg-gray-400 dark:bg-gray-500",
 };
 
 export default function CommandsPage() {
@@ -106,7 +124,7 @@ export default function CommandsPage() {
           Workflow commands
         </h1>
         <p className="mt-3 text-lg text-text-secondary">
-          All 31 commands covering the complete development lifecycle — from
+          All 42 commands covering the complete development lifecycle — from
           planning and spec writing to autonomous overnight builds.
         </p>
       </div>
@@ -191,13 +209,20 @@ function CommandCard({
   cmd,
   icon: Icon,
 }: {
-  cmd: (typeof COMMANDS)[number];
+  cmd: CommandEntry;
   icon: LucideIcon;
 }) {
   const phaseColor = PHASE_META[cmd.phase].color;
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-5">
+    <div className={`rounded-xl border bg-surface p-5 ${cmd.deprecated ? "border-amber-200 dark:border-amber-800/40 opacity-75" : "border-border"}`}>
+      {/* Deprecated notice */}
+      {cmd.deprecated && cmd.deprecatedNote && (
+        <div className="mb-3 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:border-amber-800/40 dark:bg-amber-950/30 dark:text-amber-400">
+          <AlertTriangle size={12} className="shrink-0" aria-hidden="true" />
+          <span><strong>Deprecated:</strong> {cmd.deprecatedNote}</span>
+        </div>
+      )}
       {/* Command header */}
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-background">

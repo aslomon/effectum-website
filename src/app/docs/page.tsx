@@ -37,7 +37,7 @@ const SECTIONS = [
   {
     title: "Commands",
     description:
-      "Reference for all 31 workflow commands — from planning to autonomous overnight builds.",
+      "Reference for all 42 workflow commands — from planning to autonomous overnight builds.",
     href: "/docs/commands",
     icon: Terminal,
     featured: false,
