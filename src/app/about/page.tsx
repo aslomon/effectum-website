@@ -99,7 +99,7 @@ export default function AboutPage() {
               <span>
                 <strong className="text-text-primary">Build</strong> — The{" "}
                 <Link href="/docs/commands" className="text-accent hover:text-accent-hover underline underline-offset-2">
-                  /run command
+                  effect:dev:run command
                 </Link>{" "}
                 launches an autonomous build loop. Claude writes code, runs tests, fixes errors, and iterates
                 — without interrupting you — until the completion promise is satisfied.

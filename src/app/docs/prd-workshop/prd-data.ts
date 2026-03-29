@@ -2,53 +2,53 @@
 
 export const PRD_COMMANDS = [
   {
-    name: "/prd:new",
+    name: "effect:prd:new",
     icon: "Sparkles",
     phase: "Discovery",
     description:
       "Start a new guided specification from scratch. Claude asks adaptive questions until it fully understands what you want to build.",
   },
   {
-    name: "/prd:express",
+    name: "effect:prd:express",
     icon: "Zap",
     phase: "Discovery",
     description:
       "Fast one-shot spec from clear requirements. Best when you already know exactly what you want.",
   },
   {
-    name: "/prd:discuss",
+    name: "effect:prd:discuss",
     icon: "MessageSquare",
     phase: "Refinement",
     description:
       "Deep-dive into a specific area of your spec. Explore edge cases, data models, or API design in detail.",
   },
   {
-    name: "/prd:review",
+    name: "effect:prd:review",
     icon: "ClipboardCheck",
     phase: "Refinement",
     description:
       "Quality check before handing off to implementation. Flags missing acceptance criteria, vague goals, and incomplete data models.",
   },
   {
-    name: "/prd:decompose",
+    name: "effect:prd:decompose",
     icon: "Layers",
     phase: "Refinement",
     description:
       "Split large projects into smaller, manageable PRDs. Each sub-PRD is independently buildable.",
   },
   {
-    name: "/prd:network-map",
+    name: "effect:prd:network-map",
     icon: "Network",
     phase: "Refinement",
     description:
       "Visualize connections and dependencies between all your PRDs. Generates a Mermaid diagram.",
   },
   {
-    name: "/prd:handoff",
+    name: "effect:prd:handoff",
     icon: "Send",
     phase: "Handoff",
     description:
-      "Export a finished spec to the target project. Copies the PRD file and prepares it for /plan.",
+      "Export a finished spec to the target project. Copies the PRD file and prepares it for effect:dev:plan.",
   },
   {
     name: "/prd:prompt",
@@ -58,14 +58,14 @@ export const PRD_COMMANDS = [
       "Generate a handoff prompt for a completed PRD. Use this to start a new Claude session focused on one feature.",
   },
   {
-    name: "/prd:status",
+    name: "effect:prd:status",
     icon: "BarChart3",
     phase: "Management",
     description:
       "View all projects and their current progress. Shows which specs are draft, complete, or in progress.",
   },
   {
-    name: "/prd:resume",
+    name: "effect:prd:resume",
     icon: "RotateCcw",
     phase: "Management",
     description:

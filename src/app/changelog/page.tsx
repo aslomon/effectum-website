@@ -31,9 +31,41 @@ interface Release {
 
 const RELEASES: Release[] = [
   {
+    version: "0.18.0",
+    date: "2026-03-29",
+    tag: "latest",
+    sections: [
+      {
+        type: "Added",
+        items: [
+          "effectum:status Command — Project health dashboard. Shows PRD count, open/in-progress tasks, quality gate status, and recent activity at a glance.",
+          "Namespace Clarity — All commands reorganised into two clean spheres: effectum: (system/meta) and effect: (work). Old names continue as deprecated aliases until v0.20.",
+          "effect:prd: namespace — All PRD pipeline commands: effect:prd:new, effect:prd:express, effect:prd:review, effect:prd:handoff, effect:prd:update, effect:prd:discuss, effect:prd:decompose, effect:prd:resume, effect:prd:status, effect:prd:network-map.",
+          "effect:dev: namespace — Full dev pipeline: effect:dev:run, effect:dev:stop, effect:dev:save, effect:dev:diagnose, effect:dev:plan, effect:dev:tdd, effect:dev:verify, effect:dev:review, effect:dev:e2e, effect:dev:fix, effect:dev:refactor, effect:dev:orchestrate.",
+          "effectum: namespace — System commands: effectum:init, effectum:setup, effectum:status, effectum:archive, effectum:onboard, effectum:explore.",
+        ],
+      },
+      {
+        type: "Changed",
+        items: [
+          "/ralph-loop is now a PERMANENT alias for effect:dev:run — it will never be removed.",
+          "/effectum remains the entry point — unchanged.",
+          "Deprecated aliases (/plan, /tdd, /verify, /code-review, /prd:new, etc.) continue to work until v0.20.",
+          "Version bumped — v0.17.0 → v0.18.0",
+        ],
+      },
+      {
+        type: "Tests",
+        items: [
+          "Tests updated for new namespace — all passing.",
+        ],
+      },
+    ],
+  },
+  {
     version: "0.17.0",
     date: "2026-03-28",
-    tag: "latest",
+    tag: "stable",
     sections: [
       {
         type: "Added",
