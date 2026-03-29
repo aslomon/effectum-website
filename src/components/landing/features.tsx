@@ -31,7 +31,7 @@ const FEATURES = [
     details: [
       "6 agents: Stack, Architecture, API, Database, Frontend, Test",
       "Auto-generates PRD from existing code",
-      "Self-tests with /verify after setup",
+      "Self-tests with effect:dev:verify after setup",
       "Works on any codebase, any language",
     ],
     icon: Compass,
@@ -40,13 +40,13 @@ const FEATURES = [
   {
     title: "42 Workflow Commands",
     description:
-      "The entire Claude Code development lifecycle in slash commands. From spec to ship — plan, build, test, verify, review, update, and deploy with full autonomy.",
+      "The entire Claude Code development lifecycle in slash commands — two clean namespaces. effect:prd:* for specs, effect:dev:* for builds, effectum:* for system commands.",
     details: [
       "/effectum — entry point: pick your journey in 60 seconds",
-      "/next — smart router: always know what to do next",
-      "/run — autonomous overnight builds (internally: /ralph-loop)",
-      "/diagnose — post-mortem analysis (alias: /forensics)",
-      "/explore — 4-agent codebase map (alias: /map-codebase)",
+      "effectum:status — project health dashboard (new in v0.18)",
+      "effect:dev:run — autonomous overnight builds (alias: /ralph-loop)",
+      "effect:dev:diagnose — post-mortem analysis",
+      "effectum:explore — 4-agent codebase map",
     ],
     icon: Terminal,
     size: "large",
@@ -56,8 +56,8 @@ const FEATURES = [
     description:
       "PRDs that evolve with your code. /prd:update applies delta handoffs, tracks what changed, and keeps specs in sync with implementation.",
     details: [
-      "/prd:new — workshop or express mode",
-      "/prd:update — delta handoff from changes",
+      "effect:prd:new — workshop or express mode",
+      "effect:prd:update — delta handoff from changes",
       "Task registry tracks completion",
       "Decompose large projects automatically",
     ],
@@ -210,7 +210,7 @@ const FEATURES = [
     details: [
       "<!-- effectum:project-context:start/end --> markers",
       "Preserved across effectum update runs",
-      "/context:init populates it via 7-question interview",
+      "effectum:init populates it via 7-question interview",
     ],
     icon: SplitSquareHorizontal,
     size: "small",

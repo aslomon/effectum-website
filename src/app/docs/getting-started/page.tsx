@@ -197,9 +197,9 @@ cd ~/my-project && claude
               </span>
             </div>
             <CodeBlock
-              code={`/effectum → /prd:new →
-/prd:review → /prd:handoff →
-[target repo] → /run`}
+              code={`/effectum → effect:prd:new →
+effect:prd:review → effect:prd:handoff →
+[target repo] → effect:dev:run`}
               language="terminal"
             />
             <p className="mt-3 text-xs text-text-muted">
@@ -223,7 +223,7 @@ cd ~/my-project && claude
             </div>
             <CodeBlock
               code={`/effectum → /onboard →
-/prd:new → /prd:handoff → /run`}
+effect:prd:new → effect:prd:handoff → effect:dev:run`}
               language="terminal"
             />
             <p className="mt-3 text-xs text-text-muted">
@@ -247,7 +247,7 @@ cd ~/my-project && claude
               </span>
             </div>
             <CodeBlock
-              code={`/prd:new → /prd:review → /prd:handoff → /save → /run`}
+              code={`effect:prd:new → effect:prd:review → effect:prd:handoff → effect:dev:save → effect:dev:run`}
               language="terminal"
             />
             <p className="mt-3 text-xs text-text-muted">
@@ -263,41 +263,41 @@ cd ~/my-project && claude
         <p className="mb-4 text-sm text-text-secondary">
           The PRD Workshop is the core of effectum.{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /prd:new
+            effect:prd:new
           </code>{" "}
           →{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /prd:review
+            effect:prd:review
           </code>{" "}
           →{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /prd:handoff
+            effect:prd:handoff
           </code>{" "}
           gives you a spec that Claude can actually build from.
         </p>
         <CodeBlock
           code={`# 1. Write a spec (guided mode — Claude asks questions)
-/prd:new
+effect:prd:new
 
 # 2. Review for completeness before building
-/prd:review
+effect:prd:review
 
 # 3. Generate the build prompt for your target repo
-/prd:handoff docs/prds/001-my-feature.md ~/my-project
+effect:prd:handoff docs/prds/001-my-feature.md ~/my-project
 
 # 4. In your project — create a restore point, then build
-/save
-/run`}
+effect:dev:save
+effect:dev:run`}
           language="terminal"
         />
         <Callout icon={Lightbulb} variant="tip">
           Use{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /prd:express
+            effect:prd:express
           </code>{" "}
           for a one-shot spec when requirements are already clear. Use{" "}
           <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /prd:new
+            effect:prd:new
           </code>{" "}
           for guided discovery when the idea is still vague.
         </Callout>
@@ -307,22 +307,18 @@ cd ~/my-project && claude
       <DocSection icon={Bot} title="Autonomous overnight builds">
         <p className="mb-4 text-sm text-text-secondary">
           For complex features with a thorough spec, use{" "}
-          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /run
-          </code>
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text"> effect:dev:run </code>
           . Claude iterates autonomously — writing code, running tests, fixing
           errors — until every quality gate passes. Always{" "}
-          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-            /save
-          </code>{" "}
+          <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text"> effect:dev:save </code>{" "}
           first as your safety net.
         </p>
         <CodeBlock
           code={`# Create a restore point before the autonomous run
-/save
+effect:dev:save
 
 # Start the autonomous build loop
-/run "Build the auth system per PRD" --max-iterations 30 --completion-promise "All tests pass, build succeeds, 0 lint errors"
+effect:dev:run "Build the auth system per PRD" --max-iterations 30 --completion-promise "All tests pass, build succeeds, 0 lint errors"
 
 # Something went wrong? Run post-mortem diagnosis
 /diagnose
@@ -456,9 +452,7 @@ cd ~/my-project && claude
               It installs 42 workflow commands, 8 automated quality gates, and modular stack
               presets that give Claude Code a structured spec-driven workflow. You write a
               specification using the PRD Workshop, then run{" "}
-              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-                /run
-              </code>{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text"> effect:dev:run </code>{" "}
               to let Claude build autonomously until every quality gate passes.
             </p>
           </div>
@@ -480,12 +474,10 @@ cd ~/my-project && claude
               </code>{" "}
               to start,{" "}
               <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-                /prd:new
+                effect:prd:new
               </code>{" "}
               to write a spec, and{" "}
-              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-                /run
-              </code>{" "}
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text"> effect:dev:run </code>{" "}
               to build. The framework handles quality enforcement, stuck detection, and
               context budget monitoring automatically.
             </p>
@@ -560,12 +552,10 @@ cd ~/my-project && claude
               complete CLAUDE.md tailored to your project. From there, the full Effectum
               framework applies: write specs with{" "}
               <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-                /prd:new
+                effect:prd:new
               </code>
               , build with{" "}
-              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text">
-                /run
-              </code>
+              <code className="rounded bg-code-bg px-1 py-0.5 font-mono text-xs text-code-text"> effect:dev:run </code>
               , verify quality, and iterate.
             </p>
           </div>

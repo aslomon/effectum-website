@@ -31,18 +31,18 @@ const STEPS = [
   },
   {
     label: "Spec",
-    command: "/prd:new",
+    command: "effect:prd:new",
     description:
       "Write a structured PRD using the guided workshop. Adaptive questioning turns vague ideas into precise, actionable specifications with clear acceptance criteria.",
     detail:
-      "Workshop mode asks 12–15 questions. Express mode generates from a one-liner. Run /prd:review before handoff.",
+      "Workshop mode asks 12–15 questions. Express mode generates from a one-liner. Run effect:prd:review before handoff.",
     icon: FileText,
   },
   {
     label: "Handoff",
-    command: "/prd:handoff",
+    command: "effect:prd:handoff",
     description:
-      "Export the finished spec to the target project. This generates the build prompt that /run will use — the bridge between your spec and the autonomous build loop.",
+      "Export the finished spec to the target project. This generates the build prompt that effect:dev:run will use — the bridge between your spec and the autonomous build loop.",
     detail:
       "Validates PRD completeness, sets status to 'ready', copies to target project, and tells you exactly what to run next.",
     icon: Send,
@@ -58,11 +58,11 @@ const STEPS = [
   },
   {
     label: "Build",
-    command: "/run",
+    command: "effect:dev:run",
     description:
       "Claude builds autonomously — writing code, running tests, fixing errors, iterating — until every quality gate passes and your completion promise is 100% true.",
     detail:
-      "Built-in stuck detection, context budget monitor, and error recovery. Use --max-iterations 50 for overnight builds.",
+      "Built-in stuck detection, context budget monitor, and error recovery. Use --max-iterations 50 for overnight builds. Alias: /ralph-loop.",
     icon: Play,
   },
 ];

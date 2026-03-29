@@ -46,7 +46,7 @@ const AGENTS = [
 const OUTPUTS = [
   "CLAUDE.md generated from analysis",
   "PRD created from existing codebase",
-  "Self-tests run with /verify",
+  "Self-tests run with effect:dev:verify",
   "Ready to build in minutes",
 ];
 

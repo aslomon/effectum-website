@@ -30,8 +30,8 @@ export const INSTALL_OPTIONS = [
     title: "Classic git clone",
     badge: "Full control",
     description:
-      "Clone the repo and use /setup to configure manually. Best when you want to inspect every file before applying.",
-    command: `git clone https://github.com/aslomon/effectum.git\ncd effectum && claude\n/setup ~/my-project`,
+      "Clone the repo and use effectum:setup to configure manually. Best when you want to inspect every file before applying.",
+    command: `git clone https://github.com/aslomon/effectum.git\ncd effectum && claude\neffectum:setup ~/my-project`,
   },
 ] as const;
 
@@ -45,7 +45,7 @@ export const INSTALLED_ITEMS = [
   {
     label: "PRD Workshop",
     detail:
-      "12 commands for guided specification writing — /prd:new, /prd:review, /prd:handoff, and the full lifecycle",
+      "12 commands for guided specification writing — effect:prd:new, effect:prd:review, effect:prd:handoff, and the full lifecycle",
   },
   {
     label: "Quality gates",

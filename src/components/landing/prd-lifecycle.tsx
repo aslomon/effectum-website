@@ -5,25 +5,25 @@ import { FileText, RefreshCw, ListChecks, GitBranch } from "lucide-react";
 
 const PHASES = [
   {
-    command: "/prd:new",
+    command: "effect:prd:new",
     title: "Create",
     desc: "Workshop or express mode. Guided questions turn vague ideas into precise, actionable specifications.",
     icon: FileText,
   },
   {
-    command: "/prd:review",
+    command: "effect:prd:review",
     title: "Review",
     desc: "Quality check before handing off. Flags missing acceptance criteria, vague goals, and unverifiable completion promises.",
     icon: ListChecks,
   },
   {
-    command: "/prd:handoff",
+    command: "effect:prd:handoff",
     title: "Hand off",
-    desc: "Export the finished spec to your target project — ready for /run. The bridge between spec and autonomous build.",
+    desc: "Export the finished spec to your target project — ready for effect:dev:run. The bridge between spec and autonomous build.",
     icon: GitBranch,
   },
   {
-    command: "/run",
+    command: "effect:dev:run",
     title: "Build",
     desc: "Claude builds autonomously — writing code, running tests, fixing errors — until every quality gate passes.",
     icon: RefreshCw,

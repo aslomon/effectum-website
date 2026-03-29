@@ -22,12 +22,15 @@ const HEADLINES = [
 ];
 
 // ---------------------------------------------------------------------------
-// Terminal typing sequence
+// Terminal typing sequence — v0.18 "Namespace Clarity"
+// Two Spheres: effectum: (system) + effect: (work)
 // ---------------------------------------------------------------------------
 const TERMINAL_LINES = [
   { text: "$ npx @aslomon/effectum", type: "command", pause: 800 },
   { text: "✓ Stack detected: Next.js + Supabase", type: "success", pause: 400 },
-  { text: "✓ 42 commands installed", type: "success", pause: 600 },
+  { text: "✓ v0.18 — Namespace Clarity", type: "success", pause: 500 },
+  { text: "  ◈ effectum:  setup · status · onboard · explore", type: "info", pause: 400 },
+  { text: "  ◈ effect:    prd:* · dev:*", type: "info", pause: 600 },
   { text: "$ claude", type: "command", pause: 700 },
   { text: "> /effectum", type: "prompt", pause: 500 },
   {
@@ -35,12 +38,16 @@ const TERMINAL_LINES = [
     type: "info",
     pause: 600,
   },
-  { text: "> /prd:new", type: "prompt", pause: 500 },
+  { text: "> effectum:status", type: "prompt", pause: 500 },
+  { text: "◆ Project health: 3 PRDs · 2 open · 1 in progress", type: "info", pause: 500 },
+  { text: "  ✓ Quality gates: passing", type: "success", pause: 400 },
+  { text: "> effect:prd:new", type: "prompt", pause: 500 },
   { text: "◆ What do you want to build?", type: "info", pause: 400 },
   { text: "> An auth system with social login", type: "prompt", pause: 700 },
   { text: "◆ Writing spec...", type: "info", pause: 800 },
   { text: "✓ PRD-001-auth.md created", type: "success", pause: 600 },
-  { text: "> /run --max-iterations 30", type: "prompt", pause: 500 },
+  { text: "> effect:dev:run --max-iterations 30", type: "prompt", pause: 500 },
+  { text: "  (alias: /ralph-loop — the classic still works)", type: "info", pause: 500 },
   { text: "◆ Starting autonomous build...", type: "info", pause: 700 },
   { text: "✓ Iteration 1/30 — tests written", type: "success", pause: 500 },
   { text: "✓ Iteration 2/30 — auth flow implemented", type: "success", pause: 500 },
@@ -195,7 +202,7 @@ export function Hero() {
             <div>
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                Built for Claude Code · v0.17
+                Built for Claude Code · v0.18
               </div>
               <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-5xl whitespace-pre-line">
                 {headline.headline}
@@ -292,7 +299,7 @@ export function Hero() {
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Built for Claude Code · v0.17
+            Built for Claude Code · v0.18
           </div>
 
           {/* Headline */}

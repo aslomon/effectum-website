@@ -140,7 +140,7 @@ export function Autonomy() {
         >
           Configured during{" "}
           <code className="rounded bg-code-bg px-1.5 py-0.5 font-mono text-xs text-code-text">
-            /setup
+            effectum:setup
           </code>
           . Settings stored in{" "}
           <code className="rounded bg-code-bg px-1.5 py-0.5 font-mono text-xs text-code-text">

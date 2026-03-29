@@ -105,7 +105,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 // Typical command flow for the visual header
 const FLOW_STEPS: { name: string; phase: CommandPhase }[] = [
   { name: "/effectum", phase: "Navigation" },
-  { name: "/prd:new", phase: "Spec" },
+  { name: "effect:prd:new", phase: "Spec" },
   { name: "/prd:handoff", phase: "Spec" },
   { name: "/save", phase: "Autonomous" },
   { name: "/run", phase: "Autonomous" },

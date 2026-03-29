@@ -10,9 +10,9 @@ describe("CommandsPage", () => {
 
   it("renders command names", () => {
     render(<CommandsPage />);
-    expect(screen.getAllByText("/plan").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("/tdd").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("/verify").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("effect:dev:plan").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("effect:dev:tdd").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("effect:dev:verify").length).toBeGreaterThanOrEqual(1);
   });
 
   it("renders phase groupings", () => {

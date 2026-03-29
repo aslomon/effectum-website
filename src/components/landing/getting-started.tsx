@@ -18,7 +18,7 @@ const STEPS = [
   {
     icon: FileText,
     label: "Spec",
-    command: "/prd:new",
+    command: "effect:prd:new",
   },
   {
     icon: Rocket,
@@ -81,17 +81,20 @@ cd ~/my-project && claude
 # See your options — always start here
 /effectum
 
+# Check project health (new in v0.18)
+effectum:status
+
 # Write your spec
-/prd:new
+effect:prd:new
 
 # Generate a build prompt
-/prd:handoff
+effect:prd:handoff
 
 # Create a restore point
-/save
+effect:dev:save
 
 # Build it autonomously
-/run`}
+effect:dev:run`}
             language="terminal"
           />
         </div>

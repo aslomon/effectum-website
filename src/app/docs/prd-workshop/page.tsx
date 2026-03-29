@@ -180,7 +180,7 @@ export default function PrdWorkshopPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <ModeCard
             title="Workshop Mode"
-            command="/prd:new"
+            command="effect:prd:new"
             badge="For vague ideas"
             badgeColor="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800/30"
             description="Guided discovery process. Claude asks adaptive questions about your idea — problem, users, constraints, edge cases — until it fully understands what to build."
@@ -282,7 +282,7 @@ export default function PrdWorkshopPage() {
 # → Choose Journey A (new project), B (existing codebase), or C (feature)
 
 # 2. Start with a vague idea — Claude asks questions
-/prd:new
+effect:prd:new
 # → "What problem does this solve?"
 # → "Who are the users?"
 # → "What does success look like?"

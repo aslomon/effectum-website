@@ -83,7 +83,7 @@ export default function AboutPage() {
                 <Link href="/docs/prd-workshop" className="text-accent hover:text-accent-hover underline underline-offset-2">
                   PRD Workshop
                 </Link>{" "}
-                (<code className="font-mono text-sm text-code-text">/prd:new</code>) guides you through writing a structured Product Requirements Document.
+                (<code className="font-mono text-sm text-code-text">effect:prd:new</code>) guides you through writing a structured Product Requirements Document.
                 Adaptive questioning turns a vague idea into precise acceptance criteria, data models, and scope boundaries.
               </span>
             </li>
