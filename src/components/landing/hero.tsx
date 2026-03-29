@@ -249,7 +249,7 @@ export function Hero() {
 
       <section
         ref={sectionRef}
-        className="relative min-h-[115vh] overflow-hidden bg-[#080808]"
+        className="relative min-h-[105vh] overflow-hidden bg-[#080808]"
       >
         {/* Subtle background glow */}
         <div
@@ -280,7 +280,7 @@ export function Hero() {
 
         {/* Hero content — overlaps terminal from bottom, fades in progressively */}
         <div
-          className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-6 pb-10 text-center"
+          className="relative z-20 mx-auto flex max-w-3xl flex-col items-center px-6 pb-0 text-center"
           style={{
             marginTop: "-28vh",
             opacity: scrollProgress,
