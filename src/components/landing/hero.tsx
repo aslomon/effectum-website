@@ -215,7 +215,7 @@ export function Hero() {
                 </a>
                 <a
                   href="/docs/getting-started"
-                  className="inline-flex h-12 items-center gap-2 rounded-lg border border-border bg-surface px-6 text-sm font-medium text-white transition-all hover:border-border-hover hover:bg-surface"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg border border-border bg-surface px-6 text-sm font-medium text-text-primary transition-all hover:border-border-hover hover:bg-surface"
                 >
                   Get started
                   <ArrowRight size={14} className="text-accent" />
@@ -318,7 +318,7 @@ export function Hero() {
             </a>
             <a
               href="/docs/getting-started"
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-border bg-surface px-7 text-sm font-medium text-white transition-all hover:border-border-hover hover:bg-surface sm:w-auto"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-border bg-surface px-7 text-sm font-medium text-text-primary transition-all hover:border-border-hover hover:bg-surface sm:w-auto"
             >
               Get started
               <ArrowRight size={14} className="text-accent" />
