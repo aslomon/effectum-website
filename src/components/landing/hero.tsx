@@ -92,7 +92,7 @@ function CinematicTerminal() {
       </div>
 
       {/* Lines */}
-      <div ref={scrollRef} className="h-[65vh] max-h-[65vh] space-y-1.5 overflow-y-auto px-5 py-4 sm:h-[55vh] sm:max-h-[55vh]">
+      <div ref={scrollRef} className="h-[65vh] max-h-[65vh] space-y-1.5 overflow-hidden px-5 py-4 sm:h-[55vh] sm:max-h-[55vh]" style={{ pointerEvents: "none" }}>
         {TERMINAL_LINES.slice(0, visibleCount).map((line, i) => (
           <div key={i} className="leading-relaxed">
             <span
@@ -249,7 +249,7 @@ export function Hero() {
 
       <section
         ref={sectionRef}
-        className="relative min-h-[130vh] overflow-hidden bg-[#080808]"
+        className="relative min-h-[115vh] overflow-hidden bg-[#080808]"
       >
         {/* Subtle background glow */}
         <div
@@ -261,7 +261,7 @@ export function Hero() {
 
         {/* Terminal — starts fullscreen, shrinks progressively */}
         <div
-          className="sticky top-[72px] z-10 mx-auto w-[92vw] max-w-2xl px-2 sm:top-[80px] sm:w-[90vw] sm:px-0"
+          className="sticky top-[50%] z-10 mx-auto w-[92vw] max-w-2xl -translate-y-[55%] px-2 sm:w-[90vw] sm:px-0"
           style={{
             transform: `scale(${1 - scrollProgress * 0.3})`,
             opacity: Math.max(1 - scrollProgress * 0.6, 0.35),
