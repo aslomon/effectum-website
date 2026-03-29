@@ -77,18 +77,18 @@ function CinematicTerminal() {
 
   return (
     <div
-      className="cinematic-terminal overflow-hidden rounded-xl border border-white/10 bg-[#0d0d0d] font-mono text-sm"
+      className="cinematic-terminal overflow-hidden rounded-xl border border-border bg-code-bg font-mono text-sm"
       style={{
         boxShadow:
           "0 0 0 1px rgba(217,119,6,0.15), 0 8px 32px rgba(0,0,0,0.6), 0 0 60px rgba(217,119,6,0.08)",
       }}
     >
       {/* Title bar */}
-      <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+      <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
         <div className="h-3 w-3 rounded-full bg-red-500/70" />
         <div className="h-3 w-3 rounded-full bg-yellow-500/70" />
         <div className="h-3 w-3 rounded-full bg-green-500/70" />
-        <span className="ml-3 text-xs text-white/30">effectum — terminal</span>
+        <span className="ml-3 text-xs text-text-muted">effectum — terminal</span>
       </div>
 
       {/* Lines */}
@@ -98,12 +98,12 @@ function CinematicTerminal() {
             <span
               className={
                 line.type === "command"
-                  ? "text-amber-400 font-semibold"
+                  ? "text-accent font-semibold"
                   : line.type === "success"
                   ? "text-green-400"
                   : line.type === "prompt"
                   ? "text-purple-300"
-                  : "text-white/60"
+                  : "text-text-secondary"
               }
             >
               {line.text}
@@ -112,7 +112,7 @@ function CinematicTerminal() {
         ))}
         {/* Blinking cursor */}
         {visibleCount < TERMINAL_LINES.length && (
-          <span className="terminal-cursor inline-block h-4 w-0.5 bg-amber-400" />
+          <span className="terminal-cursor inline-block h-4 w-0.5 bg-accent" />
         )}
       </div>
     </div>
@@ -193,14 +193,14 @@ export function Hero() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Headline */}
             <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Built for Claude Code · v0.17
               </div>
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl whitespace-pre-line">
+              <h1 className="text-4xl font-bold tracking-tight text-text-primary sm:text-5xl whitespace-pre-line">
                 {headline.headline}
               </h1>
-              <p className="mt-6 text-lg leading-relaxed text-white/60">
+              <p className="mt-6 text-lg leading-relaxed text-text-secondary">
                 {headline.sub}
               </p>
               <div className="mt-10 flex flex-wrap gap-4">
@@ -208,17 +208,17 @@ export function Hero() {
                   href="https://github.com/aslomon/effectum"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center gap-2 rounded-lg bg-amber-500 px-6 text-sm font-medium text-white shadow-sm transition-all hover:bg-amber-400"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg bg-amber-500 px-6 text-sm font-medium text-white shadow-sm transition-all hover:bg-accent"
                 >
                   <Github size={16} />
                   View on GitHub
                 </a>
                 <a
                   href="/docs/getting-started"
-                  className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-6 text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10"
+                  className="inline-flex h-12 items-center gap-2 rounded-lg border border-border bg-surface px-6 text-sm font-medium text-white transition-all hover:border-border-hover hover:bg-surface"
                 >
                   Get started
-                  <ArrowRight size={14} className="text-amber-400" />
+                  <ArrowRight size={14} className="text-accent" />
                 </a>
               </div>
             </div>
@@ -249,20 +249,21 @@ export function Hero() {
 
       <section
         ref={sectionRef}
-        className="relative min-h-[105vh] overflow-hidden bg-[#080808]"
+        className="relative min-h-[105vh] overflow-hidden bg-background"
       >
         {/* Subtle background glow */}
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"
         >
-          <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-600/5 blur-[120px]" />
+          <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-[120px]" />
         </div>
 
         {/* Terminal — starts fullscreen, shrinks progressively */}
         <div
-          className="sticky top-[50%] z-10 mx-auto w-[92vw] max-w-2xl -translate-y-[55%] px-2 sm:w-[90vw] sm:px-0"
+          className="sticky z-10 mx-auto w-[92vw] max-w-2xl px-2 sm:w-[90vw] sm:px-0"
           style={{
+            top: "max(72px, calc(50vh - min(32.5vh, 27.5vh + 40px)))",
             transform: `scale(${1 - scrollProgress * 0.3})`,
             opacity: Math.max(1 - scrollProgress * 0.6, 0.35),
             transformOrigin: "top center",
@@ -271,7 +272,7 @@ export function Hero() {
           <CinematicTerminal />
           {/* Scroll hint */}
           <p
-            className="mt-4 text-center text-xs text-white/25"
+            className="mt-4 text-center text-xs text-text-muted"
             style={{ opacity: Math.max(1 - scrollProgress * 4, 0) }}
           >
             ↓ scroll
@@ -289,18 +290,18 @@ export function Hero() {
           }}
         >
           {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-accent">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Built for Claude Code · v0.17
           </div>
 
           {/* Headline */}
-          <h1 className="whitespace-pre-line text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="whitespace-pre-line text-4xl font-bold tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
             {headline.headline}
           </h1>
 
           {/* Sub */}
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/55">
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
             {headline.sub}
           </p>
 
@@ -310,17 +311,17 @@ export function Hero() {
               href="https://github.com/aslomon/effectum"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-7 text-sm font-medium text-white shadow shadow-amber-900/30 transition-all hover:bg-amber-400 sm:w-auto"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-7 text-sm font-medium text-white shadow shadow-amber-900/30 transition-all hover:bg-accent sm:w-auto"
             >
               <Github size={16} />
               View on GitHub
             </a>
             <a
               href="/docs/getting-started"
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-7 text-sm font-medium text-white transition-all hover:border-white/30 hover:bg-white/10 sm:w-auto"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-border bg-surface px-7 text-sm font-medium text-white transition-all hover:border-border-hover hover:bg-surface sm:w-auto"
             >
               Get started
-              <ArrowRight size={14} className="text-amber-400" />
+              <ArrowRight size={14} className="text-accent" />
             </a>
           </div>
         </div>
